@@ -52,7 +52,7 @@ const HomeHeader = ({ onSearch }) => {
             color: COLORS.white,
           }}
         >
-          Hello Victoria 👋
+          Hello Elder/Sister!  👋
         </Text>
 
         <Text
@@ -63,7 +63,7 @@ const HomeHeader = ({ onSearch }) => {
             marginTop: SIZES.base / 2,
           }}
         >
-          Let’s find masterpiece Art
+          Search below for resources to help.
         </Text>
       </View>
 
@@ -85,7 +85,7 @@ const HomeHeader = ({ onSearch }) => {
             style={{ width: 20, height: 20, marginRight: SIZES.base }}
           />
           <TextInput
-            placeholder="Search NFTs"
+            placeholder="Search for resources"
             style={{ flex: 1 }}
             onChangeText={onSearch}
           />

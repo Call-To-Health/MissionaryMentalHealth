@@ -97,7 +97,7 @@ export const EndDate = () => {
           color: COLORS.primary,
         }}
       >
-        Ending in
+        Insert
       </Text>
       <Text
         style={{
@@ -106,7 +106,7 @@ export const EndDate = () => {
           color: COLORS.primary,
         }}
       >
-        12h 30m
+        AUTHOR
       </Text>
     </View>
   );
