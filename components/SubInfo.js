@@ -28,11 +28,11 @@ export const NFTTitle = ({ title, subTitle, titleSize, subTitleSize }) => {
   );
 };
 
-export const EthPrice = ({ price }) => {
+export const TaggedItems = ({ price }) => {
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <Image
-        source={assets.eth}
+        source={assets.tag}
         resizeMode="contain"
         style={{ width: 20, height: 20, marginRight: 2 }}
       />
@@ -90,23 +90,23 @@ export const EndDate = () => {
         maxWidth: "50%",
       }}
     >
-      <Text
+      {/* <Text
         style={{
           fontFamily: FONTS.regular,
           fontSize: SIZES.small,
           color: COLORS.primary,
         }}
       >
-        Insert
-      </Text>
+        type
+      </Text> */}
       <Text
         style={{
           fontFamily: FONTS.semiBold,
-          fontSize: SIZES.medium,
+          fontSize: SIZES.small,
           color: COLORS.primary,
         }}
       >
-        AUTHOR
+        STORY
       </Text>
     </View>
   );

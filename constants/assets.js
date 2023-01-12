@@ -1,5 +1,5 @@
 import badge from "../assets/icons/badge.png";
-import eth from "../assets/icons/eth.png";
+import tag from "../assets/icons/tag.png";
 import heart from "../assets/icons/heart.png";
 import left from "../assets/icons/left.png";
 import search from "../assets/icons/search.png";
@@ -20,7 +20,7 @@ import person04 from "../assets/images/person04.png";
 
 export default {
   badge,
-  eth,
+  tag,
   heart,
   left,
   search,

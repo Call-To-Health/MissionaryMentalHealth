@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
 
-import { EthPrice, NFTTitle } from "./SubInfo";
+import { NFTTitle, TaggedItems } from "./SubInfo";
 import { COLORS, SIZES, FONTS } from "../constants";
 
 const DetailsDesc = ({ data }) => {
@@ -25,7 +25,7 @@ const DetailsDesc = ({ data }) => {
           subTitleSize={SIZES.font}
         />
 
-        <EthPrice price={data.price} />
+        <TaggedItems price={data.price} />
       </View>
 
       <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>
@@ -36,7 +36,7 @@ const DetailsDesc = ({ data }) => {
             color: COLORS.primary,
           }}
         >
-          Description
+          Body
         </Text>
         <View
           style={{

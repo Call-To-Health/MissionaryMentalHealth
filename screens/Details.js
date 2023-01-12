@@ -76,7 +76,7 @@ const Details = ({ route, navigation }) => {
                     color: COLORS.primary,
                   }}
                 >
-                  Current Bid
+                  Similar Topics
                 </Text>
               )}
             </View>
