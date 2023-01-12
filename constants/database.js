@@ -1,11 +1,11 @@
 import assets from "./assets";
 
-const NFTData = [
+const Data = [
   {
     id: "NFT-01",
     name: "Dealing with Depression",
     creator: "John Best",
-    price: "Depression",
+    tags: "Depression",
     description:
       "Insert story here.",
     image: assets.nft01,
@@ -13,21 +13,21 @@ const NFTData = [
       {
         id: "BID-11",
         name: "Jessica Tan",
-        price: 4.25,
+        tags: "Depression",
         image: assets.person02,
         date: "December 12, 2019 at 12:10 PM",
       },
       {
         id: "BID-12",
         name: "Jennifer Sia",
-        price: 4.5,
+        tags: "Anxiety",
         image: assets.person03,
         date: "December 27, 2019 at 1:50 PM",
       },
       {
         id: "BID-13",
         name: "Rosie Wong",
-        price: 4.75,
+        tags: "Homesickness",
         image: assets.person04,
         date: "December 31, 2019 at 3:50 PM",
       },
@@ -37,7 +37,7 @@ const NFTData = [
     id: "NFT-02",
     name: "Anxiety in the Mission Field",
     creator: "Sarah Fields",
-    price: "Anxiety, Depression",
+    tags: "Anxiety, Depression",
     description:
       "Insert story here.",
     image: assets.nft02,
@@ -45,7 +45,7 @@ const NFTData = [
       {
         id: "BID-21",
         name: "Jessica Tan",
-        price: 7.05,
+        tags: "Anxiety",
         image: assets.person04,
         date: "December 12, 2019 at 12:10 PM",
       },
@@ -55,7 +55,7 @@ const NFTData = [
     id: "NFT-03",
     name: "Missing Home",
     creator: "Elisabeth Johnson",
-    price: 95.25,
+    tags: "Homesickness",
     description:
       "Insert story here.",
     image: assets.nft03,
@@ -63,14 +63,14 @@ const NFTData = [
       {
         id: "BID-31",
         name: "Jessica Tan",
-        price: 95.25,
+        tags: "Homesickness",
         image: assets.person02,
         date: "December 12, 2019 at 12:10 PM",
       },
       {
         id: "BID-32",
         name: "Jennifer Sia",
-        price: 95.5,
+        tags: "Anxiety",
         image: assets.person03,
         date: "December 27, 2019 at 1:50 PM",
       },
@@ -80,7 +80,7 @@ const NFTData = [
     id: "NFT-04",
     name: "Disagreement with a Companion",
     creator: "Peter Wild",
-    price: "Conflict, Depression",
+    tags: "Conflict, Depression",
     description:
       "Insert story here.",
     image: assets.nft04,
@@ -88,28 +88,28 @@ const NFTData = [
       {
         id: "BID-41",
         name: "Jessica Tan",
-        price: 56.25,
+        tags: "Anxiety",
         image: assets.person02,
         date: "December 12, 2019 at 12:10 PM",
       },
       {
         id: "BID-42",
         name: "Jennifer Sia",
-        price: 54.25,
+        tags: "Anger",
         image: assets.person03,
         date: "December 27, 2019 at 1:50 PM",
       },
       {
         id: "BID-43",
         name: "Rosie Wong",
-        price: 55.15,
+        tags: "Anger",
         image: assets.person04,
         date: "December 31, 2019 at 3:50 PM",
       },
       {
         id: "BID-44",
         name: "Vincent Swift",
-        price: 54.15,
+        tags: "Hate",
         image: assets.person02,
         date: "December 31, 2019 at 3:50 PM",
       },
@@ -119,7 +119,7 @@ const NFTData = [
     id: "NFT-05",
     name: "Feeling nothing at all",
     creator: "David Dietrich",
-    price: "Depression, Loneliness",
+    tags: "Depression, Loneliness",
     description:
       "Insert story here.",
     image: assets.nft05,
@@ -127,7 +127,7 @@ const NFTData = [
       {
         id: "BID-51",
         name: "Jessica Tan",
-        price: 10.25,
+        tags: "Loneliness",
         image: assets.person02,
         date: "December 12, 2019 at 12:10 PM",
       },
@@ -137,7 +137,7 @@ const NFTData = [
     id: "NFT-06",
     name: "Frustration with the Rules",
     creator: "Leonard Keller",
-    price: "Frustration, Resentment",
+    tags: "Frustration, Resentment",
     description:
       "Insert story here.",
     image: assets.nft06,
@@ -145,35 +145,35 @@ const NFTData = [
       {
         id: "BID-61",
         name: "Jessica Tan",
-        price: 20.25,
+        tags: "Annoyance",
         image: assets.person02,
         date: "December 12, 2019 at 12:10 PM",
       },
       {
         id: "BID-62",
         name: "Jennifer Sia",
-        price: 20.5,
+        tags: "Annoyance",
         image: assets.person03,
         date: "December 27, 2019 at 1:50 PM",
       },
       {
         id: "BID-63",
         name: "Rosie Wong",
-        price: 20.75,
+        tags: "Annoyance",
         image: assets.person04,
         date: "December 31, 2019 at 3:50 PM",
       },
       {
         id: "BID-64",
         name: "Siti Nurhaliza",
-        price: 21.25,
+        tags: "Anxiety",
         image: assets.person02,
         date: "December 31, 2019 at 3:50 PM",
       },
       {
         id: "BID-65",
         name: "Kaitlyn Lee",
-        price: 7.25,
+        tags: "Anxiety",
         image: assets.person02,
         date: "December 31, 2019 at 3:50 PM",
       },
@@ -183,7 +183,7 @@ const NFTData = [
     id: "NFT-07",
     name: "Anger and revenge",
     creator: "Victor Vega",
-    price: "Frustration",
+    tags: "Frustration",
     description:
       "Insert story here.",
     image: assets.nft07,
@@ -191,4 +191,4 @@ const NFTData = [
   },
 ];
 
-export { NFTData };
+export { Data };

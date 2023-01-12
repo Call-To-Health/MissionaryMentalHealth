@@ -2,22 +2,22 @@ import React, { useState } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
 
 import { NFTCard, HomeHeader, FocusedStatusBar } from "../components";
-import { COLORS, NFTData } from "../constants";
+import { COLORS, Data } from "../constants";
 
 const Home = () => {
-  const [nftData, setNftData] = useState(NFTData);
+  const [nftData, setNftData] = useState(Data);
 
   const handleSearch = (value) => {
     if (value.length === 0) {
       setNftData(NFTData);
     }
 
-    const filteredData = NFTData.filter((item) =>
+    const filteredData = Data.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase())
     );
 
     if (filteredData.length === 0) {
-      setNftData(NFTData);
+      setNftData(Data);
     } else {
       setNftData(filteredData);
     }

@@ -25,7 +25,7 @@ const DetailsDesc = ({ data }) => {
           subTitleSize={SIZES.font}
         />
 
-        <TaggedItems price={data.price} />
+        <TaggedItems tags={data.tags} />
       </View>
 
       <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>

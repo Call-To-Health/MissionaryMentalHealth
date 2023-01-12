@@ -57,7 +57,7 @@ const NFTCard = ({ data }) => {
             alignItems: "center",
           }}
         >
-          <TaggedItems price={data.price} />
+          <TaggedItems tags={data.tags} />
           <RectButton
             minWidth={120}
             fontSize={SIZES.font}

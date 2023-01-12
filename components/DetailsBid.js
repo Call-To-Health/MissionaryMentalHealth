@@ -37,7 +37,7 @@ const DetailsBid = ({ bid }) => {
             color: COLORS.primary,
           }}
         >
-          Bid placed by {bid.name}
+          Similar story by {bid.name}
         </Text>
         <Text
           style={{
@@ -51,7 +51,7 @@ const DetailsBid = ({ bid }) => {
         </Text>
       </View>
 
-      <TaggedItems price={bid.price} />
+      <TaggedItems tags={bid.tags} />
     </View>
   );
 };

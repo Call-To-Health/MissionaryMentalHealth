@@ -28,7 +28,7 @@ export const NFTTitle = ({ title, subTitle, titleSize, subTitleSize }) => {
   );
 };
 
-export const TaggedItems = ({ price }) => {
+export const TaggedItems = ({ tags }) => {
   return (
     <View style={{ flexDirection: "row", alignItems: "center" }}>
       <Image
@@ -43,7 +43,7 @@ export const TaggedItems = ({ price }) => {
           color: COLORS.primary,
         }}
       >
-        {price}
+        {tags}
       </Text>
     </View>
   );
