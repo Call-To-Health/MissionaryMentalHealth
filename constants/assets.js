@@ -5,13 +5,13 @@ import left from "../assets/icons/left.png";
 import search from "../assets/icons/search.png";
 
 import logo from "../assets/images/logo.png";
-import nft01 from "../assets/images/nft01.png";
-import nft02 from "../assets/images/nft02.jpeg";
-import nft03 from "../assets/images/nft03.jpeg";
-import nft04 from "../assets/images/nft04.jpeg";
-import nft05 from "../assets/images/nft05.jpeg";
-import nft06 from "../assets/images/nft06.jpeg";
-import nft07 from "../assets/images/nft07.jpeg";
+import missionaries1 from "../assets/images/missionaries1.jpg";
+import missionaries2 from "../assets/images/missionaries2.jpg";
+import missionaries3 from "../assets/images/missionaries3.jpg";
+import missionaries4 from "../assets/images/missionaries4.jpeg";
+import missionaries5 from "../assets/images/missionaries5.jpeg";
+import missionaries6 from "../assets/images/missionaries6.jpg";
+import missionaries7 from "../assets/images/missionaries7.jpeg";
 
 import person01 from "../assets/images/person01.png";
 import person02 from "../assets/images/person02.png";
@@ -26,13 +26,13 @@ export default {
   search,
 
   logo,
-  nft01,
-  nft02,
-  nft03,
-  nft04,
-  nft05,
-  nft06,
-  nft07,
+  missionaries1,
+  missionaries2,
+  missionaries3,
+  missionaries4,
+  missionaries5,
+  missionaries6,
+  missionaries7,
 
   person01,
   person02,

@@ -2,13 +2,13 @@ import assets from "./assets";
 
 const Data = [
   {
-    id: "NFT-01",
+    id: "missionaries1",
     name: "Dealing with Depression",
     creator: "John Best",
     tags: "Depression",
     description:
       "Insert story here.",
-    image: assets.nft01,
+    image: assets.missionaries1,
     bids: [
       {
         id: "BID-11",
@@ -34,13 +34,13 @@ const Data = [
     ],
   },
   {
-    id: "NFT-02",
+    id: "missionaries2",
     name: "Anxiety in the Mission Field",
     creator: "Sarah Fields",
     tags: "Anxiety, Depression",
     description:
       "Insert story here.",
-    image: assets.nft02,
+    image: assets.missionaries2,
     bids: [
       {
         id: "BID-21",
@@ -52,13 +52,13 @@ const Data = [
     ],
   },
   {
-    id: "NFT-03",
+    id: "missionaries3",
     name: "Missing Home",
     creator: "Elisabeth Johnson",
     tags: "Homesickness",
     description:
       "Insert story here.",
-    image: assets.nft03,
+    image: assets.missionaries3,
     bids: [
       {
         id: "BID-31",
@@ -77,13 +77,13 @@ const Data = [
     ],
   },
   {
-    id: "NFT-04",
+    id: "missionaries4",
     name: "Disagreement with a Companion",
     creator: "Peter Wild",
     tags: "Conflict, Depression",
     description:
       "Insert story here.",
-    image: assets.nft04,
+    image: assets.missionaries4,
     bids: [
       {
         id: "BID-41",
@@ -116,13 +116,13 @@ const Data = [
     ],
   },
   {
-    id: "NFT-05",
+    id: "missionaries5",
     name: "Feeling nothing at all",
     creator: "David Dietrich",
     tags: "Depression, Loneliness",
     description:
       "Insert story here.",
-    image: assets.nft05,
+    image: assets.missionaries5,
     bids: [
       {
         id: "BID-51",
@@ -134,13 +134,13 @@ const Data = [
     ],
   },
   {
-    id: "NFT-06",
+    id: "missionaries6",
     name: "Frustration with the Rules",
     creator: "Leonard Keller",
     tags: "Frustration, Resentment",
     description:
       "Insert story here.",
-    image: assets.nft06,
+    image: assets.missionaries6,
     bids: [
       {
         id: "BID-61",
@@ -180,13 +180,13 @@ const Data = [
     ],
   },
   {
-    id: "NFT-07",
+    id: "missionaries7",
     name: "Anger and revenge",
     creator: "Victor Vega",
     tags: "Frustration",
     description:
       "Insert story here.",
-    image: assets.nft07,
+    image: assets.missionaries7,
     bids: [],
   },
 ];

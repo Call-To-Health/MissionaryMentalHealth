@@ -9,7 +9,7 @@ const Home = () => {
 
   const handleSearch = (value) => {
     if (value.length === 0) {
-      setNftData(NFTData);
+      setNftData(Data);
     }
 
     const filteredData = Data.filter((item) =>
