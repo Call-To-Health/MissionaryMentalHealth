@@ -1,22 +1,22 @@
 import HomeHeader from "./HomeHeader";
-import NFTCard from "./NFTCard";
+import Card from "./Card";
 import { RectButton, CircleButton } from "./Button";
-import { SubInfo, People, EndDate, Tags, NFTTitle } from "./SubInfo";
-import DetailsBid from "./DetailsBid";
+import { SubInfo, People, EndDate, Tags, Title } from "./SubInfo";
+import DetailsArticle from "./DetailsArticle";
 import FocusedStatusBar from "./FocusedStatusBar";
 import DetailsDesc from './DetailsDesc';
 
 export {
   HomeHeader,
-  NFTCard,
+  Card,
   SubInfo,
   People,
   EndDate,
   RectButton,
   CircleButton,
   Tags,
-  NFTTitle,
-  DetailsBid,
+  Title,
+  DetailsArticle,
   FocusedStatusBar,
   DetailsDesc,
 };

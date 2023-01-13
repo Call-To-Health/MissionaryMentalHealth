@@ -2,7 +2,7 @@ import React from "react";
 import { View, Text, SafeAreaView, Image, StatusBar, FlatList } from "react-native";
 
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from "../constants";
-import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsBid, FocusedStatusBar } from "../components";
+import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsArticle, FocusedStatusBar } from "../components";
 
 const DetailsHeader = ({ data, navigation }) => (
   <View style={{ width: "100%", height: 373 }}>
@@ -54,8 +54,8 @@ const Details = ({ route, navigation }) => {
       </View>
 
       <FlatList
-        data={data.bids}
-        renderItem={({ item }) => <DetailsBid bid={item} />}
+        data={data.articles}
+        renderItem={({ item }) => <DetailsArticle article={item} />}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -68,7 +68,7 @@ const Details = ({ route, navigation }) => {
             <View style={{ padding: SIZES.font }}>
               <DetailsDesc data={data} />
 
-              {data.bids.length > 0 && (
+              {data.articles.length > 0 && (
                 <Text
                   style={{
                     fontSize: SIZES.font,

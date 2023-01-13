@@ -9,7 +9,7 @@ const Data = [
     description:
       "Insert story here.",
     image: assets.missionaries1,
-    bids: [
+    articles: [
       {
         id: "BID-11",
         name: "Jessica Tan",
@@ -41,7 +41,7 @@ const Data = [
     description:
       "Insert story here.",
     image: assets.missionaries2,
-    bids: [
+    articles: [
       {
         id: "BID-21",
         name: "Jessica Tan",
@@ -59,7 +59,7 @@ const Data = [
     description:
       "Insert story here.",
     image: assets.missionaries3,
-    bids: [
+    articles: [
       {
         id: "BID-31",
         name: "Jessica Tan",
@@ -84,7 +84,7 @@ const Data = [
     description:
       "Insert story here.",
     image: assets.missionaries4,
-    bids: [
+    articles: [
       {
         id: "BID-41",
         name: "Jessica Tan",
@@ -123,7 +123,7 @@ const Data = [
     description:
       "Insert story here.",
     image: assets.missionaries5,
-    bids: [
+    articles: [
       {
         id: "BID-51",
         name: "Jessica Tan",
@@ -141,7 +141,7 @@ const Data = [
     description:
       "Insert story here.",
     image: assets.missionaries6,
-    bids: [
+    articles: [
       {
         id: "BID-61",
         name: "Jessica Tan",
@@ -187,7 +187,7 @@ const Data = [
     description:
       "Insert story here.",
     image: assets.missionaries7,
-    bids: [],
+    articles: [],
   },
 ];
 

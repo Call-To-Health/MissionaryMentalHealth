@@ -3,8 +3,9 @@ import { View, Text, Image } from "react-native";
 
 import { TaggedItems } from "./SubInfo";
 import { COLORS, SIZES, FONTS } from "../constants";
+// import Details from "../screens/DetailsArticle";
 
-const DetailsBid = ({ bid }) => {
+const DetailsArticle = ({ article }) => {
   return (
     <View
       style={{
@@ -15,10 +16,10 @@ const DetailsBid = ({ bid }) => {
         marginVertical: SIZES.base,
         paddingHorizontal: SIZES.base,
       }}
-      key={bid.id}
+      key={article.id}
     >
       <Image
-        source={bid.image}
+        source={article.image}
         resizeMode="contain"
         style={{ width: 48, height: 48 }}
       />
@@ -37,7 +38,7 @@ const DetailsBid = ({ bid }) => {
             color: COLORS.primary,
           }}
         >
-          Similar story by {bid.name}
+          Similar story by {article.name}
         </Text>
         <Text
           style={{
@@ -47,13 +48,13 @@ const DetailsBid = ({ bid }) => {
             marginTop: 3,
           }}
         >
-          {bid.date}
+          {article.date}
         </Text>
       </View>
 
-      <TaggedItems tags={bid.tags} />
+      <TaggedItems tags={article.tags} />
     </View>
   );
 };
 
-export default DetailsBid;
+export default DetailsArticle;
