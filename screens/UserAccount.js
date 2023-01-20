@@ -1,5 +1,7 @@
-import { View, Text } from 'react-native'
-import React from 'react'
+import { View, Text, SafeAreaView, Image, StatusBar, FlatList } from "react-native";
+import React from 'react';
+import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsArticle, FocusedStatusBar } from "../components";
+import { assets } from '../constants';
 
 const UserAccount = ({ data, navigation }) => (
   <View style={{ width: "100%", height: 373 }}>
@@ -11,7 +13,7 @@ const UserAccount = ({ data, navigation }) => (
       left={15}
       top={StatusBar.currentHeight + 10}/>
     
-      <Text>UserAccount</Text>
+      <Text>User Account</Text>
 
       
     </View>

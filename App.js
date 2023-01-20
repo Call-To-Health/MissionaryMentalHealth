@@ -1,7 +1,10 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
+import {StyleSheet, Text,View, Pressable} from 'react-native';
 import { useFonts } from "expo-font";
+import Icon from 'react-native-ico-material-design';
+import Tabs from './navigation/tabs'
 
 import Home from "./screens/Home";
 import Details from "./screens/Details";
@@ -31,7 +34,8 @@ const App = () => {
 
   return (
     <NavigationContainer theme={theme}>
-      <Stack.Navigator
+      <Tabs/>
+      {/* <Stack.Navigator
         screenOptions={{
           headerShown: false,
         }}
@@ -42,7 +46,7 @@ const App = () => {
         <Stack.Screen name="Library" component={Library} />
         <Stack.Screen name="UserAccount" component={UserAccount} />
 
-      </Stack.Navigator>
+      </Stack.Navigator> */}
     </NavigationContainer>
   );
 };
