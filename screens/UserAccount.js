@@ -12,7 +12,7 @@ const UserAccount = () => {
         translucent={true}
       />
 
-<CircleButton
+    <CircleButton
       imgUrl={assets.left}
       handlePress={() => navigation.goBack()}
       left={15}
@@ -22,9 +22,6 @@ const UserAccount = () => {
 
       
     </View>
-
-    
-  )
-}
+);
 
 export default UserAccount
