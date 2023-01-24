@@ -1,6 +1,6 @@
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Home from '../screens/Home';
-import Details from '../screens/Details';
+import Chat from '../screens/Chat';
 import Library from '../screens/Library';
 import Journal from "../screens/Journal";
 import UserAccount from '../screens/UserAccount';
@@ -51,6 +51,11 @@ const Tabs = () => {
         >
             <Tab.Screen name="Home" component={Home} 
             options={{
+                headerLeft:null,
+                headerRight:null,
+                //  this is what removes the header! 
+                headerShown:false,
+                
                 tabBarIcon: ({focused}) => (
                     <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
                         <Image
@@ -67,12 +72,12 @@ const Tabs = () => {
                     </View>
                 ),
             }} />
-            <Tab.Screen name="Details" component={Details}
+            <Tab.Screen name="Chat" component={Chat}
             options={{
                 tabBarIcon: ({focused}) => (
                     <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
                         <Image
-                        source={require('../assets/icons/search.png')}
+                        source={require('../assets/icons/chat.png')}
                         resizeMode='contain'
                         style={{
                             width:25,
@@ -80,7 +85,7 @@ const Tabs = () => {
                             tintColor: focused ? '#e32f45' : '#748c94'
                         }}/>
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                            Details
+                            Chat
                             </Text>
                     </View>
                 ),

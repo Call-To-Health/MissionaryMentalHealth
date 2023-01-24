@@ -3,9 +3,14 @@ import React from 'react';
 import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsArticle, FocusedStatusBar } from "../components";
 import { assets } from '../constants';
 
-const UserAccount = ({ data, navigation }) => (
-  <View style={{ width: "100%", height: 373 }}>
-    
+const UserAccount = () => {
+  return (
+    <View>
+      <FocusedStatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
 
     <CircleButton
       imgUrl={assets.left}

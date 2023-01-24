@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
-
 import { Card, HomeHeader, FocusedStatusBar } from "../components";
 import { COLORS, Data } from "../constants";
 
