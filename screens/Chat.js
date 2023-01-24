@@ -2,17 +2,18 @@ import { View, Text } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import React from 'react'
 
-const Library = () => {
+const Chat = () => {
   return (
+    
     <View>
       <FocusedStatusBar
         barStyle="dark-content"
         backgroundColor="transparent"
         translucent={true}
       />
-      <Text>Library</Text>
+      <Text>Chat</Text>
     </View>
   )
 }
 
-export default Library
+export default Chat

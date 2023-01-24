@@ -6,6 +6,11 @@ import { assets } from '../constants';
 const UserAccount = () => {
   return (
     <View>
+      <FocusedStatusBar
+        barStyle="dark-content"
+        backgroundColor="transparent"
+        translucent={true}
+      />
 
 <CircleButton
       imgUrl={assets.left}
