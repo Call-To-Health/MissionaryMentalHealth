@@ -1,7 +1,6 @@
 import React from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Image } from "react-native";
-
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
 import { SubInfo, TaggedItems, Title } from "./SubInfo";
 import { RectButton, CircleButton } from "./Button";
@@ -36,7 +35,9 @@ const Card = ({ data }) => {
           }}
         />
 
-        <CircleButton imgUrl={assets.heart} right={10} top={10} />
+        <CircleButton 
+        mgUrl={assets.heart} right={10} top={10} 
+        handlePress={() => navigation.navigate("Details", { data })}/>
       </View>
 
       <SubInfo />

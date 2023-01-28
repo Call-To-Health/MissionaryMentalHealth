@@ -22,6 +22,8 @@ const UserAccount = () => {
 
       
     </View>
+
 );
+}
 
 export default UserAccount
