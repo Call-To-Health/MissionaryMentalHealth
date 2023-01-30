@@ -36,7 +36,7 @@ const Card = ({ data }) => {
         />
 
         <CircleButton 
-        mgUrl={assets.heart} right={10} top={10} 
+        imgUrl={assets.heart} right={10} top={10} 
         handlePress={() => navigation.navigate("Details", { data })}/>
       </View>
 

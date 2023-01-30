@@ -37,6 +37,10 @@ return (
           name="Details"
           component={Details}
         />
+        <Stack.Screen
+          name="UserAccount"
+          component={UserAccount}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>

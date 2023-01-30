@@ -8,12 +8,6 @@ import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 
 const Tab = createBottomTabNavigator();
 
-// const HomeStack = () => (
-//     <Stack.Navigator>
-//       <Stack.Screen name="Details" component={Details} options={{ tabBarIcon: () => null}} />
-//     </Stack.Navigator>
-//   )
-
 const CustomTabBarButton = ({children, onPress}) => (
     <TouchableOpacity
     style={{
@@ -31,7 +25,7 @@ const CustomTabBarButton = ({children, onPress}) => (
             height:70,
             borderRadius:35,
             backgroundColor: '#e32f45',
-            elevation: 10
+            elevation: 8
         }}>
             {children}
         </View>
@@ -41,17 +35,17 @@ const CustomTabBarButton = ({children, onPress}) => (
 const Tabs = () => {
     return(
         
-        
         <Tab.Navigator
         screenOptions = {{
             tabBarShowLabel:false,
+            tabBarHideOnKeyboard: true,
             tabBarStyle: {
                 position: 'absolute',
                 bottom: 8,
-                left: 20,
-                right: 20,
+                left: 15,
+                right: 15,
                 backgroundColor: "#ffffff",
-                borderRadius:20,
+                borderRadius:22,
                 height: 75,
                 ...styles.shadow}}}>
 
@@ -169,7 +163,6 @@ const styles = StyleSheet.create({
     shadowOpacity: 0.45,
     shadowRadius: 6.5,
     elevation: 20
-
     }
 });
 
