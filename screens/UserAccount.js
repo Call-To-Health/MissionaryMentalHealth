@@ -1,29 +1,41 @@
-import { View, Text, SafeAreaView, Image, StatusBar, FlatList } from "react-native";
+import { View, Text, StyleSheet } from 'react-native'
+import {FocusedStatusBar} from "../components";
 import React from 'react';
-import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsArticle, FocusedStatusBar } from "../components";
-import { assets } from '../constants';
+import Header from '../components/Header';
+import { SafeAreaView } from 'react-navigation';
+import { COLORS } from '../constants';
 
 const UserAccount = () => {
   return (
-    <View>
-      <FocusedStatusBar
-        barStyle="dark-content"
-        backgroundColor="transparent"
-        translucent={true}
-      />
-
-    <CircleButton
-      imgUrl={assets.left}
-      handlePress={() => navigation.goBack()}
-      left={15}
-      top={StatusBar.currentHeight + 10}/>
-    
-      <Text>User Account</Text>
-
+    <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
+      <Header/>
+      <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       
-    </View>
-
-);
+        <View style={style.header}>
+          <Text>User Account</Text>
+          
+        </View>
+        
+          <View style={{backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
+            <Text style={style.headerTitle}>User Account</Text>
+          </View>
+        
+    </SafeAreaView>
+  )
 }
+
+const style = StyleSheet.create ({
+  header: {
+    paddingVertical:20,
+    flexDirection:'row',
+    justifyContent: 'space-between',
+    backgroundColor: COLORS.primary,
+  },
+  headerTitle: {
+    color:COLORS.white,
+    fontWeight:'bold',
+    fontSize: 23,
+  }
+})
 
 export default UserAccount
