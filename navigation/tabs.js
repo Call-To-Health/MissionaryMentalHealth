@@ -1,14 +1,10 @@
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
-import { createStackNavigator } from "@react-navigation/stack";
 import Home from '../screens/Home';
 import Chat from '../screens/Chat';
 import Library from '../screens/Library';
 import Journal from "../screens/Journal";
 import UserAccount from '../screens/UserAccount';
-import Details from '../screens/Details';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
-
-const Stack = createStackNavigator();
 
 const Tab = createBottomTabNavigator();
 
