@@ -13,6 +13,10 @@ import UserAccount from "./screens/UserAccount";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import react from "react";
 
+const Stack = createStackNavigator();
+const Tab = createBottomTabNavigator();
+
+
 // function TabNav() {
 //   return(
 //     <Tab.Navigator>
@@ -30,38 +34,32 @@ const theme = {
   },
 };
 
-const Stack = createStackNavigator();
-const TabNavigator = createBottomTabNavigator();
-const Tab = createBottomTabNavigator();
 
 const App = () => {
-  const [loaded] = useFonts({
-    InterBold: require("./assets/fonts/Inter-Bold.ttf"),
-    InterSemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),
-    InterMedium: require("./assets/fonts/Inter-Medium.ttf"),
-    InterRegular: require("./assets/fonts/Inter-Regular.ttf"),
-    InterLight: require("./assets/fonts/Inter-Light.ttf"),
-  });
-
-
-
+  const [loaded] = useFonts({InterBold: require("./assets/fonts/Inter-Bold.ttf"),InterSemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),InterMedium: require("./assets/fonts/Inter-Medium.ttf"),InterRegular: require("./assets/fonts/Inter-Regular.ttf"),InterLight: require("./assets/fonts/Inter-Light.ttf"),});
   if (!loaded) return null;
 
-  return (
-      
+return (
     <NavigationContainer theme={theme}>
+      <Stack.Navigator>
+        <Stack.Screen
+          name="Tabs"
+          component={Tabs}
+          options={{
+            headerLeft:null,
+            headerRight:null,
+            //  this is what removes the header! 
+            headerShown:false}}
+        />
+        <Stack.Screen
+          name="Details"
+          component={Details}
+        />
 
-      <Tabs/>
-      
+      </Stack.Navigator>
     </NavigationContainer>
   );
 };
 
 export default App;
 
-
-{/* <Stack.Navigator screenOptions={{headerShown: false,}}initialRouteName="Home">
-  <Stack.Screen name="TabNav" component={TabNav}></Stack.Screen>
-  <Stack.Screen name="Home" component={Home}></Stack.Screen>
-  <Stack.Screen name="Details" component={Details} />
-</Stack.Navigator>   */}
