@@ -53,7 +53,6 @@ const Tabs = () => {
             options={{
                 //  this is what removes the header! 
                 headerShown:false,
-                
                 tabBarIcon: ({focused}) => (
                     <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
                         <Image
@@ -73,6 +72,7 @@ const Tabs = () => {
 
             <Tab.Screen name="Chat" component={Chat}
             options={{
+                headerShown:false,
                 tabBarIcon: ({focused}) => (
                     <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
                         <Image
@@ -93,6 +93,7 @@ const Tabs = () => {
 
             <Tab.Screen name="Journal" component={Journal}
             options={{
+                headerShown:false,
                 tabBarIcon: ({focused}) => (
                 <Image source={require('../assets/icons/diary.png')} resizeMode="contain"
                     style={{
@@ -110,6 +111,7 @@ const Tabs = () => {
 
             <Tab.Screen name="Library" component={Library}
             options={{
+                headerShown:false,
                 tabBarIcon: ({focused}) => (
                     <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
                         <Image
@@ -129,7 +131,7 @@ const Tabs = () => {
 
             <Tab.Screen name="Settings" component={UserAccount}
             options={{
-                
+                headerShown:false,
                 tabBarIcon: ({focused}) => (
                     <View style= {{alignItems: 'center', justifyContent: 'center',top:10}}>
                         <Image

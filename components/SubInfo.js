@@ -57,6 +57,7 @@ const ImageCmp = ({ imgUrl, index }) => {
       style={{
         width: 48,
         height: 48,
+        borderRadius: 50,
         marginLeft: index === 0 ? 0 : -SIZES.font,
       }}
     />
