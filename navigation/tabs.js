@@ -1,12 +1,22 @@
-import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
+import { createStackNavigator } from "@react-navigation/stack";
 import Home from '../screens/Home';
 import Chat from '../screens/Chat';
 import Library from '../screens/Library';
 import Journal from "../screens/Journal";
 import UserAccount from '../screens/UserAccount';
+import Details from '../screens/Details';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 
+const Stack = createStackNavigator();
+
 const Tab = createBottomTabNavigator();
+
+// const HomeStack = () => (
+//     <Stack.Navigator>
+//       <Stack.Screen name="Details" component={Details} options={{ tabBarIcon: () => null}} />
+//     </Stack.Navigator>
+//   )
 
 const CustomTabBarButton = ({children, onPress}) => (
     <TouchableOpacity
@@ -34,6 +44,8 @@ const CustomTabBarButton = ({children, onPress}) => (
 
 const Tabs = () => {
     return(
+        
+        
         <Tab.Navigator
         screenOptions = {{
             tabBarShowLabel:false,
@@ -45,14 +57,10 @@ const Tabs = () => {
                 backgroundColor: "#ffffff",
                 borderRadius:20,
                 height: 75,
-                ...styles.shadow
-            }
-        }}
-        >
+                ...styles.shadow}}}>
+
             <Tab.Screen name="Home" component={Home} 
             options={{
-                headerLeft:null,
-                headerRight:null,
                 //  this is what removes the header! 
                 headerShown:false,
                 
@@ -64,14 +72,15 @@ const Tabs = () => {
                         style={{
                             width:25,
                             height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94'
-                        }}/>
+                            tintColor: focused ? '#e32f45' : '#748c94'}}/>
+
+                        {/* This is what shows on the navbar */}
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
                             Home
                             </Text>
                     </View>
-                ),
-            }} />
+                ), }} />
+
             <Tab.Screen name="Chat" component={Chat}
             options={{
                 tabBarIcon: ({focused}) => (
@@ -128,7 +137,6 @@ const Tabs = () => {
                 ),
             }} />
 
-
             <Tab.Screen name="Settings" component={UserAccount}
             options={{
                 
@@ -149,7 +157,9 @@ const Tabs = () => {
                     </View>
                 ),
             }} />
+
         </Tab.Navigator>
+        
     )
 }
 
