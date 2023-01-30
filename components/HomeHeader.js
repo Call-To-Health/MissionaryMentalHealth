@@ -1,9 +1,11 @@
 import React from "react";
-import { View, Text, Image, TextInput } from "react-native";
-
+import { View, Text, Image, TextInput,Pressable } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
+import { useNavigation } from "@react-navigation/native";
+
 
 const HomeHeader = ({ onSearch }) => {
+  const navigation = useNavigation();
   return (
     <View
       style={{
@@ -25,12 +27,12 @@ const HomeHeader = ({ onSearch }) => {
         />
 
         <View style={{ width: 45, height: 45 }}>
-          <Image
-            source={assets.person01}
-            resizeMode="contain"
-            style={{ width: "100%", height: "100%" }}
-          />
-          <Image
+          <Pressable onPress={() => navigation.navigate("UserAccount")}>
+            <Image source={assets.person01} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50 }}/>
+          </Pressable>
+
+          {/* Code for the badge next to the profile picture */}
+          {/* <Image
             source={assets.badge}
             resizeMode="contain"
             style={{
@@ -40,7 +42,7 @@ const HomeHeader = ({ onSearch }) => {
               bottom: 0,
               right: 0,
             }}
-          />
+          /> */}
         </View>
       </View>
 
@@ -76,7 +78,7 @@ const HomeHeader = ({ onSearch }) => {
             flexDirection: "row",
             alignItems: "center",
             paddingHorizontal: SIZES.font,
-            paddingVertical: SIZES.small - 2,
+            paddingVertical: SIZES.small - 3,
           }}
         >
           <Image
@@ -85,7 +87,7 @@ const HomeHeader = ({ onSearch }) => {
             style={{ width: 20, height: 20, marginRight: SIZES.base }}
           />
           <TextInput
-            placeholder="Search for resources"
+            placeholder="Search for resources..."
             style={{ flex: 1 }}
             onChangeText={onSearch}
           />
