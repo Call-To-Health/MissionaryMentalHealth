@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
-
 import { Card, HomeHeader, FocusedStatusBar } from "../components";
+import Header from "../components/Header";
 import { COLORS, Data } from "../constants";
 
 const Home = () => {
@@ -24,7 +24,9 @@ const Home = () => {
   };
 
   return (
-    <SafeAreaView style={{ flex: 1 }}>
+
+    <SafeAreaView style={{backgroundColor: COLORS.primary, flex: 1 }}>
+      <Header/>
       <FocusedStatusBar backgroundColor={COLORS.primary} />
       <View style={{ flex: 1 }}>
         <View style={{ zIndex: 0 }}>
@@ -48,7 +50,7 @@ const Home = () => {
           }}
         >
           <View
-            style={{ height: 300, backgroundColor: COLORS.primary }} />
+            style={{ height: 160, backgroundColor: COLORS.primary }} />
           <View style={{ flex: 1, backgroundColor: COLORS.white }} />
         </View>
       </View>

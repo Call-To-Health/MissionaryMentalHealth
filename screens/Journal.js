@@ -1,29 +1,29 @@
-import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text } from 'react-native'
-import Icon from 'react-native-ico-material-design'
+import { View, Text, StyleSheet } from 'react-native'
 import {FocusedStatusBar} from "../components";
-import React from 'react'
-import { COLORS } from '../constants';
+import React from 'react';
 import Header from '../components/Header';
-import { withOrientation } from 'react-navigation';
-  
-const Library = (navigation) => {
+import { SafeAreaView } from 'react-navigation';
+import { COLORS } from '../constants';
+
+const Journal = () => {
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <Header/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       
         <View style={style.header}>
-          <Text>Library</Text>
+          <Text>Journal</Text>
           
         </View>
-        <ScrollView showsVerticalScrollIndicator={false}>
+        
           <View style={{backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
-            <Text style={style.headerTitle}>Explore the</Text>
+            <Text style={style.headerTitle}>Journal</Text>
           </View>
-        </ScrollView>
+        
     </SafeAreaView>
   )
 }
+
 const style = StyleSheet.create ({
   header: {
     paddingVertical:20,
@@ -37,4 +37,5 @@ const style = StyleSheet.create ({
     fontSize: 23,
   }
 })
-export default Library;
+
+export default Journal
