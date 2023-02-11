@@ -13,12 +13,12 @@ const Library = (navigation) => {
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       
         <View style={style.header}>
-          <Text>Library</Text>
+          <Text></Text>
           
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
-            <Text style={style.headerTitle}>Explore the</Text>
+            <Text style={style.headerTitle}>Explore the Library</Text>
           </View>
         </ScrollView>
     </SafeAreaView>

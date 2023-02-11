@@ -5,9 +5,10 @@ import {StyleSheet,Text,View,Pressable} from 'react-native';
 import { useFonts } from "expo-font";
 import Icon from 'react-native-ico-material-design';
 import Tabs from './navigation/tabs';
-
+import AsyncStorage from "@react-native-async-storage/async-storage";
 import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
+import Home from "./screens/Home";
 
 const Stack = createStackNavigator();
 
@@ -38,8 +39,14 @@ return (
           component={Details}
         />
         <Stack.Screen
+          options={{headerShown: false}}
           name="UserAccount"
           component={UserAccount}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Home"
+          component={Home}
         />
 
       </Stack.Navigator>
@@ -48,4 +55,3 @@ return (
 };
 
 export default App;
-
