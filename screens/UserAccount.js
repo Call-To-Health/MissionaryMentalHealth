@@ -1,3 +1,4 @@
+import { AsyncStorage } from '@react-native-async-storage/async-storage';
 import { View, Text, StyleSheet, TouchableOpacity  } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import React from 'react';
@@ -17,6 +18,8 @@ const UserAccount = () => {
     auth
     .signOut()
     .then(()=> {
+      setEmail("");
+      setPassword("");
       navigation.navigate("Home")
     })
     .catch(error => alert(error.message))
@@ -63,8 +66,6 @@ const UserAccount = () => {
       <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary}}>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
 
-          
-        
           <View style={{justifyContent:'center',alignItems:'center',backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
             <Text style={styles.headerTitle}>User Account</Text>
             <Text style={styles.buttonText}>{auth.currentUser?.email} </Text>
