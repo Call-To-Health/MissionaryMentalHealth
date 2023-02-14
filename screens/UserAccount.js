@@ -73,7 +73,7 @@ const UserAccount = () => {
 
           <View style={styles.inputContainer}>
             <TextInput placeholder='Email'
-            value={email}
+            value={email.trim()}
             onChangeText={text => setEmail(text)}
             style={styles.input}
             />
