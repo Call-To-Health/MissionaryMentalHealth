@@ -1,12 +1,21 @@
-import { View, Text, StyleSheet, TouchableOpacity, Button  } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button  } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import Header from '../components/Header';
 import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-navigation';
-import { COLORS } from '../constants';
+import { COLORS, FONTS, SIZES, assets} from '../constants';
 import { TextInput } from 'react-native-gesture-handler';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
+import * as WebBrowser from 'expo-web-browser';
+import * as Google from 'expo-auth-session/providers/google';
+
+// Keys for OAuth
+// Web: 733294962332-vlsshtk13q21uc5hosvd6l4pmk8nivs4.apps.googleusercontent.com
+// Android: 733294962332-cv38cd85frv3gt18p2m6d6mmkg4nhe9r.apps.googleusercontent.com
+// iOS: 733294962332-497egn0ig9480umhto7rvtplh8boc6du.apps.googleusercontent.com
+
+WebBrowser.maybeCompleteAuthSession()
 
 const UserAccount = () => {
   
@@ -39,7 +48,7 @@ const UserAccount = () => {
     .createUserWithEmailAndPassword(email,password)
     .then(userCredentials => {
       const user = userCredentials.user;
-      console.log(user.email);
+      console.log(user.email); 
     })
     .catch(error=> alert(error.message))
   }
@@ -52,6 +61,41 @@ const UserAccount = () => {
       console.log('Logged in with: ', user.email);
     })
     .catch(error=> alert(error.message))
+  }
+
+  const [accessToken, setAccessToken] = React.useState(null);
+  const [user, setUser] = React.useState(null);
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: "733294962332-vlsshtk13q21uc5hosvd6l4pmk8nivs4.apps.googleusercontent.com",
+    iosClientId: "733294962332-497egn0ig9480umhto7rvtplh8boc6du.apps.googleusercontent.com",
+    androidClientId: "733294962332-cv38cd85frv3gt18p2m6d6mmkg4nhe9r.apps.googleusercontent.com"});
+
+  React.useEffect(()=> {
+    if(response?.type === "success") {
+      setAccessToken(response.authentication.accessToken);
+      accessToken && fetchUserInfo();}},[response, accessToken])
+
+  async function fetchUserInfo() {
+    let response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
+      headers: {
+        Authorization: 'Bearer ${accessToken}' }});
+    const useInfo = await response.json();
+    setUser(useInfo);
+  }
+
+  const ShowUserInfo = ()  => {
+    if(user) {
+      return(
+        <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
+          <Text style={{fontSize:35, fontWeight: 'bold', marginBottom:20}}>Welcome {user.name}</Text>
+          <Image source={{uri:user.picture}} style={{width: 100, height:100, borderRadius:50}}/>
+          <Pressable onPress={() => navigation.navigate("Home")}>
+            <Image source={assets.go} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50 }}/>
+          </Pressable>
+          <Text style={{fontSize:20, fontWeight: 'bold'}}>{user.name}</Text>
+        </View>
+      )
+    }
   }
 
   return (
@@ -87,6 +131,16 @@ const UserAccount = () => {
               <Text style={styles.buttonText}>Sign Out</Text>
             </TouchableOpacity>
 
+          </View>
+          <View>
+            {user && <ShowUserInfo/>}
+            {user === null && <>
+            <Text style={{fontSize:20, fontWeight: 'bold',marginBottom: 20,marginLeft: 20, color: 'white'}}>Google Account</Text>
+            <TouchableOpacity
+              disabled={!request}
+              onPress={() => {promptAsync();}}>
+              <Image source={assets.google} style={{width:200, height:50}} />
+            </TouchableOpacity></>}
           </View>
           </SafeAreaView>
     </SafeAreaView>

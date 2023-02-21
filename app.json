@@ -1,6 +1,7 @@
 {
   "expo": {
     "name": "Missionary Mental Health",
+    "scheme": "com.missionarymentalhealth.Login",
     "slug": "Missionary Mental Health",
     "version": "1.0.0",
     "orientation": "portrait",
