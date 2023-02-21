@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Button  } from 'react-native'
+import { View, Text, StyleSheet, Image, TouchableOpacity, Button,Pressable  } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import Header from '../components/Header';
 import React, { useState, useEffect } from 'react';
@@ -18,6 +18,18 @@ import * as Google from 'expo-auth-session/providers/google';
 WebBrowser.maybeCompleteAuthSession()
 
 const UserAccount = () => {
+
+  const [accessToken, setAccessToken] = React.useState(null);
+  const [user, setUser] = React.useState(null);
+  const [request, response, promptAsync] = Google.useAuthRequest({
+    clientId: "733294962332-vlsshtk13q21uc5hosvd6l4pmk8nivs4.apps.googleusercontent.com",
+    iosClientId: "733294962332-497egn0ig9480umhto7rvtplh8boc6du.apps.googleusercontent.com",
+    androidClientId: "733294962332-cv38cd85frv3gt18p2m6d6mmkg4nhe9r.apps.googleusercontent.com"});
+
+  React.useEffect(()=> {
+    if(response?.type === "success") {
+      setAccessToken(response.authentication.accessToken);
+      accessToken && fetchUserInfo();}},[response, accessToken])
   
   const HandleSignOut = () => {
     auth
@@ -63,18 +75,6 @@ const UserAccount = () => {
     .catch(error=> alert(error.message))
   }
 
-  const [accessToken, setAccessToken] = React.useState(null);
-  const [user, setUser] = React.useState(null);
-  const [request, response, promptAsync] = Google.useAuthRequest({
-    clientId: "733294962332-vlsshtk13q21uc5hosvd6l4pmk8nivs4.apps.googleusercontent.com",
-    iosClientId: "733294962332-497egn0ig9480umhto7rvtplh8boc6du.apps.googleusercontent.com",
-    androidClientId: "733294962332-cv38cd85frv3gt18p2m6d6mmkg4nhe9r.apps.googleusercontent.com"});
-
-  React.useEffect(()=> {
-    if(response?.type === "success") {
-      setAccessToken(response.authentication.accessToken);
-      accessToken && fetchUserInfo();}},[response, accessToken])
-
   async function fetchUserInfo() {
     let response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
       headers: {
@@ -87,10 +87,10 @@ const UserAccount = () => {
     if(user) {
       return(
         <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
-          <Text style={{fontSize:35, fontWeight: 'bold', marginBottom:20}}>Welcome {user.name}</Text>
+          <Text style={{fontSize:35,marginTop: 500, color: "white", fontWeight: 'bold', marginBottom:20}}>Google Sign In Successful! {user.name}</Text>
           <Image source={{uri:user.picture}} style={{width: 100, height:100, borderRadius:50}}/>
           <Pressable onPress={() => navigation.navigate("Home")}>
-            <Image source={assets.go} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50 }}/>
+            <Text>Go Home</Text>
           </Pressable>
           <Text style={{fontSize:20, fontWeight: 'bold'}}>{user.name}</Text>
         </View>
@@ -123,13 +123,13 @@ const UserAccount = () => {
             <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline]}>
               <Text style={styles.buttonOutlineText}>Register</Text>
             </TouchableOpacity>
-
-          </View>
-          <View style ={styles.littleContainer}>
-            
             <TouchableOpacity onPress={HandleSignOut} style={styles.redButton}>
               <Text style={styles.buttonText}>Sign Out</Text>
             </TouchableOpacity>
+          </View>
+          <View style ={styles.littleContainer}>
+            
+            
 
           </View>
           <View>

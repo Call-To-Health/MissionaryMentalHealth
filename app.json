@@ -2,7 +2,7 @@
   "expo": {
     "name": "Missionary Mental Health",
     "scheme": "com.missionarymentalhealth.Login",
-    "slug": "Missionary Mental Health",
+    "slug": "MissionaryMentalHealth",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -28,7 +28,6 @@
         "googleServicesFile": "./google-services.json"
       },
       "package": "missionary-mental-health.firebaseapp.com",
-      "plugins": ["@react-native-google-signin/google-signin"],
       "config": {
         "googleSignIn": {
           "apiKey": "1:733294962332:web:3b0e8dfddcb1bbec9a2f59",
