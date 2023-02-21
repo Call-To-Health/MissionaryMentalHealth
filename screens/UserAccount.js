@@ -1,19 +1,15 @@
-import { AsyncStorage } from '@react-native-async-storage/async-storage';
-import { View, Text, StyleSheet, TouchableOpacity  } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Button  } from 'react-native'
 import {FocusedStatusBar} from "../components";
-import React from 'react';
 import Header from '../components/Header';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { SafeAreaView } from 'react-navigation';
 import { COLORS } from '../constants';
 import { TextInput } from 'react-native-gesture-handler';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
-import NavigationContainer from '@react-navigation/native';
-
 
 const UserAccount = () => {
-
+  
   const HandleSignOut = () => {
     auth
     .signOut()
@@ -59,7 +55,6 @@ const UserAccount = () => {
   }
 
   return (
-    
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <Header/>
 
@@ -72,16 +67,8 @@ const UserAccount = () => {
           </View>
 
           <View style={styles.inputContainer}>
-            <TextInput placeholder='Email'
-            value={email}
-            onChangeText={text => setEmail(text)}
-            style={styles.input}
-            />
-            <TextInput placeholder='Password'
-            value={password}
-            onChangeText={text => setPassword(text)}
-            style={styles.input}
-            secureTextEntry/>
+            <TextInput placeholder='Email'value={email}onChangeText={text => setEmail(text)}style={styles.input}/>
+            <TextInput placeholder='Password'value={password}onChangeText={text => setPassword(text)}style={styles.input}secureTextEntry/>
           </View>
 
           <View style={styles.buttonContainer}>
@@ -92,20 +79,20 @@ const UserAccount = () => {
             <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline]}>
               <Text style={styles.buttonOutlineText}>Register</Text>
             </TouchableOpacity>
+
           </View>
           <View style ={styles.littleContainer}>
             
             <TouchableOpacity onPress={HandleSignOut} style={styles.redButton}>
               <Text style={styles.buttonText}>Sign Out</Text>
             </TouchableOpacity>
+
           </View>
           </SafeAreaView>
     </SafeAreaView>
 
   )
 }
-
-
 const styles = StyleSheet.create ({
   header: {
     paddingVertical:20,
@@ -177,5 +164,4 @@ buttonOutlineText : {
   fontSize:16, 
 },
 })
-
 export default UserAccount
