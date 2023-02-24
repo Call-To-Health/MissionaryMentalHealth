@@ -3,6 +3,8 @@ import tag from "../assets/icons/tag.png";
 import heart from "../assets/icons/heart.png";
 import left from "../assets/icons/left.png";
 import search from "../assets/icons/search.png";
+import google from "../assets/icons/google.png";
+import go from "../assets/icons/go.png";
 
 import logo from "../assets/images/logo.png";
 import missionaries1 from "../assets/images/missionaries1.jpg";
@@ -24,6 +26,8 @@ export default {
   heart,
   left,
   search,
+  google,
+  go,
 
   logo,
   missionaries1,
