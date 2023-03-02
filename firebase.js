@@ -2,8 +2,6 @@
 import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,14 +13,25 @@ const firebaseConfig = {
   appId: "1:733294962332:web:3b0e8dfddcb1bbec9a2f59"
 };
 
-// Initialize Firebase
 let app;
 if (firebase.apps.length === 0){
-    app= firebase.initializeApp(firebaseConfig);
+    app = firebase.initializeApp(firebaseConfig);
 } else {
     app = firebase.app()
 }
 
 const auth = firebase.auth()
 
-export {auth};
+const db = firebase.firestore();
+
+// Get a reference to the "stories" collection
+const storiesCollection = db.collection('stories');
+
+// Read data from the "stories" collection
+storiesCollection.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+  });
+});
+
+export {firebase,auth,db,storiesCollection};

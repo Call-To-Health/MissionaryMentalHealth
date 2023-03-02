@@ -1,37 +1,55 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
-import { Card, HomeHeader, FocusedStatusBar } from "../components";
-import Header from "../components/Header";
-import { COLORS, Data } from "../constants";
+import { Card, HomeHeader,FocusedStatusBar } from "../components";
+import { COLORS } from "../constants";
+import { firebase , db,storiesCollection} from "../firebase";
+import _ from 'lodash';
 
 const Home = () => {
-  const [storyData, setStoryData] = useState(Data);
+  const [stories, setStories] = useState([]);
 
   const handleSearch = (value) => {
     if (value.length === 0) {
-      setStoryData(Data);
+      setStories([]);
     }
-
-    const filteredData = Data.filter((item) =>
+  
+    const filteredData = db.filter((item) =>
       item.name.toLowerCase().includes(value.toLowerCase())
     );
-
+  
     if (filteredData.length === 0) {
-      setStoryData(Data);
+      setStories([]);
     } else {
-      setStoryData(filteredData);
+      setStories(filteredData);
     }
   };
 
-  return (
+  useEffect(() => {
+    const unsubscribe = storiesCollection.onSnapshot(_.debounce((querySnapshot) => {
+      const data = [];
+      querySnapshot.forEach((doc) => {
+        data.push({
+          id: doc.id,
+          ...doc.data(),
+        });
+      });
+      setStories(data);
+    }, 500));
 
-    <SafeAreaView style={{backgroundColor: COLORS.primary, flex: 1 }}>
-      <Header/>
-      <FocusedStatusBar backgroundColor={COLORS.primary} />
+    return () => {
+      unsubscribe();
+    };
+  }, []);
+
+  return (
+    <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
+
+      <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
+
       <View style={{ flex: 1 }}>
         <View style={{ zIndex: 0 }}>
           <FlatList
-            data={storyData}
+            data={stories}
             renderItem={({ item }) => <Card data={item} />}
             keyExtractor={(item) => item.id}
             showsVerticalScrollIndicator={false}
@@ -49,8 +67,7 @@ const Home = () => {
             zIndex: -1,
           }}
         >
-          <View
-            style={{ height: 160, backgroundColor: COLORS.primary }} />
+          <View style={{ height: 160, backgroundColor: COLORS.primary }} />
           <View style={{ flex: 1, backgroundColor: COLORS.white }} />
         </View>
       </View>
