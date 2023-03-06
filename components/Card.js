@@ -1,31 +1,30 @@
-import React, { useState, useEffect } from "react";
-import { useNavigation } from "@react-navigation/native";
-import { View, Image, Text} from "react-native";
-import { COLORS, SIZES, SHADOWS, assets } from "../constants";
+import React, {useState,useEffect} from "react";
+import { View, Image, Text } from "react-native";
 import { SubInfo, TaggedItems, Title } from "./SubInfo";
-import { RectButton, CircleButton } from "./Button";
-import { db, storiesCollection } from "../firebase";
-import { collection, getDocs } from "firebase/firestore";
+import { CircleButton } from "./Button";
+import { COLORS, SIZES, SHADOWS, assets } from "../constants";
+import { fetchRandomDocs } from "../firebase";
 
 const Card = () => {
-  const navigation = useNavigation();
-  const [storyData, setStoryData] = useState([]);
+  const [randomDocs, setRandomDocs] = useState([]);
 
   useEffect(() => {
-    const fetchStories = async () => {
-      const querySnapshot = await getDocs(collection(db, "stories"));
-      const data = querySnapshot.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setStoryData(data);
+    const getRandomDocs = async () => {
+      const randomDocs = await fetchRandomDocs();
+      setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      console.log("Here is the content of randomDocs in the Card component" + randomDocs);
     };
-    fetchStories();
+    getRandomDocs();
   }, []);
+
+  const handlePress = (id) => {
+    // Do something with the story id, e.g. navigate to story details screen
+    console.log(`Story id ${id} clicked`);
+  };
 
   return (
     <>
-      {storyData.map((story) => (
+      {randomDocs.map((story) => (
         <View
           key={story.id}
           style={{
@@ -36,14 +35,9 @@ const Card = () => {
             ...SHADOWS.dark,
           }}
         >
-          <View
-            style={{
-              width: "100%",
-              height: 80,
-            }}
-          >
+          <View style={{ width: "100%", height: 80 }}>
             <Image
-              source={story.image}
+              source={{ uri: story?.image }}
               resizeMode="cover"
               style={{
                 width: "100%",
@@ -57,17 +51,15 @@ const Card = () => {
               imgUrl={assets.heart}
               right={10}
               top={10}
-              handlePress={() =>
-                navigation.navigate("Details", { storiesId: story.id })
-              }
+              handlePress={() => handlePress(story.id)}
             />
           </View>
 
-          <SubInfo date={story.date} location={story.location} />
+          <SubInfo date={story?.date} location={story?.location} />
 
           <View style={{ width: "100%", padding: SIZES.font }}>
             <Title
-              title={story.solution}
+              title={story?.solution}
               titleSize={SIZES.large}
               subTitleSize={SIZES.small}
             />
@@ -79,7 +71,6 @@ const Card = () => {
                 justifyContent: "space-between",
                 alignItems: "center",
               }}
-              
             >
               <Text>by {story.name}</Text>
               <TaggedItems tags={story.tag} />

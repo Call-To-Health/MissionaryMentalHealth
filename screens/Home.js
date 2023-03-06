@@ -7,21 +7,21 @@ import {fetchRandomDocs} from "../firebase";
 const Home = () => {
   const [randomDocs, setRandomDocs] = useState([]);
 
-  // const handleSearch = (value) => {
-  //   if (value.length === 0) {
-  //     setStories([]);
-  //   }
+  const handleSearch = (value) => {
+    if (value.length === 0) {
+      setStories([]);
+    }
   
-  //   const filteredData = db.filter((item) =>
-  //     item.name.toLowerCase().includes(value.toLowerCase())
-  //   );
+    const filteredData = db.filter((item) =>
+      item.name.toLowerCase().includes(value.toLowerCase())
+    );
   
-  //   if (filteredData.length === 0) {
-  //     setRandomDocs([]);
-  //   } else {
-  //     setRandomDocs(filteredData);
-  //   }
-  // };
+    if (filteredData.length === 0) {
+      setRandomDocs([]);
+    } else {
+      setRandomDocs(filteredData);
+    }
+  };
 
   useEffect(() => {
     const getRandomDocs = async () => {
