@@ -21,17 +21,28 @@ if (firebase.apps.length === 0){
 }
 
 const auth = firebase.auth()
-
 const db = firebase.firestore();
 
-// Get a reference to the "stories" collection
 const storiesCollection = db.collection('stories');
 
-// Read data from the "stories" collection
-storiesCollection.get().then((querySnapshot) => {
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
-  });
-});
 
-export {firebase,auth,db,storiesCollection};
+
+// Make randomDocs which is a collection of 20 random stories.
+async function fetchRandomDocs() {
+  const querySnapshot = await storiesCollection.orderBy(firebase.firestore.FieldPath.documentId()).get();
+  const randomIndices = [];
+  while (randomIndices.length < Math.min(20, querySnapshot.size)) {
+    const randomIndex = Math.floor(Math.random() * querySnapshot.size);
+    if (!randomIndices.includes(randomIndex)) {
+      randomIndices.push(randomIndex);
+    }
+}
+  const randomDocs = randomIndices.map((randomIndex) => querySnapshot.docs[randomIndex]);
+  randomDocs.forEach((doc) => {
+    console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+  });
+  console.log("Here is the content of RandomDocs :" + randomDocs);
+  return randomDocs;
+}
+
+export { firebase, auth, db, fetchRandomDocs};

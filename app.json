@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Missionary Mental Health",
-    "scheme": "com.missionarymentalhealth.Login",
+    "scheme": "com.missionarymentalhealth.login",
     "slug": "MissionaryMentalHealth",
     "version": "1.0.0",
     "orientation": "portrait",
@@ -10,7 +10,7 @@
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
+      "backgroundColor": "#000000"
     },
     "updates": {
       "fallbackToCacheTimeout": 0
@@ -27,7 +27,7 @@
         "backgroundColor": "#FFFFFF",
         "googleServicesFile": "./google-services.json"
       },
-      "package": "missionary-mental-health.firebaseapp.com",
+      "package": "com.missionary-mental-health.firebaseapp",
       "config": {
         "googleSignIn": {
           "apiKey": "1:733294962332:web:3b0e8dfddcb1bbec9a2f59",

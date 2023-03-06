@@ -2,71 +2,45 @@ import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
 import { Card, HomeHeader,FocusedStatusBar } from "../components";
 import { COLORS } from "../constants";
-import { firebase , db,storiesCollection} from "../firebase";
-import _ from 'lodash';
+import {fetchRandomDocs} from "../firebase";
 
 const Home = () => {
-  const [stories, setStories] = useState([]);
+  const [randomDocs, setRandomDocs] = useState([]);
 
-  const handleSearch = (value) => {
-    if (value.length === 0) {
-      setStories([]);
-    }
+  // const handleSearch = (value) => {
+  //   if (value.length === 0) {
+  //     setStories([]);
+  //   }
   
-    const filteredData = db.filter((item) =>
-      item.name.toLowerCase().includes(value.toLowerCase())
-    );
+  //   const filteredData = db.filter((item) =>
+  //     item.name.toLowerCase().includes(value.toLowerCase())
+  //   );
   
-    if (filteredData.length === 0) {
-      setStories([]);
-    } else {
-      setStories(filteredData);
-    }
-  };
+  //   if (filteredData.length === 0) {
+  //     setRandomDocs([]);
+  //   } else {
+  //     setRandomDocs(filteredData);
+  //   }
+  // };
 
   useEffect(() => {
-    const unsubscribe = storiesCollection.onSnapshot(_.debounce((querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-      setStories(data);
-    }, 500));
-
-    return () => {
-      unsubscribe();
+    const getRandomDocs = async () => {
+      const randomDocs = await fetchRandomDocs();
+      setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      console.log("Here is the content of randomDocs in the Home component" + randomDocs);
     };
+    getRandomDocs();
   }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
-
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
-
       <View style={{ flex: 1 }}>
         <View style={{ zIndex: 0 }}>
-          <FlatList
-            data={stories}
-            renderItem={({ item }) => <Card data={item} />}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={<HomeHeader onSearch={handleSearch} />}
-          />
+          <FlatList data={randomDocs} renderItem={({item:doc}) => <Card doc={doc} />}keyExtractor={(doc) => doc.id}showsVerticalScrollIndicator={true}ListHeaderComponent={<HomeHeader />}/>
         </View>
-
         <View
-          style={{
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            right: 0,
-            left: 0,
-            zIndex: -1,
-          }}
-        >
+          style={{position: "absolute", top: 0,bottom: 0,right: 0,left: 0,zIndex: -1,}}> 
           <View style={{ height: 160, backgroundColor: COLORS.primary }} />
           <View style={{ flex: 1, backgroundColor: COLORS.white }} />
         </View>
