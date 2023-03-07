@@ -14,15 +14,19 @@ const Library = (navigation) => {
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color="white" />, label: "Talks"},
     {icon: <Feather name="book-open" size={30} color="white" />, label: "User Stories"},
-    {icon: <Foundation name="torso-business" size={30} color="white" />, label: "Adjusting to ML"},
+    {icon: <Foundation name="torso-business" size={30} color="white" />, label: "Adjusting to Missionary Life"},
   ];
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
         {categoryIcons.map(({icon, label}, index) => (
-          <View key={index} style={style.iconContainer}>
-            {icon}
+          <View style={{alignItems: "center"}}>
+            <View key={index} style={style.iconContainer}>
+              {icon}
+            </View>
+            <Text style={style.labelContainer}>{label}</Text>
           </View>
+
         ))}
       </View>
     );
@@ -86,6 +90,14 @@ const style = StyleSheet.create ({
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10
+  },
+  labelContainer: {
+    width: 100,
+    color: COLORS.white,
+    alignItems: "center",
+    textAlign: "center",
+    fontSize: 12,
+    paddingTop: 10
   }
 })
 export default Library;
