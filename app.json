@@ -1,42 +1,8 @@
 {
   "expo": {
-    "name": "Missionary Mental Health",
-    "scheme": "com.missionarymentalhealth.Login",
-    "slug": "MissionaryMentalHealth",
-    "version": "1.0.0",
-    "orientation": "portrait",
-    "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
-    "splash": {
-      "image": "./assets/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#ffffff"
-    },
-    "updates": {
-      "fallbackToCacheTimeout": 0
-    },
-    "assetBundlePatterns": [
-      "**/*"
-    ],
-    "ios": {
-      "supportsTablet": true
-    },
-    "android": {
-      "adaptiveIcon": {
-        "foregroundImage": "./assets/adaptive-icon.png",
-        "backgroundColor": "#FFFFFF",
-        "googleServicesFile": "./google-services.json"
-      },
-      "package": "missionary-mental-health.firebaseapp.com",
-      "config": {
-        "googleSignIn": {
-          "apiKey": "1:733294962332:web:3b0e8dfddcb1bbec9a2f59",
-          "certificateHash": "7C:09:40:74:84:94:50:1E:07:7C:D2:0D:39:C6:3B:3C:E4:4F:56:6B"
-    }
-  }
-    },
-    "web": {
-      "favicon": "./assets/favicon.png"
-    }
-  }
+    "slug": "calledto",
+    "name": "calledto",
+    "sdkVersion": "47.0.0"
+  },
+  "name": "calledto"
 }

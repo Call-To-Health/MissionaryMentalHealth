@@ -12,17 +12,16 @@ import { TextInput } from 'react-native-gesture-handler';
   
 const Library = (navigation) => {
   const categoryIcons = [
-  <MaterialCommunityIcons name="bookshelf" size={30} color="white" />,
-  <Feather name="book-open" size={30} color="white" />,
-  <Foundation name="torso-business" size={30} color="white" />
-  ]
+    {icon: <MaterialCommunityIcons name="bookshelf" size={30} color="white" />, label: "Talks"},
+    {icon: <Feather name="book-open" size={30} color="white" />, label: "User Stories"},
+    {icon: <Foundation name="torso-business" size={30} color="white" />, label: "Adjusting to ML"},
+  ];
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
-        {categoryIcons.map((icon, index) => (
+        {categoryIcons.map(({icon, label}, index) => (
           <View key={index} style={style.iconContainer}>
             {icon}
-            <Text>{index}</Text>
           </View>
         ))}
       </View>
