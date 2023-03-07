@@ -1,4 +1,6 @@
 import React, {useState,useEffect} from "react";
+import { useNavigation } from "@react-navigation/native";
+import Button from "../components";
 import { View, Image, Text } from "react-native";
 import { SubInfo, TaggedItems, Title } from "./SubInfo";
 import { CircleButton } from "./Button";
@@ -19,8 +21,12 @@ const Card = () => {
 
   const handlePress = (id) => {
     // Do something with the story id, e.g. navigate to story details screen
-    console.log(`Story id ${id} clicked`);
+    console.log(`Heart on story id ${id} clicked.`);
   };
+
+  const imageIndex = Math.floor(Math.random() * 7) + 1; // numImages is the total number of available images
+  const imageSource = (`assets.missionaries${imageIndex}`);
+  console.log("imageSource:", imageSource);
 
   return (
     <>
@@ -37,7 +43,8 @@ const Card = () => {
         >
           <View style={{ width: "100%", height: 80 }}>
             <Image
-              source={{ uri: story?.image }}
+              // source={{imageSource}}
+              source={assets.missionaries1}
               resizeMode="cover"
               style={{
                 width: "100%",
@@ -59,7 +66,7 @@ const Card = () => {
 
           <View style={{ width: "100%", padding: SIZES.font }}>
             <Title
-              title={story?.solution}
+              title={story.solution}
               titleSize={SIZES.large}
               subTitleSize={SIZES.small}
             />
@@ -72,6 +79,11 @@ const Card = () => {
                 alignItems: "center",
               }}
             >
+              {/* <Button
+             minWidth={120}
+             fontSize={SIZES.font}
+             handlePress={() => navigation.navigate("Details", { data })}
+           /> */}
               <Text>by {story.name}</Text>
               <TaggedItems tags={story.tag} />
             </View>
