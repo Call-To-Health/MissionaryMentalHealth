@@ -13,12 +13,15 @@ const Library = (navigation) => {
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       
         <View style={style.header}>
-          <Text>Library</Text>
+          <Text></Text>
           
         </View>
         <ScrollView showsVerticalScrollIndicator={false}>
           <View style={{backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
-            <Text style={style.headerTitle}>Explore the</Text>
+            <Text style={style.headerTitle}>Explore the Library</Text>
+          </View>
+          <View style={style.inputContainer}>
+            
           </View>
         </ScrollView>
     </SafeAreaView>
@@ -35,6 +38,17 @@ const style = StyleSheet.create ({
     color:COLORS.white,
     fontWeight:'bold',
     fontSize: 23,
+  },
+  inputContainer: {
+    height: 60,
+    width: '100%',
+    backgroundColor: COLORS.white,
+    borderRadius: 15,
+    position: 'absolute',
+    top: 90,
+    flexDirection: 'row',
+    paddingHorizontal: 20,
+    alignItems: 'center',
   }
 })
 export default Library;
