@@ -10,9 +10,9 @@ const Header = () => {
             <Image source={assets.logo} resizeMode="contain" style={{ width: 90, height: 25 }}/>
 
             <View style={{ width: 45, height: 45 }}>
-                {/* <Pressable onPress={() => navigation.navigate("UserAccount")}> */}
+                <Pressable onPress={() => navigation.navigate("UserAccount")}>
                     <Image source={assets.person04} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50 }}/>
-                {/* </Pressable> */}
+                </Pressable>
 
           {/* Code for the badge next to the profile picture */}
             {/* <Image source={assets.badge} resizeMode="contain" style={{position: "absolute",width: 15,height: 15,bottom: 0,right: 0,}}/> */}

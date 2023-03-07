@@ -12,10 +12,7 @@ const Chat = () => {
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       
         <View style={style.header}>
-          <Text>Chat</Text>
-          
         </View>
-        
           <View style={{backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
             <Text style={style.headerTitle}>Chat</Text>
           </View>

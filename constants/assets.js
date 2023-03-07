@@ -3,7 +3,7 @@ import tag from "../assets/icons/tag.png";
 import heart from "../assets/icons/heart.png";
 import left from "../assets/icons/left.png";
 import search from "../assets/icons/search.png";
-import google from "../assets/icons/google.png";
+import google from "../assets/icons/googleIcon.png";
 import go from "../assets/icons/go.png";
 
 import logo from "../assets/images/logo.png";
