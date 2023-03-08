@@ -5,16 +5,16 @@ import { Feather } from '@expo/vector-icons';
 import { Foundation } from '@expo/vector-icons';
 import {FocusedStatusBar} from "../components";
 import React from 'react'
-import { COLORS } from '../constants';
+import { COLORS, SIZES } from '../constants';
 import Header from '../components/Header';
 import { withOrientation } from 'react-navigation';
 import { TextInput } from 'react-native-gesture-handler';
   
 const Library = (navigation) => {
   const categoryIcons = [
-    {icon: <MaterialCommunityIcons name="bookshelf" size={30} color="white" />, label: "Talks"},
-    {icon: <Feather name="book-open" size={30} color="white" />, label: "User Stories"},
-    {icon: <Foundation name="torso-business" size={30} color="white" />, label: "Adjusting to Missionary Life"},
+    {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks"},
+    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "User Stories"},
+    {icon: <Foundation name="torso-business" size={30} color={COLORS.primary} />, label: "Adjusting to Missionary Life"},
   ];
   const ListCategories = () => {
     return (
@@ -32,19 +32,20 @@ const Library = (navigation) => {
     );
   };
   return (
-    <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
+    <SafeAreaView style={{flex: 1,backgroundColor: COLORS.primary}}>
       <Header/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
         <View style={style.header}>
-          <Text></Text>
         </View>
         
-        <ScrollView showsVerticalScrollIndicator={false}>
-          <View style={{backgroundColor: COLORS.primary, height: 120, margin: 15}}>
-            <Text style={style.headerTitle}>Explore the Library</Text>
-            <View style={style.inputContainer}>
-              <AntDesign name="search1" size={24} color="white" />
-              <TextInput placeholder='Search the library' style={{color: COLORS.black, paddingLeft: 10}} />
+        <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
+          <View style={{backgroundColor: COLORS.primary, height: 115}}>
+            <View style={{ marginLeft: 10, marginRight: 10}}>
+              <Text style={style.headerTitle}>Explore the Library</Text>
+              <View style={style.inputContainer}>
+                <AntDesign name="search1" size={20} color="white" style={{ marginRight: SIZES.base }} />
+                <TextInput placeholder='Search the library' style={{color: COLORS.black, flex: 1}} />
+              </View>
             </View>
           </View>
           
@@ -66,7 +67,7 @@ const style = StyleSheet.create ({
     fontSize: 23,
   },
   inputContainer: {
-    height: 60,
+    height: 50,
     width: '100%',
     backgroundColor: COLORS.gray,
     borderRadius: 15,
@@ -86,17 +87,17 @@ const style = StyleSheet.create ({
   iconContainer: {
     height: 60,
     width: 60,
-    backgroundColor: COLORS.secondary,
+    backgroundColor: "#d8e0e6",
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10
   },
   labelContainer: {
     width: 100,
-    color: COLORS.white,
+    color: COLORS.black,
     alignItems: "center",
     textAlign: "center",
-    fontSize: 12,
+    fontSize: 13,
     paddingTop: 10
   }
 })
