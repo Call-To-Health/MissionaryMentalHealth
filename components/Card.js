@@ -14,7 +14,7 @@ const Card = () => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
       setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      console.log("Here is the content of randomDocs in the Card component" + randomDocs);
+      // console.log("Here is the content of randomDocs in the Card component" + randomDocs);
     };
     getRandomDocs();
   }, []);

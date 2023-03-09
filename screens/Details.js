@@ -1,5 +1,5 @@
 import React from "react";
-import { View, Text, SafeAreaView, Image, StatusBar, FlatList } from "react-native";
+import { View, Text, SafeAreaView, Image, StatusBar, VirtualizedList } from "react-native";
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from "../constants";
 import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsArticle, FocusedStatusBar } from "../components";
 
@@ -26,9 +26,21 @@ const DetailsHeader = ({ story, navigation }) => (
   </View>
 );
 
+const getItem = (data, index) => {
+  return data[index];
+};
+
+const getItemCount = (data) => {
+  return data.length;};
+
 const Details = ({ route, navigation }) => {
   const { story } = route.params;
-  console.log(`The contents of ${story.id}  ${story.experience} on the Details component` );
+
+  const renderItem = ({ item }) => {
+    // return (
+    //   // <DetailsArticle story={story} />
+    // );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -53,10 +65,10 @@ const Details = ({ route, navigation }) => {
         <RectButton minWidth={170} fontSize={SIZES.large} {...SHADOWS.dark} />
       </View>
 
-      <FlatList
+      <VirtualizedList
         data={story?.experience}
-        // renderItem={({ item }) => <DetailsArticle story={story} />}
-        keyExtractor={(item) => item.id}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id ? item.id.toString() : Math.random().toString()}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: SIZES.extraLarge * 3,
@@ -82,6 +94,12 @@ const Details = ({ route, navigation }) => {
             </View>
           </React.Fragment>
         )}
+        getItem={getItem}
+        getItemCount={getItemCount}
+        initialNumToRender={20}
+        maxToRenderPerBatch={20}
+        updateCellsBatchingPeriod={50}
+        removeClippedSubviews={true}
       />
     </SafeAreaView>
   );
