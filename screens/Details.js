@@ -3,10 +3,10 @@ import { View, Text, SafeAreaView, Image, StatusBar, FlatList } from "react-nati
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from "../constants";
 import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsArticle, FocusedStatusBar } from "../components";
 
-const DetailsHeader = ({ data, navigation }) => (
+const DetailsHeader = ({ story, navigation }) => (
   <View style={{ width: "100%", height: 373 }}>
     <Image
-      source={data.image}
+      source={assets.missionaries1}
       resizeMode="cover"
       style={{ width: "100%", height: "100%" }}
     />
@@ -27,7 +27,8 @@ const DetailsHeader = ({ data, navigation }) => (
 );
 
 const Details = ({ route, navigation }) => {
-  const { data } = route.params;
+  const { story } = route.params;
+  console.log(`The contents of ${story.id}  ${story.experience} on the Details component` );
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -53,8 +54,8 @@ const Details = ({ route, navigation }) => {
       </View>
 
       <FlatList
-        data={data.articles}
-        renderItem={({ item }) => <DetailsArticle article={item} />}
+        data={story?.experience}
+        // renderItem={({ item }) => <DetailsArticle story={story} />}
         keyExtractor={(item) => item.id}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
@@ -62,12 +63,12 @@ const Details = ({ route, navigation }) => {
         }}
         ListHeaderComponent={() => (
           <React.Fragment>
-            <DetailsHeader data={data} navigation={navigation} />
+            <DetailsHeader story={story} navigation={navigation} />
             <SubInfo />
             <View style={{ padding: SIZES.font }}>
-              <DetailsDesc data={data} />
+              <DetailsDesc story={story} />
 
-              {data.articles.length > 0 && (
+              {story?.solution.length > 0 && (
                 <Text
                   style={{
                     fontSize: SIZES.font,
@@ -75,7 +76,7 @@ const Details = ({ route, navigation }) => {
                     color: COLORS.primary,
                   }}
                 >
-                  Similar Topics
+                  {/* Similar Topics */}
                 </Text>
               )}
             </View>

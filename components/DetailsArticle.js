@@ -1,11 +1,10 @@
 import React from "react";
 import { View, Text, Image } from "react-native";
-
 import { TaggedItems } from "./SubInfo";
 import { COLORS, SIZES, FONTS } from "../constants";
-// import Details from "../screens/DetailsArticle";
 
-const DetailsArticle = ({ article }) => {
+
+const DetailsArticle = ({ story }) => {
   return (
     <View
       style={{
@@ -16,10 +15,10 @@ const DetailsArticle = ({ article }) => {
         marginVertical: SIZES.base,
         paddingHorizontal: SIZES.base,
       }}
-      key={article.id}
+      key={story?.id}
     >
       <Image
-        source={article.image}
+        source={story?.image}
         resizeMode="contain"
         style={{ width: 48, height: 48 }}
       />
@@ -38,7 +37,7 @@ const DetailsArticle = ({ article }) => {
             color: COLORS.primary,
           }}
         >
-          Similar story by {article.name}
+          Similar story by {story?.name}
         </Text>
         <Text
           style={{
@@ -48,11 +47,11 @@ const DetailsArticle = ({ article }) => {
             marginTop: 3,
           }}
         >
-          {article.date}
+          {story?.date}
         </Text>
       </View>
 
-      <TaggedItems tags={article.tags} />
+      <TaggedItems tags={story?.tags} />
     </View>
   );
 };

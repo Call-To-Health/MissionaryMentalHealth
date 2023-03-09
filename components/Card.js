@@ -1,7 +1,6 @@
 import React, {useState,useEffect} from "react";
 import { useNavigation } from "@react-navigation/native";
-import Button from "../components";
-import { View, Image, Text } from "react-native";
+import { View, Image, Text, TouchableOpacity} from "react-native";
 import { SubInfo, TaggedItems, Title } from "./SubInfo";
 import { CircleButton } from "./Button";
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
@@ -9,6 +8,7 @@ import { fetchRandomDocs } from "../firebase";
 
 const Card = () => {
   const [randomDocs, setRandomDocs] = useState([]);
+  const navigation = useNavigation();
 
   useEffect(() => {
     const getRandomDocs = async () => {
@@ -19,20 +19,25 @@ const Card = () => {
     getRandomDocs();
   }, []);
 
-  const handlePress = (id) => {
-    // Do something with the story id, e.g. navigate to story details screen
-    console.log(`Heart on story id ${id} clicked.`);
+
+  const handlePress = (story) => {
+    navigation.navigate('Details', { story: story });
+    console.log(`Story id ${story.id} clicked. ${story.experience}` );
   };
 
   const imageIndex = Math.floor(Math.random() * 7) + 1; // numImages is the total number of available images
   const imageSource = (`assets.missionaries${imageIndex}`);
-  console.log("imageSource:", imageSource);
+  // console.log("imageSource:", imageSource);
 
   return (
     <>
-      {randomDocs.map((story) => (
-        <View
+      {randomDocs.length > 0 &&
+      randomDocs.map((story) => (
+        <TouchableOpacity
           key={story.id}
+          onPress={() => handlePress(story)}
+          >
+          <View
           style={{
             backgroundColor: COLORS.white,
             borderRadius: SIZES.font,
@@ -43,7 +48,7 @@ const Card = () => {
         >
           <View style={{ width: "100%", height: 80 }}>
             <Image
-              // source={{imageSource}}
+              // source={imageSource}
               source={assets.missionaries1}
               resizeMode="cover"
               style={{
@@ -79,16 +84,12 @@ const Card = () => {
                 alignItems: "center",
               }}
             >
-              {/* <Button
-             minWidth={120}
-             fontSize={SIZES.font}
-             handlePress={() => navigation.navigate("Details", { data })}
-           /> */}
               <Text>by {story.name}</Text>
               <TaggedItems tags={story.tag} />
             </View>
           </View>
         </View>
+        </TouchableOpacity>
       ))}
     </>
   );
