@@ -7,18 +7,7 @@ import { COLORS, SIZES, SHADOWS, assets } from "../constants";
 // import { fetchRandomDocs } from "../firebase";
 
 const Card = ({doc,randomDocs}) => {
-  // const [randomDocs, setRandomDocs] = useState([]);
   const navigation = useNavigation();
-
-  // useEffect(() => {
-  //   const getRandomDocs = async () => {
-  //     const randomDocs = await fetchRandomDocs();
-  //     setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-  //     // console.log("Here is the content of randomDocs in the Card component" + randomDocs);
-  //   };
-  //   getRandomDocs();
-  // }, []);
-
 
   const handlePress = (story) => {
     navigation.navigate('Details', { story: story });
