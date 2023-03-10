@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
 import { Card, HomeHeader,FocusedStatusBar } from "../components";
+import Header from "../components/Header";
 import { COLORS } from "../constants";
 import {fetchRandomDocs} from "../firebase";
 
@@ -25,13 +26,14 @@ const Home = () => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
       setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      console.log("Here is the content of randomDocs in the Home component" + randomDocs);
+      // console.log("Here is the content of randomDocs in the Home component" + randomDocs);
     };
     getRandomDocs();
   }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
+      <Header/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       <View style={{ flex: 1 }}>
         <View style={{ zIndex: 0 }}>

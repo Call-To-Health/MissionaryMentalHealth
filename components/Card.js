@@ -18,7 +18,7 @@ const Card = ({doc,randomDocs}) => {
   const imageSource = (`assets.missionaries${imageIndex}`);
   // console.log("imageSource:", imageSource);
 
-  console.log("here is randomDocs as it is in the Card.js" + Object.values(randomDocs));
+  console.log("Here is randomDocs as it is in the Card.js" + Object.values(randomDocs));
 
   return (
     
@@ -52,12 +52,12 @@ const Card = ({doc,randomDocs}) => {
               }}
             />
 
-            <CircleButton
+            {/* <CircleButton
               imgUrl={assets.heart}
               right={10}
               top={10}
               handlePress={() => handlePress(story.id)}
-            />
+            /> */}
           </View>
 
           <SubInfo date={story?.date} location={story?.location} />
