@@ -43,7 +43,7 @@ const Library = (navigation) => {
             <View style={{ marginLeft: 10, marginRight: 10}}>
               <Text style={style.headerTitle}>Explore the Library</Text>
               <View style={style.inputContainer}>
-                <AntDesign name="search1" size={20} color="white" style={{ marginRight: SIZES.base }} />
+                <AntDesign name="search1" size={20} color="black" style={{ marginRight: SIZES.base }} />
                 <TextInput placeholder='Search the library' style={{color: COLORS.black, flex: 1}} />
               </View>
             </View>
@@ -69,7 +69,7 @@ const style = StyleSheet.create ({
   inputContainer: {
     height: 50,
     width: '100%',
-    backgroundColor: COLORS.gray,
+    backgroundColor: COLORS.lightgray,
     borderRadius: 15,
     position: 'absolute',
     top: 90,
@@ -87,7 +87,7 @@ const style = StyleSheet.create ({
   iconContainer: {
     height: 60,
     width: 60,
-    backgroundColor: "#d8e0e6",
+    backgroundColor: COLORS.lightgray,
     justifyContent: "center",
     alignItems: "center",
     borderRadius: 10
