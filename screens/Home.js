@@ -6,20 +6,18 @@ import {fetchRandomDocs} from "../firebase";
 
 const Home = () => {
   const [randomDocs, setRandomDocs] = useState([]);
+  const [searchQuery, setSearchQuery] = useState("");
+  const [filteredData, setFilteredData] = useState([]);
 
   const handleSearch = (value) => {
+    setSearchQuery(value);
     if (value.length === 0) {
-      setStories([]);
-    }
-  
-    const filteredData = db.filter((item) =>
-      item.name.toLowerCase().includes(value.toLowerCase())
-    );
-  
-    if (filteredData.length === 0) {
-      setRandomDocs([]);
+      setFilteredData([]);
     } else {
-      setRandomDocs(filteredData);
+      const filteredData = randomDocs.filter((doc) =>
+        doc.name.toLowerCase().includes(value.toLowerCase())
+      );
+      setFilteredData(filteredData);
     }
   };
 
@@ -27,7 +25,7 @@ const Home = () => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
       setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      // console.log("Here is the content of randomDocs in the Home component" + randomDocs);
+      console.log("Here is the content of randomDocs in the Home component" + randomDocs);
     };
     getRandomDocs();
   }, []);
@@ -37,7 +35,13 @@ const Home = () => {
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       <View style={{ flex: 1 }}>
         <View style={{ zIndex: 0 }}>
-          <FlatList data={randomDocs} renderItem={({item:doc}) => <Card doc={doc} />}keyExtractor={(doc) => doc.id}showsVerticalScrollIndicator={true}ListHeaderComponent={<HomeHeader />}/>
+        <FlatList
+            data={searchQuery.length === 0 ? randomDocs : filteredData}
+            renderItem={({item:doc}) => <Card doc={doc} randomDocs={randomDocs} />}
+            keyExtractor={(doc) => doc.id}
+            showsVerticalScrollIndicator={true}
+            ListHeaderComponent={<HomeHeader onSearch={handleSearch} />}
+          />
         </View>
         <View
           style={{position: "absolute", top: 0,bottom: 0,right: 0,left: 0,zIndex: -1,}}> 
@@ -50,3 +54,4 @@ const Home = () => {
 };
 
 export default Home;
+

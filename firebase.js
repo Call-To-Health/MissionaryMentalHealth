@@ -25,9 +25,14 @@ const db = firebase.firestore();
 
 const storiesCollection = db.collection('stories');
 
+let count = 0;
+
 // Make randomDocs which is a collection of 20 random stories.
 async function fetchRandomDocs() {
+  count += 1;
+  console.log("fetchRandomDocs", count);
   const querySnapshot = await storiesCollection.orderBy(firebase.firestore.FieldPath.documentId()).get();
+  console.log(querySnapshot.size)
   const randomIndices = [];
   while (randomIndices.length < Math.min(20, querySnapshot.size)) {
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);

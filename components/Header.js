@@ -13,9 +13,6 @@ const Header = () => {
                 <Pressable onPress={() => navigation.navigate("UserAccount")}>
                     <Image source={assets.person04} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50 }}/>
                 </Pressable>
-
-          {/* Code for the badge next to the profile picture */}
-            {/* <Image source={assets.badge} resizeMode="contain" style={{position: "absolute",width: 15,height: 15,bottom: 0,right: 0,}}/> */}
             </View>
         </View>
     )

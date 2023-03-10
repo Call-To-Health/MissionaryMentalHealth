@@ -23,7 +23,7 @@ const HomeHeader = ({ onSearch }) => {
             marginTop: SIZES.base / 100,
           }}
         >
-          Search below for resources to help.
+          Search below for resources to help you.
         </Text>
       </View>
 
