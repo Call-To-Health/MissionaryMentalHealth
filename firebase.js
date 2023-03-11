@@ -24,6 +24,7 @@ const auth = firebase.auth()
 const db = firebase.firestore();
 
 const storiesCollection = db.collection('stories');
+const journalsCollection = db.collection('journals');
 
 let count = 0;
 
@@ -44,4 +45,4 @@ async function fetchRandomDocs() {
   return randomDocs;
 }
 
-export { firebase, auth, db, fetchRandomDocs};
+export { firebase,journalsCollection, auth, db, fetchRandomDocs};

@@ -13,15 +13,17 @@ const Home = () => {
   const handleSearch = (value) => {
     setSearchQuery(value);
     if (value.length === 0) {
-      setFilteredData([]);
+      setFilteredData(randomDocs);
     } else {
       const filteredData = randomDocs.filter((doc) =>
-        doc.name.toLowerCase().includes(value.toLowerCase())
+        doc.solution.toLowerCase().includes(value.toLowerCase())
       );
       setFilteredData(filteredData);
+      console.log("here is the filtered Data: " + JSON.stringify(filteredData));
     }
   };
 
+  
   useEffect(() => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
