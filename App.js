@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
 import Home from "./screens/Home";
+import JournalList from "./screens/JournalList";
 
 const Stack = createStackNavigator();
 
@@ -42,6 +43,11 @@ return (
           options={{headerShown: false}}
           name="UserAccount"
           component={UserAccount}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="JournalList"
+          component={JournalList}
         />
         <Stack.Screen
           options={{headerShown: false}}

@@ -2,12 +2,15 @@ import { View, Text, StyleSheet, TextInput, Keyboard, TouchableOpacity} from 're
 import FocusedStatusBar from '../components/FocusedStatusBar'
 import React, {useState} from 'react';
 import Header from '../components/Header';
+import { useNavigation } from '@react-navigation/native';
 import { SafeAreaView } from 'react-navigation';
 import { COLORS} from '../constants';
+import JournalList from './JournalList';
 import {firebase,journalsCollection} from '../firebase';
 
 const Add = () => {
 
+  const navigation = useNavigation()
   const journalsCollection = firebase.firestore().collection('journalsCollection');
   const [addData, setAddData] = useState('');
 
@@ -56,6 +59,9 @@ const Add = () => {
               
               <TouchableOpacity style={style.button} onPress={addField}>
                 <Text style={style.buttontext}>       Add</Text>
+              </TouchableOpacity>
+              <TouchableOpacity style={style.button} onPress={() => navigation.navigate("JournalList")}>
+                <Text style={style.buttontext}>See Journal Entries</Text>
               </TouchableOpacity>
             </View>
           </View>
