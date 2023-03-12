@@ -1,22 +1,22 @@
 import React from "react";
-import { View, Text, SafeAreaView, Image, StatusBar, FlatList } from "react-native";
+import { View, Text, SafeAreaView, Image, StatusBar, VirtualizedList } from "react-native";
 import { COLORS, SIZES, assets, SHADOWS, FONTS } from "../constants";
 import { CircleButton, RectButton, SubInfo, DetailsDesc, DetailsArticle, FocusedStatusBar } from "../components";
 
-const DetailsHeader = ({ data, navigation }) => (
+const DetailsHeader = ({ story, navigation }) => (
   <View style={{ width: "100%", height: 373 }}>
     <Image
-      source={data.image}
+      source={assets.missionaries1}
       resizeMode="cover"
       style={{ width: "100%", height: "100%" }}
     />
 
-    <CircleButton
+    {/* <CircleButton
       imgUrl={assets.left}
       handlePress={() => navigation.goBack()}
       left={15}
       top={StatusBar.currentHeight + 10}
-    />
+    /> */}
 
     <CircleButton
       imgUrl={assets.heart}
@@ -26,8 +26,21 @@ const DetailsHeader = ({ data, navigation }) => (
   </View>
 );
 
+const getItem = (data, index) => {
+  return data[index];
+};
+
+const getItemCount = (data) => {
+  return data.length;};
+
 const Details = ({ route, navigation }) => {
-  const { data } = route.params;
+  const { story } = route.params;
+
+  const renderItem = ({ item }) => {
+    // return (
+    //   // <DetailsArticle story={story} />
+    // );
+  };
 
   return (
     <SafeAreaView style={{ flex: 1 }}>
@@ -49,25 +62,25 @@ const Details = ({ route, navigation }) => {
           zIndex: 1,
         }}
       >
-        <RectButton minWidth={170} fontSize={SIZES.large} {...SHADOWS.dark} />
+        
       </View>
 
-      <FlatList
-        data={data.articles}
-        renderItem={({ item }) => <DetailsArticle article={item} />}
-        keyExtractor={(item) => item.id}
+      <VirtualizedList
+        data={story?.experience}
+        renderItem={renderItem}
+        keyExtractor={(item) => item.id ? item.id.toString() : Math.random().toString()}
         showsVerticalScrollIndicator={false}
         contentContainerStyle={{
           paddingBottom: SIZES.extraLarge * 3,
         }}
         ListHeaderComponent={() => (
           <React.Fragment>
-            <DetailsHeader data={data} navigation={navigation} />
+            <DetailsHeader story={story} navigation={navigation} />
             <SubInfo />
             <View style={{ padding: SIZES.font }}>
-              <DetailsDesc data={data} />
+              <DetailsDesc story={story} />
 
-              {data.articles.length > 0 && (
+              {story?.solution.length > 0 && (
                 <Text
                   style={{
                     fontSize: SIZES.font,
@@ -75,12 +88,18 @@ const Details = ({ route, navigation }) => {
                     color: COLORS.primary,
                   }}
                 >
-                  Similar Topics
+                  {/* Similar Topics */}
                 </Text>
               )}
             </View>
           </React.Fragment>
         )}
+        getItem={getItem}
+        getItemCount={getItemCount}
+        initialNumToRender={20}
+        maxToRenderPerBatch={20}
+        updateCellsBatchingPeriod={50}
+        removeClippedSubviews={true}
       />
     </SafeAreaView>
   );

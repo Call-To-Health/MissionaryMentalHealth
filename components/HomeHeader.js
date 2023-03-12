@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, TextInput,Pressable } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
+import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
 
 const HomeHeader = ({ onSearch }) => {
@@ -23,7 +24,7 @@ const HomeHeader = ({ onSearch }) => {
             marginTop: SIZES.base / 100,
           }}
         >
-          Search below for resources to help.
+          Search below for resources to help you.
         </Text>
       </View>
 
@@ -39,11 +40,7 @@ const HomeHeader = ({ onSearch }) => {
             paddingVertical: SIZES.small - 3,
           }}
         >
-          <Image
-            source={assets.search}
-            resizeMode="contain"
-            style={{ width: 20, height: 20, marginRight: SIZES.base }}
-          />
+          <AntDesign name="search1" size={20} color="white" style={{ marginRight: SIZES.base}} />
           <TextInput
             placeholder="Search for resources..."
             style={{ flex: 1 }}
