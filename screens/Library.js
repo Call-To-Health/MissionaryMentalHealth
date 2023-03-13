@@ -2,6 +2,7 @@ import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text, Pressable }
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
+import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import { FocusedStatusBar } from "../components";
