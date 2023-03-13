@@ -1,12 +1,14 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-
 import { Title, TaggedItems } from "./SubInfo";
 import { COLORS, SIZES, FONTS } from "../constants";
 
-const DetailsDesc = ({ data }) => {
-  const [text, setText] = useState(data.description.slice(0, 100));
-  const [readMore, setReadMore] = useState(false);
+const DetailsDesc = ({ story }) => {
+  const [solutionText, setSolutionText] = useState(story?.solution.slice(0, 100));
+  const [solutionReadMore, setSolutionReadMore] = useState(false);
+
+  const [experienceText, setExperienceText] = useState(story?.experience.slice(0, 100));
+  const [experienceReadMore, setExperienceReadMore] = useState(false);
 
   return (
     <>
@@ -19,15 +21,14 @@ const DetailsDesc = ({ data }) => {
         }}
       >
         <Title
-          title={data.name}
-          subTitle={data.creator}
+          title={story?.name}
+          subTitle={story?.name}
           titleSize={SIZES.extraLarge}
           subTitleSize={SIZES.font}
         />
 
-        <TaggedItems tags={data.tags} />
+        <TaggedItems tags={story?.tag} />
       </View>
-
       <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>
         <Text
           style={{
@@ -36,7 +37,7 @@ const DetailsDesc = ({ data }) => {
             color: COLORS.primary,
           }}
         >
-          Body
+          {story.name}'s Expierence with {story.tag}
         </Text>
         <View
           style={{
@@ -51,8 +52,9 @@ const DetailsDesc = ({ data }) => {
               lineHeight: SIZES.large,
             }}
           >
-            {text}
-            {!readMore && "..."}
+            {experienceText}
+            {!experienceReadMore && "..."}
+            
             <Text
               style={{
                 color: COLORS.primary,
@@ -60,16 +62,65 @@ const DetailsDesc = ({ data }) => {
                 fontFamily: FONTS.semiBold,
               }}
               onPress={() => {
-                if (!readMore) {
-                  setText(data.description);
-                  setReadMore(true);
+                if (!experienceReadMore) {
+                  setExperienceText(story?.experience);
+                  setExperienceReadMore(true);
                 } else {
-                  setText(data.description.slice(0, 100));
-                  setReadMore(false);
+                  setExperienceText(story?.experience.slice(0, 100));
+                  setExperienceReadMore(false);
                 }
               }}
             >
-              {readMore ? " Show Less" : " Read More"}
+              {experienceReadMore ? " Show Less" : " Read More"}
+            </Text>
+          </Text>
+        </View>
+      </View>
+
+      <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>
+        <Text
+          style={{
+            fontSize: SIZES.font,
+            fontFamily: FONTS.semiBold,
+            color: COLORS.primary,
+          }}
+        >
+
+{story.name}'s Solution
+        </Text>
+        <View
+          style={{
+            marginTop: SIZES.base,
+          }}
+        >
+          <Text
+            style={{
+              color: COLORS.secondary,
+              fontSize: SIZES.small,
+              fontFamily: FONTS.regular,
+              lineHeight: SIZES.large,
+            }}
+          >
+            {solutionText}
+            {!solutionReadMore && "..."}
+            
+            <Text
+              style={{
+                color: COLORS.primary,
+                fontSize: SIZES.small,
+                fontFamily: FONTS.semiBold,
+              }}
+              onPress={() => {
+                if (!solutionReadMore) {
+                  setSolutionText(story?.solution);
+                  setSolutionReadMore(true);
+                } else {
+                  setSolutionText(story?.solution.slice(0, 100));
+                  setSolutionReadMore(false);
+                }
+              }}
+            >
+              {solutionReadMore ? " Show Less" : " Read More"}
             </Text>
           </Text>
         </View>
