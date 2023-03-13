@@ -15,7 +15,7 @@ const Checkin = () => {
       <Header/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
         
-        <View style={{backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
+        <View style={{backgroundColor:COLORS.primary, height:120, paddingHorizontal:20}}>
         <Text style={style.headerTitle}>Daily Check-in</Text>
         </View>
 
@@ -50,7 +50,9 @@ const Checkin = () => {
                 marginHorizontal:20,
                 borderRadius: 8,
             }}
-            onDayPress={() => navigation.navigate("Modal")}
+            onDayPress= {(day) => {
+                navigation.navigate("Modal", { selectedDate: day.dateString})
+            }}
             />
         </View>
         
