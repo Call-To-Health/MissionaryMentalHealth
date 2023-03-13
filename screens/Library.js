@@ -1,33 +1,36 @@
 import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text } from 'react-native'
+
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons';
-import {FocusedStatusBar} from "../components";
+import { FontAwesome5 } from '@expo/vector-icons';
+
+import { FocusedStatusBar } from "../components";
 import React from 'react'
 import { COLORS, SIZES } from '../constants';
 import Header from '../components/Header';
 import { withOrientation } from 'react-navigation';
-import { TextInput } from 'react-native-gesture-handler';
+import { FlatList, TextInput } from 'react-native-gesture-handler';
+
   
 const Library = (navigation) => {
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks"},
     {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "User Stories"},
-    {icon: <Foundation name="torso-business" size={30} color={COLORS.primary} />, label: "Adjusting to Missionary Life"},
+    {icon: <FontAwesome5 name="pencil-alt" size={23} color="black" />, label: "My Journal Entries"},
   ];
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
         {categoryIcons.map(({icon, label}, index) => (
-          <View style={{alignItems: "center"}}>
+          <View style={{alignItems: "center"}} key={index}>
             <View key={index} style={style.iconContainer}>
               {icon}
             </View>
             <Text style={style.labelContainer}>{label}</Text>
           </View>
 
-        ))}
+        ))} 
       </View>
     );
   };
@@ -50,6 +53,8 @@ const Library = (navigation) => {
           </View>
           
           <ListCategories />
+          <Text style={style.sectionTitle}>Adjusting to Missionary Life</Text>
+          <View></View>
         </ScrollView>
     </SafeAreaView>
   )
@@ -90,7 +95,8 @@ const style = StyleSheet.create ({
     backgroundColor: COLORS.lightgray,
     justifyContent: "center",
     alignItems: "center",
-    borderRadius: 10
+    borderRadius: 10,
+    elevation: 12,
   },
   labelContainer: {
     width: 100,
@@ -99,6 +105,12 @@ const style = StyleSheet.create ({
     textAlign: "center",
     fontSize: 13,
     paddingTop: 10
-  }
+  },
+  sectionTitle: {
+    marginHorizontal: 20,
+    marginVertical: 20,
+    fontWeight: "bold",
+    fontSize: 20,
+  },
 })
 export default Library;
