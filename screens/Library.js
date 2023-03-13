@@ -1,5 +1,4 @@
-import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text } from 'react-native'
-
+import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text, Pressable } from 'react-native'
 import { AntDesign } from '@expo/vector-icons';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
@@ -11,26 +10,28 @@ import { COLORS, SIZES } from '../constants';
 import Header from '../components/Header';
 import { withOrientation } from 'react-navigation';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
-
+import { useNavigation } from "@react-navigation/native";
   
-const Library = (navigation) => {
+const Library = () => {
+  const navigation = useNavigation();
   const categoryIcons = [
-    {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks"},
-    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "User Stories"},
-    {icon: <FontAwesome5 name="pencil-alt" size={23} color="black" />, label: "My Journal Entries"},
+    {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "AdjustingToMission"},
+    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "User Stories",  navLocation: "AdjustingToMission"},
+    {icon: <Foundation name="torso-business" size={30} color="black" />, label: "Adjusting to Missionary Life",  navLocation: "AdjustingToMission"},
   ];
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
         {categoryIcons.map(({icon, label}, index) => (
           <View style={{alignItems: "center"}} key={index}>
+            <Pressable onPress={() => navigation.navigate("AdjustingToMission")}>
             <View key={index} style={style.iconContainer}>
               {icon}
             </View>
             <Text style={style.labelContainer}>{label}</Text>
+            </Pressable>
           </View>
-
-        ))} 
+        ))}
       </View>
     );
   };

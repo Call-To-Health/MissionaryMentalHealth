@@ -9,6 +9,7 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
 import Home from "./screens/Home";
+import AdjustingToMission from "./screens/AdjustingToMission";
 
 const Stack = createStackNavigator();
 
@@ -47,6 +48,11 @@ return (
           options={{headerShown: false}}
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="AdjustingToMission"
+          component={AdjustingToMission}
         />
 
       </Stack.Navigator>
