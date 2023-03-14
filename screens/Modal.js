@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import Modal from "react-native-modal";
-import { COLORS, SIZES, SHADOWS, assets } from "../constants";
+import { COLORS, SIZES, FONTS, assets } from "../constants";
 import { useNavigation, useRoute } from "@react-navigation/native";
 import { RectButton } from "react-native-gesture-handler";
 
@@ -18,12 +18,20 @@ const DailyModal = () => {
 
     return (
             <Modal isVisible={isModalVisible}>
-                <View>
-                    <Text>{selectedDate}</Text>
-                    <RectButton
-                        onPress={() => navigation.navigate("Checkin")}>
-                        <Text>Hide Modal</Text>
-                    </RectButton>
+                <View style={style.container}>
+                    <View style={style.header}>
+                        <Text style={style.text}>{selectedDate}</Text>
+                    </View>
+                    <View style={style.body}>
+                        <Text>This is where check-in results for this day will go.</Text>
+                    </View>
+                    <View style={style.footer}>
+                        <TouchableOpacity
+                            style={style.button}
+                            onPress={() => navigation.navigate("Checkin")}>
+                            <Text style={style.buttonText}>Back</Text>
+                        </TouchableOpacity>
+                    </View>
                 </View>
             </Modal>
     )
@@ -31,18 +39,53 @@ const DailyModal = () => {
 
 };
 
-const style = StyleSheet.create ({
-    // header: {
-    //   paddingVertical:20,
-    //   flexDirection:'row',
-    //   justifyContent: 'space-between',
-    //   backgroundColor: COLORS.primary,
-    // },
-    // headerTitle: {
-    //   color:COLORS.white,
-    //   fontWeight:'bold',
-    //   fontSize: 23,
-    // }
+const style = StyleSheet.create({
+    container: {
+      flex: 1,
+      backgroundColor: "#ffffff",
+      borderRadius: 10,
+      borderWidth: 1,
+      borderColor: "#000",
+      borderStyle: "solid",
+      padding: SIZES.medium,
+      marginVertical: SIZES.extraLarge
+
+    },
+    header: {
+      alignItems: "center",
+      justifyContent: "center",
+      padding: SIZES.medium,
+      paddingTop: SIZES.large
+    },
+    buttonText: {
+      textAlign: "center",
+      fontSize: FONTS.large,
+      fontFamily: FONTS.semiBold,
+      color: COLORS.white
+    },
+    body: {
+      paddingHorizontal: 15,
+      padding: SIZES.medium,
+      justifyContent: 'space-between',
+      flex: 1,
+    },
+    footer: {
+      justifyContent: "left",
+      alignItems: "left",
+      padding: SIZES.medium,
+      paddingBottom: SIZES.large,
+    },
+    button:{
+      backgroundColor: COLORS.primary,
+      borderRadius: SIZES.small,
+      padding: SIZES.small
+    },
+    text:{
+        textAlign: 'center',
+        color: COLORS.primary,
+        fontFamily: FONTS.semiBold,
+        fontSize: SIZES.large
+      },
   });
 
 export default DailyModal;
