@@ -23,14 +23,16 @@ const Library = () => {
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
-        {categoryIcons.map(({icon, label}, index) => (
+        {categoryIcons.map(({icon, label, navLocation}, index) => (
           <View style={{alignItems: "center"}} key={index}>
-            <Pressable onPress={() => navigation.navigate("AdjustingToMission")}>
-            <View key={index} style={style.iconContainer}>
-              {icon}
-            </View>
-            <Text style={style.labelContainer}>{label}</Text>
+            <Pressable onPress={() => navigation.navigate(navLocation)}>
+              <View>
+                <View key={index} style={style.iconContainer}>
+                  {icon}
+                </View>
+              </View>
             </Pressable>
+            <Text style={style.labelContainer}>{label}</Text>
           </View>
         ))}
       </View>
