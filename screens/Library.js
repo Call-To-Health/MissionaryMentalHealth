@@ -26,11 +26,13 @@ const Library = () => {
         {categoryIcons.map(({icon, label}, index) => (
           <View style={{alignItems: "center"}} key={index}>
             <Pressable onPress={() => navigation.navigate("AdjustingToMission")}>
-            <View key={index} style={style.iconContainer}>
-              {icon}
-            </View>
-            <Text style={style.labelContainer}>{label}</Text>
+              <View>
+                <View key={index} style={style.iconContainer}>
+                  {icon}
+                </View>
+              </View>
             </Pressable>
+            <Text style={style.labelContainer}>{label}</Text>
           </View>
         ))}
       </View>
