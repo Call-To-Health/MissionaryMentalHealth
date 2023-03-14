@@ -3,7 +3,6 @@ import { Text, View, TouchableOpacity, StyleSheet } from "react-native";
 import Modal from "react-native-modal";
 import { COLORS, SIZES, FONTS, assets } from "../constants";
 import { useNavigation, useRoute } from "@react-navigation/native";
-import { RectButton } from "react-native-gesture-handler";
 
 const DailyModal = () => {
 

@@ -10,6 +10,7 @@ import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
 import Modal from "./screens/Modal";
 import Home from "./screens/Home";
+import Survey from "./screens/Survey";
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,11 @@ return (
           options={{headerShown: false}}
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Survey"
+          component={Survey}
         />
 
       </Stack.Navigator>

@@ -24,12 +24,12 @@ const Checkin = () => {
             style={{
                 backgroundColor: COLORS.white,
                 padding: SIZES.small,
-                borderRadius: SIZES.extraLarge,
+                borderRadius: SIZES.medium,
                 width: '60%',
                 alignSelf: 'center',
                 marginBottom: 35
             }}
-            onPress={() => navigation.navigate("Home")}
+            onPress={() => navigation.navigate("Survey")}
         >
             <Text
                 style={{
@@ -48,7 +48,7 @@ const Checkin = () => {
         <Calendar 
             style={{
                 marginHorizontal:20,
-                borderRadius: 8,
+                borderRadius: 5,
             }}
             onDayPress= {(day) => {
                 navigation.navigate("Modal", { selectedDate: day.dateString})
