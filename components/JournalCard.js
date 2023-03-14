@@ -2,7 +2,7 @@ import React, {useState,useEffect} from "react";
 import { useNavigation } from "@react-navigation/native";
 import { View, Image } from "react-native";
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
-import { SubInfo, TaggedItems, Title } from "./SubInfo";
+import { JournalSubInfo, TaggedItems, Title } from "./JournalSubInfo";
 import { RectButton, CircleButton } from "./Button";
 import {db} from "../firebase";
 import { collection, getDocs} from "firebase/firestore";
@@ -53,17 +53,17 @@ const JournalCard = () => {
               }}
             />
 
-            <CircleButton
+            {/* <CircleButton
               imgUrl={assets.heart}
               right={10}
               top={10}
               handlePress={() =>
                 navigation.navigate("Details", { journalId: journal.id })
               }
-            />
+            /> */}
           </View>
 
-          <SubInfo date={journal.date} location={journal.location} />
+          <JournalSubInfo date={journal.date} location={journal.location} />
 
           <View style={{ width: "100%", padding: SIZES.font }}>
             <Title

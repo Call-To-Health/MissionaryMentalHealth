@@ -3,17 +3,14 @@ import { View, Text, Image, TextInput,Pressable } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
-const JournalHeader = ({ onSearch }) => {
+const JournalSearch = ({ onSearch }) => {
 
   return (
     <View
       style={{backgroundColor: COLORS.primary, padding: SIZES.font,}}>
       
       <View style={{ marginVertical: SIZES.font }}>
-        <Text
-          style={{fontFamily: FONTS.regular,fontSize: SIZES.small,color: COLORS.white,}}>
-          Hello Elder/Sister!  👋
-        </Text>
+      
 
         <Text
           style={{
@@ -45,7 +42,7 @@ const JournalHeader = ({ onSearch }) => {
             style={{ width: 20, height: 20, marginRight: SIZES.base }}
           />
           <TextInput
-            placeholder="Search for resources..."
+            placeholder="Search here..."
             style={{ flex: 1 }}
             onChangeText={onSearch}
           />
@@ -55,4 +52,4 @@ const JournalHeader = ({ onSearch }) => {
   );
 };
 
-export default JournalHeader;
+export default JournalSearch;

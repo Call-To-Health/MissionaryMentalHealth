@@ -45,7 +45,7 @@ async function fetchRandomDocs() {
 }
 
 // Get a reference to the "journals" collection
-const journalsCollection = db.collection('journals');
+const journalsCollection = db.collection('journalsCollection');
 
 // Read data from the "journals" collection
 journalsCollection.get().then((querySnapshot) => {
