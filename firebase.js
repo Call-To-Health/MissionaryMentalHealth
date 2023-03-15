@@ -64,7 +64,7 @@ journalsCollection.get().then((querySnapshot) => {
 });
 
 async function getTalksData() {
-  const talksRef = firebase.firestore().collection('Talks');
+  const talksRef = firebase.firestore().collection('Talks').orderBy('title');
   const snapshot = await talksRef.get();
 
   const talks = [];
