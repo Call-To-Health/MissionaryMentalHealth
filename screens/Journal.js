@@ -101,7 +101,6 @@ const Journal = () => {
                   </TouchableOpacity> */}
           </View>
         </View>
-
           <View style={{ flex: 2.1 }}>
           <JournalSearch/>
         <View style={{ zIndex: 0 }}>
