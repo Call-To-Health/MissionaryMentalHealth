@@ -14,6 +14,7 @@ import JournalList from "./screens/JournalList";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
 import TalksView from "./screens/TalksView";
+import TalkWebView from "./screens/TalkWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 
@@ -79,6 +80,11 @@ return (
           options={{headerShown: false}}
           name="TalksView"
           component={TalksView}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="TalkWebView"
+          component={TalkWebView}
         />
 
         <Stack.Screen
