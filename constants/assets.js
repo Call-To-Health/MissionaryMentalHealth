@@ -20,6 +20,8 @@ import person02 from "../assets/images/person02.png";
 import person03 from "../assets/images/person03.png";
 import person04 from "../assets/images/person04.png";
 
+import adjustToML from "../assets/images/adjustingtomissionarylife.jpeg";
+
 export default {
   badge,
   tag,
@@ -42,4 +44,5 @@ export default {
   person02,
   person03,
   person04,
+  adjustToML,
 };

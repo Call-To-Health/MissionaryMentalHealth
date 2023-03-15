@@ -12,6 +12,7 @@ import Modal from "./screens/Modal";
 import Home from "./screens/Home";
 import JournalList from "./screens/JournalList";
 import AdjustingToMission from "./screens/AdjustingToMission";
+import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 
@@ -70,6 +71,11 @@ return (
         />
         <Stack.Screen
           options={{headerShown: false}}
+          name="AdjustingToMissionChaptersView"
+          component={AdjustingToMissionChaptersView}
+        />
+        <Stack.Screen
+          options={{headerShown: false
           name="Survey"
           component={Survey}
         />

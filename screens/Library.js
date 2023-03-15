@@ -1,24 +1,24 @@
-import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text, Pressable } from 'react-native'
-import { AntDesign } from '@expo/vector-icons';
+import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text, Pressable, Dimensions, Image, TouchableOpacity } from 'react-native'
+import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
-import { Foundation } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
 
 import { FocusedStatusBar } from "../components";
-import React from 'react'
 import { COLORS, SIZES } from '../constants';
 import Header from '../components/Header';
-import { withOrientation } from 'react-navigation';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
+import { assets } from '../constants';
+
+const {width} = Dimensions.get('screen');
   
-const Library = () => {
+const Library = () => {  
   const navigation = useNavigation();
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "AdjustingToMission"},
     {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "User Stories",  navLocation: "AdjustingToMission"},
-    {icon: <Foundation name="torso-business" size={30} color="black" />, label: "Adjusting to Missionary Life",  navLocation: "AdjustingToMission"},
+    {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "AdjustingToMission"},
   ];
   const ListCategories = () => {
     return (
@@ -46,19 +46,29 @@ const Library = () => {
         </View>
         
         <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
-          <View style={{backgroundColor: COLORS.primary, height: 115}}>
+          <View style={{backgroundColor: COLORS.primary, height: 80}}>
             <View style={{ marginLeft: 10, marginRight: 10}}>
-              <Text style={style.headerTitle}>Explore the Library</Text>
-              <View style={style.inputContainer}>
+              <Text style={style.headerTitle}>Welcome to the Library</Text>
+              {/* <View style={style.inputContainer}>
                 <AntDesign name="search1" size={20} color="black" style={{ marginRight: SIZES.base }} />
                 <TextInput placeholder='Search the library' style={{color: COLORS.black, flex: 1}} />
-              </View>
+              </View> */}
             </View>
           </View>
           
           <ListCategories />
           <Text style={style.sectionTitle}>Adjusting to Missionary Life</Text>
-          <View></View>
+          <View style={{ paddingLeft: 20}}>
+            <View style={style.cardContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate("AdjustingToMissionChaptersView")}>
+              <Image
+                source={assets.adjustToML}
+                style={style.cardImage}
+              />
+              </TouchableOpacity>
+            </View>
+
+          </View>
         </ScrollView>
     </SafeAreaView>
   )
@@ -116,5 +126,16 @@ const style = StyleSheet.create ({
     fontWeight: "bold",
     fontSize: 20,
   },
+  cardContainer: {
+    width: width / 2
+  },
+  cardImage: {
+    height: 220,
+    width: width / 2.3,
+    marginRight: 20,
+    padding: 10,
+    overflow: 'hidden',
+    borderRadius: 10
+  }
 })
 export default Library;
