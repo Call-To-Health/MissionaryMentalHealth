@@ -56,15 +56,13 @@ async function getAdjustingToMissionaryLifeData() {
   return data;
 }
 
-export { firebase, journalsCollection, auth, db, fetchRandomDocs, getAdjustingToMissionaryLifeData};
-// Get a reference to the "journals" collection
-const journalsCollection = db.collection('journalsCollection');
-
-// Read data from the "journals" collection
 journalsCollection.get().then((querySnapshot) => {
   querySnapshot.forEach((doc) => {
     console.log(`${doc.id} => ${doc.data()}`);
   });
 });
 
-export { firebase,journalsCollection, auth, db, fetchRandomDocs};
+export { firebase, journalsCollection, auth, db, fetchRandomDocs, getAdjustingToMissionaryLifeData};
+// Get a reference to the "journals" collection
+// Read data from the "journals" collection
+
