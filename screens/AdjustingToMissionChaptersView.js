@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable } from 'react-native';
+import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
 import { getAdjustingToMissionaryLifeData } from '../firebase.js'
 import Header from '../components/Header';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
 import { useNavigation } from "@react-navigation/native";
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { Ionicons } from '@expo/vector-icons';
 
 
 const AdjustingToMissionChaptersView = () => {
@@ -25,6 +25,9 @@ const AdjustingToMissionChaptersView = () => {
             <Header />
             <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
             <View style={style.header}>
+            <TouchableOpacity onPress={() => navigation.goBack()}>
+                <Ionicons name="chevron-back" size={32} color={COLORS.white} />
+            </TouchableOpacity>
             </View>
             <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
                 <View style={{backgroundColor: COLORS.primary, height: 80}}>

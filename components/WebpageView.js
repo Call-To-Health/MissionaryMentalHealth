@@ -14,7 +14,7 @@ export const WebpageView = (props) => {
         <SafeAreaView style={{ flex: 1 }}>
             <View style={{ margin: 10, marginTop: 30, flexDirection: 'row', alignItems: 'center' }}>
                 <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons name="chevron-back" size={32} color={COLORS.primary} />
+                    <Ionicons name="chevron-back" size={32} color={COLORS.primary} />
                 </TouchableOpacity>
                 <Text style={{ marginLeft: 10, fontSize: 20 }}>{ props.title }</Text>
                 <Text>{JSON.stringify(props.webUrl)}</Text>
