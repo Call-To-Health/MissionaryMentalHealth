@@ -75,7 +75,7 @@ return (
           component={AdjustingToMissionChaptersView}
         />
         <Stack.Screen
-          options={{headerShown: false
+          options={{headerShown: false}}
           name="Survey"
           component={Survey}
         />
