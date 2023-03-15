@@ -13,6 +13,7 @@ import Home from "./screens/Home";
 import JournalList from "./screens/JournalList";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
+import TalksView from "./screens/TalksView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 
@@ -74,6 +75,12 @@ return (
           name="AdjustingToMissionChaptersView"
           component={AdjustingToMissionChaptersView}
         />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="TalksView"
+          component={TalksView}
+        />
+
         <Stack.Screen
           options={{headerShown: false}}
           name="Survey"

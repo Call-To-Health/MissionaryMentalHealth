@@ -26,6 +26,7 @@ const db = firebase.firestore();
 const storiesCollection = db.collection('stories');
 const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
+const talksCollection = db.collection('Talks');
 
 let count = 0;
 
@@ -51,7 +52,7 @@ async function fetchRandomDocs() {
 }
 
 async function getAdjustingToMissionaryLifeData() {
-  const snapshot = await db.collection('AdjustingToMissionaryLife').orderBy('chapter').get();
+  const snapshot = await adjustingToMissionaryLifeCollection.orderBy('chapter').get();
   const data = snapshot.docs.map(doc => doc.data());
   return data;
 }
@@ -62,7 +63,19 @@ journalsCollection.get().then((querySnapshot) => {
   });
 });
 
-export { firebase, journalsCollection, auth, db, fetchRandomDocs, getAdjustingToMissionaryLifeData};
-// Get a reference to the "journals" collection
-// Read data from the "journals" collection
+async function getTalksData() {
+  const snapshot = await talksCollection.orderBy('chapter').get();
+  const data = snapshot.docs.map(doc => doc.data());
+  return data;
+}
+
+export { 
+  firebase, 
+  journalsCollection, 
+  auth, 
+  db, 
+  fetchRandomDocs, 
+  getAdjustingToMissionaryLifeData,
+  getTalksData,
+};
 
