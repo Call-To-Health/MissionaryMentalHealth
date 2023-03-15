@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet } from 'react-native'
+import { View, Text,SafeAreaView, StyleSheet } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import React from 'react';
 import Header from '../components/Header';
-import { SafeAreaView } from 'react-navigation';
 import { COLORS } from '../constants';
 
 const Chat = () => {

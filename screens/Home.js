@@ -22,7 +22,6 @@ const Home = () => {
       console.log("here is the filtered Data: " + JSON.stringify(filteredData));
     }
   };
-
   
   useEffect(() => {
     const getRandomDocs = async () => {
@@ -41,7 +40,7 @@ const Home = () => {
         <View style={{ zIndex: 0 }}>
         <FlatList
             data={searchQuery.length === 0 ? randomDocs : filteredData}
-            renderItem={({item:doc}) => <Card doc={doc} randomDocs={randomDocs} />}
+            renderItem={({item:doc}) => <Card doc={doc}/>}
             keyExtractor={(doc) => doc.id}
             showsVerticalScrollIndicator={true}
             ListHeaderComponent={<HomeHeader onSearch={handleSearch} />}

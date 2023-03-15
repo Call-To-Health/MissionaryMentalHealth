@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, Image, TouchableOpacity, Button,Pressable  } from 'react-native'
+import { View, Text, StyleSheet, Image,SafeAreaView, TouchableOpacity, Button,Pressable  } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import Header from '../components/Header';
 import React, { useState, useEffect } from 'react';
-import { SafeAreaView } from 'react-navigation';
 import { COLORS, FONTS, SIZES, assets} from '../constants';
 import { TextInput } from 'react-native-gesture-handler';
 import { auth } from '../firebase';
