@@ -32,12 +32,13 @@ const AdjustingToMissionChaptersView = () => {
                         <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
                     </View>
                 </View>
-                <View style={style.categoryContainer}>
+                <Text style={style.sectionTitle}>Chapters</Text>
+                <View>
                     {adjustToMLData.map(chapter => (
                         <View key={chapter.chapter}>
                         <Pressable onPress={() => navigation.navigate('AdjustingToMission', {url: chapter.url, title: chapter.title})}> 
                             <View style={style.iconContainer}>
-                                <Text>{chapter.chapter}</Text>
+                                <Text>{chapter.chapter}. {chapter.title}</Text>
                             </View>
                         </Pressable>
                         </View>
@@ -62,7 +63,6 @@ const style = StyleSheet.create ({
         fontSize: 23,
     },
     categoryContainer: {
-        marginTop: 60,
         marginHorizontal: 20,
         flexDirection: "row",
         justifyContent: "flex-start",
@@ -71,13 +71,18 @@ const style = StyleSheet.create ({
     },
     iconContainer: {
         height: 60,
-        width: 60,
         backgroundColor: COLORS.lightgray,
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 10,
         elevation: 12,
         margin: 13,
+      },
+      sectionTitle: {
+        marginHorizontal: 20,
+        marginVertical: 20,
+        fontWeight: "bold",
+        fontSize: 20,
       },
   })
 
