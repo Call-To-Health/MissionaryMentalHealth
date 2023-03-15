@@ -3,6 +3,7 @@ import Home from '../screens/Home';
 import Chat from '../screens/Chat';
 import Library from '../screens/Library';
 import Journal from "../screens/Journal";
+import Checkin from '../screens/Checkin';
 import UserAccount from '../screens/UserAccount';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 
@@ -70,7 +71,7 @@ const Tabs = () => {
                     </View>
                 ), }} />
 
-            <Tab.Screen name="Chat" component={Chat}
+            {/* <Tab.Screen name="Chat" component={Chat}
             options={{
                 headerShown:false,
                 tabBarIcon: ({focused}) => (
@@ -89,7 +90,27 @@ const Tabs = () => {
                     </View>
                 ),
             }} 
-            />
+            /> */}
+
+            <Tab.Screen name="Checkin" component={Checkin}
+            options={{
+                headerShown:false,
+                tabBarIcon: ({focused}) => (
+                    <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
+                        <Image
+                        source={require('../assets/icons/calendar.png')}
+                        resizeMode='contain'
+                        style={{
+                            width:25,
+                            height:25,
+                            tintColor: focused ? '#e32f45' : '#748c94'
+                        }}/>
+                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+                            Check-in
+                            </Text>
+                    </View>
+                ),
+            }} />
 
             <Tab.Screen name="Journal" component={Journal}
             options={{
