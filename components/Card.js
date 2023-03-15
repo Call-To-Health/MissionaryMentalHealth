@@ -4,21 +4,10 @@ import { View, Image, Text, TouchableOpacity} from "react-native";
 import { SubInfo, TaggedItems, Title } from "./SubInfo";
 import { CircleButton } from "./Button";
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
-import { fetchRandomDocs } from "../firebase";
+// import { fetchRandomDocs } from "../firebase";
 
-const Card = () => {
-  const [randomDocs, setRandomDocs] = useState([]);
+const Card = ({doc,randomDocs}) => {
   const navigation = useNavigation();
-
-  useEffect(() => {
-    const getRandomDocs = async () => {
-      const randomDocs = await fetchRandomDocs();
-      setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      // console.log("Here is the content of randomDocs in the Card component" + randomDocs);
-    };
-    getRandomDocs();
-  }, []);
-
 
   const handlePress = (story) => {
     navigation.navigate('Details', { story: story });
@@ -29,10 +18,14 @@ const Card = () => {
   const imageSource = (`assets.missionaries${imageIndex}`);
   // console.log("imageSource:", imageSource);
 
+  console.log("Here is randomDocs as it is in the Card.js" + Object.values(randomDocs));
+
   return (
+    
     <>
-      {randomDocs.length > 0 &&
-      randomDocs.map((story) => (
+      
+      {Object.values(randomDocs).length > 0 &&
+      Object.values(randomDocs).map((story) => (
         <TouchableOpacity
           key={story.id}
           onPress={() => handlePress(story)}
@@ -59,12 +52,12 @@ const Card = () => {
               }}
             />
 
-            <CircleButton
+            {/* <CircleButton
               imgUrl={assets.heart}
               right={10}
               top={10}
               handlePress={() => handlePress(story.id)}
-            />
+            /> */}
           </View>
 
           <SubInfo date={story?.date} location={story?.location} />

@@ -11,12 +11,12 @@ const DetailsHeader = ({ story, navigation }) => (
       style={{ width: "100%", height: "100%" }}
     />
 
-    <CircleButton
+    {/* <CircleButton
       imgUrl={assets.left}
       handlePress={() => navigation.goBack()}
       left={15}
       top={StatusBar.currentHeight + 10}
-    />
+    /> */}
 
     <CircleButton
       imgUrl={assets.heart}
@@ -62,7 +62,7 @@ const Details = ({ route, navigation }) => {
           zIndex: 1,
         }}
       >
-        <RectButton minWidth={170} fontSize={SIZES.large} {...SHADOWS.dark} />
+        
       </View>
 
       <VirtualizedList
