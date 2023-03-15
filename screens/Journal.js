@@ -11,7 +11,7 @@ const Navigator = createStackNavigator();
 
 const Journal = () => {
 
-  const journalsCollection = firebase.firestore().collection('journalsCollection');
+  const journalsCollection = firebase.firestore().collection('journals');
   const [addData, setAddData] = useState('');
   const [journals, setJournals] = useState([]);
   const [data, setData] = useState([]);

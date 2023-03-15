@@ -47,7 +47,7 @@ async function fetchRandomDocs() {
   randomDocs.forEach((doc) => {
     console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
   });
-  console.log("Here is the content of RandomDocs :" + randomDocs);
+  // console.log("Here is the content of RandomDocs :" + randomDocs);
   return randomDocs;
 }
 
@@ -84,4 +84,3 @@ export {
   getAdjustingToMissionaryLifeData,
   getTalksData,
 };
-
