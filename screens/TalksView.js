@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
 import { getTalksData } from '../firebase.js'
 import Header from '../components/Header';
@@ -8,12 +8,14 @@ import { COLORS, SIZES } from '../constants';
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
+const screenWidth = Dimensions.get('screen').width
+
 
 const TalksView = () => {
     const [talksData, setData] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
     const navigation = useNavigation();
-    
+
     useEffect(() => {
       const fetchData = async () => {
         const result = await getTalksData();
@@ -37,14 +39,14 @@ const TalksView = () => {
                         <Text style={style.headerTitle}>Talks</Text>
                     </View>
                 </View>
-                <Text style={style.sectionTitle}>Tags</Text>
+                <Text style={style.sectionTitle}>Helpful Talks</Text>
                 <View style={style.categoryContainer}>
                     {talksData.map(talk => (
                         <View key={talk.id}>
                             <Pressable onPress={() => navigation.navigate('TalkWebView', {url: talk.url, title: talk.title})}> 
-                                <View style={style.iconContainer}>
-                                    <Text>{talk.title}</Text>
-                                </View>
+                                    <View style={style.iconContainer}>
+                                        <Text>{talk.title}</Text>
+                                    </View>
                             </Pressable>
                         </View>
                     ))}
@@ -70,18 +72,21 @@ const style = StyleSheet.create ({
     categoryContainer: {
         marginHorizontal: 20,
         flexDirection: "row",
-        justifyContent: "flex-start",
+        justifyContent: "center",
         alignItems: 'flex-start',
         flexWrap: 'wrap',
     },
     iconContainer: {
         height: 60,
+        width: screenWidth / 1.3,
         backgroundColor: COLORS.lightgray,
         justifyContent: "center",
         alignItems: "center",
         borderRadius: 10,
         elevation: 12,
         margin: 13,
+        paddingHorizontal: 10,
+        flexDirection: 'column',
       },
       sectionTitle: {
         marginHorizontal: 20,
