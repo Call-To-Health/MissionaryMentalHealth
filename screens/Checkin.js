@@ -34,7 +34,7 @@ const Checkin = () => {
             <Text
                 style={{
                 fontFamily: FONTS.semiBold,
-                fontSize: SIZES.font,
+                fontSize: SIZES.medium,
                 color: COLORS.primary,
                 textAlign: "center",
                 }}
