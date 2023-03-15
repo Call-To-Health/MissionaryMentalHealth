@@ -41,6 +41,10 @@ async function fetchRandomDocs() {
     }
 }
   const randomDocs = randomIndices.map((randomIndex) => querySnapshot.docs[randomIndex]);
+  randomDocs.forEach((doc) => {
+    console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+  });
+  console.log("Here is the content of RandomDocs :" + randomDocs);
   return randomDocs;
 }
 
