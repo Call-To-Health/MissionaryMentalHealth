@@ -24,7 +24,6 @@ const auth = firebase.auth()
 const db = firebase.firestore();
 
 const storiesCollection = db.collection('stories');
-const journalsCollection = db.collection('journals');
 
 let count = 0;
 
@@ -48,5 +47,15 @@ async function fetchRandomDocs() {
   console.log("Here is the content of RandomDocs :" + randomDocs);
   return randomDocs;
 }
+
+// Get a reference to the "journals" collection
+const journalsCollection = db.collection('journalsCollection');
+
+// Read data from the "journals" collection
+journalsCollection.get().then((querySnapshot) => {
+  querySnapshot.forEach((doc) => {
+    console.log(`${doc.id} => ${doc.data()}`);
+  });
+});
 
 export { firebase,journalsCollection, auth, db, fetchRandomDocs};
