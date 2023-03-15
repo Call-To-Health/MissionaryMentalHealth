@@ -10,6 +10,7 @@ import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
 import Home from "./screens/Home";
 import AdjustingToMission from "./screens/AdjustingToMission";
+import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
 
 const Stack = createStackNavigator();
 
@@ -53,6 +54,11 @@ return (
           options={{headerShown: false}}
           name="AdjustingToMission"
           component={AdjustingToMission}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="AdjustingToMissionChaptersView"
+          component={AdjustingToMissionChaptersView}
         />
 
       </Stack.Navigator>

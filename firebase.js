@@ -25,6 +25,7 @@ const db = firebase.firestore();
 
 const storiesCollection = db.collection('stories');
 const journalsCollection = db.collection('journals');
+const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
 
 let count = 0;
 
@@ -40,7 +41,7 @@ async function fetchRandomDocs() {
     if (!randomIndices.includes(randomIndex)) {
       randomIndices.push(randomIndex);
     }
-}
+  }
   const randomDocs = randomIndices.map((randomIndex) => querySnapshot.docs[randomIndex]);
   randomDocs.forEach((doc) => {
     console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
@@ -49,4 +50,10 @@ async function fetchRandomDocs() {
   return randomDocs;
 }
 
-export { firebase,journalsCollection, auth, db, fetchRandomDocs};
+async function getAdjustingToMissionaryLifeData() {
+  const snapshot = await db.collection('AdjustingToMissionaryLife').orderBy('chapter').get();
+  const data = snapshot.docs.map(doc => doc.data());
+  return data;
+}
+
+export { firebase, journalsCollection, auth, db, fetchRandomDocs, getAdjustingToMissionaryLifeData};
