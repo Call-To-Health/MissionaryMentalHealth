@@ -64,9 +64,15 @@ journalsCollection.get().then((querySnapshot) => {
 });
 
 async function getTalksData() {
-  const snapshot = await talksCollection.orderBy('chapter').get();
-  const data = snapshot.docs.map(doc => doc.data());
-  return data;
+  const talksRef = firebase.firestore().collection('Talks');
+  const snapshot = await talksRef.get();
+
+  const talks = [];
+  snapshot.forEach((doc) => {
+    talks.push({ id: doc.id, ...doc.data() });
+  });
+
+  return talks;
 }
 
 export { 

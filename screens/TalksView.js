@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
-import { getAdjustingToMissionaryLifeData } from '../firebase.js'
-import { getTalksData } from '../firebase.js';
+import { getTalksData } from '../firebase.js'
 import Header from '../components/Header';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
@@ -11,11 +10,13 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 const TalksView = () => {
-    const [adjustToMLData, setData] = useState([]);
+    const [talksData, setData] = useState([]);
+    const [selectedTags, setSelectedTags] = useState([]);
     const navigation = useNavigation();
+    
     useEffect(() => {
       const fetchData = async () => {
-        const result = await getAdjustingToMissionaryLifeData();
+        const result = await getTalksData();
         setData(result);
       };
   
@@ -33,18 +34,18 @@ const TalksView = () => {
             <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
                 <View style={{backgroundColor: COLORS.primary, height: 80}}>
                     <View style={{ marginLeft: 10, marginRight: 10}}>
-                        <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
+                        <Text style={style.headerTitle}>Talks</Text>
                     </View>
                 </View>
-                <Text style={style.sectionTitle}>Chapters</Text>
-                <View>
-                    {adjustToMLData.map(chapter => (
-                        <View key={chapter.chapter}>
-                        <Pressable onPress={() => navigation.navigate('AdjustingToMission', {url: chapter.url, title: chapter.title})}> 
-                            <View style={style.iconContainer}>
-                                <Text>{chapter.chapter}. {chapter.title}</Text>
-                            </View>
-                        </Pressable>
+                <Text style={style.sectionTitle}>Tags</Text>
+                <View style={style.categoryContainer}>
+                    {talksData.map(talk => (
+                        <View key={talk.id}>
+                            <Pressable onPress={() => navigation.navigate('TalkWebView', {url: talk.url, title: talk.title})}> 
+                                <View style={style.iconContainer}>
+                                    <Text>{talk.title}</Text>
+                                </View>
+                            </Pressable>
                         </View>
                     ))}
                 </View>
