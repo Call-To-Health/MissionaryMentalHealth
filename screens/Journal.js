@@ -95,7 +95,7 @@ const Journal = () => {
                 <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
     
-              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JournalList")}>
+              <TouchableOpacity style={styles.buttonPink} onPress={() => navigation.navigate("JournalList")}>
                     <Text style={styles.buttonText}>See Journal Entries</Text>
                   </TouchableOpacity>
           </View>
@@ -137,6 +137,15 @@ const styles = StyleSheet.create({
   },
   button: {
     backgroundColor: '#e32f45',
+    borderRadius: 15,
+    paddingVertical: 15,
+    paddingHorizontal: 20,
+    elevation:10,
+    alignSelf: 'flex-end',
+    margin: 10,
+  },
+  buttonPink: {
+    backgroundColor: '#E17474',
     borderRadius: 15,
     paddingVertical: 15,
     paddingHorizontal: 20,
