@@ -7,7 +7,7 @@ const Header = () => {
     const navigation = useNavigation();
     return (
         <View style={{height: 70,flexDirection: "row",justifyContent: "space-between",alignItems: "center",paddingHorizontal: SIZES.font}}>
-            <Image source={assets.logo} resizeMode="contain" style={{ width: 90, height: 25 }}/>
+            <Image source={assets.heartlogo} resizeMode="contain" style={{ width: 50, height: 50 }}/>
 
             <View style={{ width: 45, height: 45 }}>
                 <Pressable onPress={() => navigation.navigate("UserAccount")}>

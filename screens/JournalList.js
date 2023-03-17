@@ -1,12 +1,15 @@
 import React, { useState, useEffect, useCallback } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
-import { JournalCard, JournalHeader,HomeHeader, FocusedStatusBar } from "../components";
+import { JournalCard,JournalSearch } from "../components";
+import Header from '../components/Header';
+import FocusedStatusBar from '../components/FocusedStatusBar';
 import { COLORS } from "../constants";
-import { firebase, db, journalsCollection } from "../firebase";
+import { firebase, db} from "../firebase";
 
 const JournalList= () => {
   const [journals, setJournals] = useState([]);
   const [data, setData] = useState([]);
+  const journalsCollection = firebase.firestore().collection('journals');
 
   const handleSearch = useCallback(
     (value) => {
@@ -42,17 +45,16 @@ const JournalList= () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
+      <Header/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary} />
 
       <View style={{ flex: 1 }}>
+      <JournalSearch/>
         <View style={{ zIndex: 0 }}>
-          <FlatList
+        <FlatList
             data={journals}
             renderItem={({ item }) => <JournalCard data={item} />}
-            keyExtractor={(item) => item.id}
-            showsVerticalScrollIndicator={false}
-            ListHeaderComponent={<JournalHeader onSearch={handleSearch} />}
-          />
+            keyExtractor={(item) => item.id}/>
         </View>
 
         <View
@@ -69,6 +71,7 @@ const JournalList= () => {
           <View style={{ flex: 1, backgroundColor: COLORS.white }} />
         </View>
       </View>
+        
     </SafeAreaView>
   );
 };

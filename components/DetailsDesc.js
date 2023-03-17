@@ -4,10 +4,10 @@ import { Title, TaggedItems } from "./SubInfo";
 import { COLORS, SIZES, FONTS } from "../constants";
 
 const DetailsDesc = ({ story }) => {
-  const [solutionText, setSolutionText] = useState(story?.solution.slice(0, 100));
+  const [solutionText, setSolutionText] = useState(story?.solution.slice(0, 500));
   const [solutionReadMore, setSolutionReadMore] = useState(false);
 
-  const [experienceText, setExperienceText] = useState(story?.experience.slice(0, 100));
+  const [experienceText, setExperienceText] = useState(story?.experience.slice(0, 500));
   const [experienceReadMore, setExperienceReadMore] = useState(false);
 
   return (
@@ -32,7 +32,7 @@ const DetailsDesc = ({ story }) => {
       <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>
         <Text
           style={{
-            fontSize: SIZES.font,
+            fontSize: SIZES.large ,
             fontFamily: FONTS.semiBold,
             color: COLORS.primary,
           }}
@@ -47,13 +47,13 @@ const DetailsDesc = ({ story }) => {
           <Text
             style={{
               color: COLORS.secondary,
-              fontSize: SIZES.small,
+              fontSize: SIZES.medium,
               fontFamily: FONTS.regular,
               lineHeight: SIZES.large,
             }}
           >
             {experienceText}
-            {!experienceReadMore && "..."}
+            {/* {!experienceReadMore && "..."} */}
             
             <Text
               style={{
@@ -66,12 +66,12 @@ const DetailsDesc = ({ story }) => {
                   setExperienceText(story?.experience);
                   setExperienceReadMore(true);
                 } else {
-                  setExperienceText(story?.experience.slice(0, 100));
+                  setExperienceText(story?.experience.slice(0, 500));
                   setExperienceReadMore(false);
                 }
               }}
             >
-              {experienceReadMore ? " Show Less" : " Read More"}
+              {/* {experienceReadMore ? " Show Less" : " Read More"} */}
             </Text>
           </Text>
         </View>
@@ -80,7 +80,7 @@ const DetailsDesc = ({ story }) => {
       <View style={{ marginVertical: SIZES.extraLarge * 1.5 }}>
         <Text
           style={{
-            fontSize: SIZES.font,
+            fontSize: SIZES.large,
             fontFamily: FONTS.semiBold,
             color: COLORS.primary,
           }}
@@ -96,13 +96,13 @@ const DetailsDesc = ({ story }) => {
           <Text
             style={{
               color: COLORS.secondary,
-              fontSize: SIZES.small,
+              fontSize: SIZES.medium,
               fontFamily: FONTS.regular,
               lineHeight: SIZES.large,
             }}
           >
             {solutionText}
-            {!solutionReadMore && "..."}
+            {/* {!solutionReadMore && "..."} */}
             
             <Text
               style={{
@@ -120,7 +120,7 @@ const DetailsDesc = ({ story }) => {
                 }
               }}
             >
-              {solutionReadMore ? " Show Less" : " Read More"}
+              {/* {solutionReadMore ? " Show Less" : " Read More"} */}
             </Text>
           </Text>
         </View>
