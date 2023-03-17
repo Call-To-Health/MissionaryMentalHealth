@@ -45,6 +45,7 @@ const JournalList= () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
+      <Header/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary} />
 
       <View style={{ flex: 1 }}>

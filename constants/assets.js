@@ -7,6 +7,8 @@ import google from "../assets/icons/googleIcon.png";
 import go from "../assets/icons/go.png";
 
 import logo from "../assets/images/logo.png";
+import fulllogo from "../assets/images/fulllogo.png";
+import heartlogo from "../assets/images/heartlogo.png";
 import missionaries1 from "../assets/images/missionaries1.jpg";
 import missionaries2 from "../assets/images/missionaries2.jpg";
 import missionaries3 from "../assets/images/missionaries3.jpg";
@@ -32,6 +34,8 @@ export default {
   go,
 
   logo,
+  heartlogo,
+  fulllogo,
   missionaries1,
   missionaries2,
   missionaries3,

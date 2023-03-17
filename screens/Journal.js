@@ -118,10 +118,10 @@ const styles = StyleSheet.create({
   },
   input: {
     height: 240,
-    padding: 10,
+    padding: 20,
     margin: 12,
     borderWidth: 1,
-    borderRadius: 10,
+    borderRadius: 20,
     borderColor: COLORS.gray,
     backgroundColor: COLORS.white,
     textAlignVertical: 'top',
@@ -138,8 +138,9 @@ const styles = StyleSheet.create({
   button: {
     backgroundColor: '#e32f45',
     borderRadius: 15,
-    paddingVertical: 10,
+    paddingVertical: 15,
     paddingHorizontal: 20,
+    elevation:10,
     alignSelf: 'flex-end',
     margin: 10,
   },
