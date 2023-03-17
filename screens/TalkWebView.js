@@ -4,7 +4,7 @@ import { WebpageView } from "../components/WebpageView";
 import { useRoute } from '@react-navigation/native';
 
 
-const AdjustingToMission = () => {
+const TalkWebView = () => {
     const route = useRoute();
     const { url, title } = route.params;
     return (
@@ -18,4 +18,4 @@ const AdjustingToMission = () => {
     )
 };
 
-export default AdjustingToMission;
+export default TalkWebView;

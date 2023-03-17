@@ -8,9 +8,15 @@ import Tabs from './navigation/tabs';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
+import Modal from "./screens/Modal";
 import Home from "./screens/Home";
 import JournalList from "./screens/JournalList";
 import AdjustingToMission from "./screens/AdjustingToMission";
+import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
+import TalksView from "./screens/TalksView";
+import TalkWebView from "./screens/TalkWebView";
+import Survey from "./screens/Survey";
+import Results from "./screens/Results";
 
 const Stack = createStackNavigator();
 
@@ -45,6 +51,11 @@ return (
           name="UserAccount"
           component={UserAccount}
         />
+        <Stack.Screen 
+          options={{headerShown: false}}
+          name="Modal"
+          component={Modal}
+        />
         <Stack.Screen
           options={{headerShown: false}}
           name="JournalList"
@@ -59,6 +70,32 @@ return (
           options={{headerShown: false}}
           name="AdjustingToMission"
           component={AdjustingToMission}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="AdjustingToMissionChaptersView"
+          component={AdjustingToMissionChaptersView}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="TalksView"
+          component={TalksView}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="TalkWebView"
+          component={TalkWebView}
+        />
+
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Survey"
+          component={Survey}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Results"
+          component={Results}
         />
 
       </Stack.Navigator>
