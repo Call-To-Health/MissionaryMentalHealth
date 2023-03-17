@@ -26,9 +26,11 @@ const CustomTabBarButton = ({children, onPress}) => (
             height:70,
             borderRadius:35,
             backgroundColor: '#e32f45',
-            elevation: 8
+            elevation: 7
         }}>
             {children}
+            
+            <Text style={{ color: '#748c94', fontSize: 12, position:'absolute', bottom:-18 }}>    Check in</Text>
         </View>
     </TouchableOpacity>
 )
@@ -92,13 +94,13 @@ const Tabs = () => {
             }} 
             /> */}
 
-            <Tab.Screen name="Checkin" component={Checkin}
+            <Tab.Screen name="Journal" component={Journal}
             options={{
                 headerShown:false,
                 tabBarIcon: ({focused}) => (
                     <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
                         <Image
-                        source={require('../assets/icons/calendar.png')}
+                        source={require('../assets/icons/diary.png')}
                         resizeMode='contain'
                         style={{
                             width:25,
@@ -106,29 +108,29 @@ const Tabs = () => {
                             tintColor: focused ? '#e32f45' : '#748c94'
                         }}/>
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                            Check-in
-                            </Text>
+                            Journal
+                        </Text>
                     </View>
                 ),
             }} />
 
-            <Tab.Screen name="Journal" component={Journal}
-            options={{
-                headerShown:false,
-                tabBarIcon: ({focused}) => (
-                <Image source={require('../assets/icons/diary.png')} resizeMode="contain"
+            <Tab.Screen name="Checkin" component={Checkin}
+                options={{headerShown:false, tabBarIcon: ({focused}) => (
+                    
+                <Image source={require('../assets/icons/calendar.png')}
+                    resizeMode="contain"
                     style={{
                         width:30,
                         height:30,
-                        tintColor:'#fff'
-                }}
-                />
-                ),
+                        tintColor:'#fff'}}/>),
                 tabBarButton: (props) => (
                     <CustomTabBarButton {...props}/>
+                    
                 )
             }}
+            
             />
+            
 
             <Tab.Screen name="Library" component={Library}
             options={{
