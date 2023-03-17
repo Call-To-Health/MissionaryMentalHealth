@@ -1,22 +1,21 @@
 import { View, Text, StyleSheet,FlatList, TextInput,SafeAreaView, Keyboard, TouchableOpacity} from 'react-native';
 import FocusedStatusBar from '../components/FocusedStatusBar';
 import React, {useState,useCallback,useEffect} from 'react';
-import { JournalSearch, JournalCard, } from '../components';
+import { JournalSearch, JournalCard } from '../components';
 import Header from '../components/Header';
 import { COLORS } from '../constants';
 import {firebase,db} from '../firebase.js';
+import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 
 const Navigator = createStackNavigator();
 
 const Journal = () => {
-
+  const navigation = useNavigation();
   const journalsCollection = firebase.firestore().collection('journals');
   const [addData, setAddData] = useState('');
   const [journals, setJournals] = useState([]);
   const [data, setData] = useState([]);
-
-  // add a new field
 
   const addField = () => {
     //check if we have new field data 
@@ -96,35 +95,12 @@ const Journal = () => {
                 <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
     
-              {/* <TouchableOpacity style={style.button} onPress={() => navigation.navigate("JournalList")}>
-                    <Text style={style.buttontext}>See Journal Entries</Text>
-                  </TouchableOpacity> */}
+              <TouchableOpacity style={styles.button} onPress={() => navigation.navigate("JournalList")}>
+                    <Text style={styles.buttonText}>See Journal Entries</Text>
+                  </TouchableOpacity>
           </View>
         </View>
-          <View style={{ flex: 2.1 }}>
-          <JournalSearch/>
-        <View style={{ zIndex: 0 }}>
 
-          <FlatList
-            data={journals}
-            renderItem={({ item }) => <JournalCard data={item} />}
-            keyExtractor={(item) => item.id}/>
-        </View>
-
-        <View
-          style={{
-            position: "absolute",
-            top: 0,
-            bottom: 0,
-            right: 0,
-            left: 0,
-            zIndex: -1,
-          }}
-        >
-          <View style={{ height: 160, backgroundColor: COLORS.primary }} />
-          <View style={{ flex: 1, backgroundColor: COLORS.white }} />
-        </View>
-      </View>
         
     </SafeAreaView>
   )
@@ -141,7 +117,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
   input: {
-    height: 120,
+    height: 240,
     padding: 10,
     margin: 12,
     borderWidth: 1,
@@ -160,8 +136,8 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   button: {
-    backgroundColor: COLORS.gray,
-    borderRadius: 10,
+    backgroundColor: '#e32f45',
+    borderRadius: 15,
     paddingVertical: 10,
     paddingHorizontal: 20,
     alignSelf: 'flex-end',
