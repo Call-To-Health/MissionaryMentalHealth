@@ -18,6 +18,7 @@ const TagButton = ({ onPress, isSelected, children }) => {
       padding: 10,
       marginRight: 10,
       marginBottom: 10,
+      elevation: 12,
     },
     selectedTagButton: {
       backgroundColor: COLORS.primary,

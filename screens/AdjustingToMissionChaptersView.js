@@ -32,7 +32,6 @@ const AdjustingToMissionChaptersView = () => {
                 <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
             </View>
             <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
-                <Text style={style.sectionTitle}>Chapters</Text>
                 <View>
                     {adjustToMLData.map(chapter => (
                         <View key={chapter.chapter}>
@@ -53,6 +52,7 @@ const AdjustingToMissionChaptersView = () => {
 const style = StyleSheet.create ({
     header: {
         paddingVertical: 20,
+        paddingHorizontal: 10,
         flexDirection: 'row',
         alignItems: 'center',
         backgroundColor: COLORS.primary,
