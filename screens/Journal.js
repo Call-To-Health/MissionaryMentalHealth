@@ -4,7 +4,7 @@ import React, {useState,useCallback,useEffect} from 'react';
 import { JournalSearch, JournalCard } from '../components';
 import Header from '../components/Header';
 import { COLORS } from '../constants';
-import {firebase,db} from '../firebase.js';
+import {firebase} from '../firebase.js';
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -23,7 +23,7 @@ const Journal = () => {
       //get the timestamp 
       const timestamp = firebase.firestore.FieldValue.serverTimestamp();
       const data = {
-        heading: addData,
+        journalEntry: addData,
         createdAt: timestamp
       };
       journalsCollection
@@ -42,37 +42,23 @@ const Journal = () => {
     }
   }
 
-  const handleSearch = useCallback(
-    (value) => {
-      if (value.length === 0) {
-        setJournals(data);
-      } else {
-        const filteredData = data.filter((item) =>
-          item.heading.toLowerCase().includes(value.toLowerCase())
-        );
-        setJournals(filteredData);
-      }
-    },
-    [data]
-  );
+  // useEffect(() => {
+  //   const unsubscribe = journalsCollection.onSnapshot((querySnapshot) => {
+  //     const data = [];
+  //     querySnapshot.forEach((doc) => {
+  //       data.push({
+  //         id: doc.id,
+  //         ...doc.data(),
+  //       });
+  //     });
+  //     setJournals(data);
+  //     setData(data);
+  //   });
 
-  useEffect(() => {
-    const unsubscribe = journalsCollection.onSnapshot((querySnapshot) => {
-      const data = [];
-      querySnapshot.forEach((doc) => {
-        data.push({
-          id: doc.id,
-          ...doc.data(),
-        });
-      });
-      setJournals(data);
-      setData(data);
-    });
-
-    return () => {
-      unsubscribe();
-    };
-  }, []);
+  //   return () => {
+  //     unsubscribe();
+  //   };
+  // }, []);
 
   return (
 
@@ -85,7 +71,7 @@ const Journal = () => {
             style={styles.input}
             placeholder='Add your journal entry here!'
             placeholderTextColor='#aaaaaa'
-            onChangeText={(heading) => setAddData(heading)}
+            onChangeText={(journalEntry) => setAddData(journalEntry)}
             value={addData}
             multiline={true}
             underlineColorAndroid='transparent'

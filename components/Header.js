@@ -13,7 +13,7 @@ const Header = () => {
 
             <View style={{ width: 45, height: 45 }}>
                 <Pressable onPress={() => navigation.navigate("UserAccount")}>
-                    <Image source={assets.person04} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50 }}/>
+                    <Image source={assets.person04} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, shadowRadius:5}}/>
                 </Pressable>
             </View>
         </View>

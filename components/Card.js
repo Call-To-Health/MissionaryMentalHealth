@@ -6,7 +6,7 @@ import { CircleButton } from "./Button";
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
 // import { fetchRandomDocs } from "../firebase";
 
-const Card = ({doc,randomDocs, filteredData}) => {
+const Card = ({doc}) => {
   const navigation = useNavigation();
 
   const handlePress = (story) => {
