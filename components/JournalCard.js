@@ -12,6 +12,8 @@ const JournalCard = ({ doc }) => {
     return null;
   }
 
+  const createdAt = doc?.createdAt?.toDate()?.toLocaleString().substring(0, 16);
+
   return (
     <View
       key={doc?.id}
@@ -41,14 +43,16 @@ const JournalCard = ({ doc }) => {
         />
       </View>
 
-      <JournalSubInfo date={doc?.createdAt} location={doc?.location} />
+      <JournalSubInfo date={createdAt} location={doc?.location} />
 
       <View style={{ width: "100%", padding: SIZES.font }}>
         <Title
           title={doc?.journalEntry}
-          subTitle={doc?.createdAt}
           titleSize={SIZES.large}
-          subTitleSize={SIZES.small}
+        />
+        <Title
+          title={createdAt}
+          titleSize={SIZES.small}
         />
 
         <View
