@@ -15,13 +15,17 @@ const JournalList= () => {
     if (value.length === 0) {
       setFilteredJournalData(journalDocs);
     } else {
-      const filteredJournalData = journalDocs.filter((doc) =>
-        doc.journalEntry.toLowerCase().includes(value.toLowerCase())
-      );
+      const filteredJournalData = journalDocs.filter((doc) => {
+        const docValues = Object.values(doc);
+        return docValues.some((fieldValue) =>
+          String(fieldValue).toLowerCase().includes(value.toLowerCase())
+        );
+      });
       setFilteredJournalData(filteredJournalData);
       console.log("here is the filtered Data: " + JSON.stringify(filteredJournalData));
     }
   };
+  
   
   useEffect(() => {
     const getJournals = async () => {
