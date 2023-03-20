@@ -94,15 +94,15 @@ const TalksView = () => {
 
 const style = StyleSheet.create ({
     header: {
-      paddingVertical:20,
-      flexDirection:'row',
-      justifyContent: 'space-between',
-      backgroundColor: COLORS.primary,
+        paddingVertical: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.primary,
     },
     headerTitle: {
         color: COLORS.white,
-        fontWeight: 'bold',
         fontSize: 23,
+        marginLeft: 10,
     },
     categoryContainer: {
         marginHorizontal: 20,

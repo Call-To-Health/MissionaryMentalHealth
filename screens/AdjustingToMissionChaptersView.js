@@ -26,16 +26,12 @@ const AdjustingToMissionChaptersView = () => {
             <Header />
             <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
             <View style={style.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons name="chevron-back" size={32} color={COLORS.white} />
-            </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Ionicons name="chevron-back" size={32} color={COLORS.white} />
+                </TouchableOpacity>
+                <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
             </View>
             <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
-                <View style={{backgroundColor: COLORS.primary, height: 80}}>
-                    <View style={{ marginLeft: 10, marginRight: 10}}>
-                        <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
-                    </View>
-                </View>
                 <Text style={style.sectionTitle}>Chapters</Text>
                 <View>
                     {adjustToMLData.map(chapter => (
@@ -56,15 +52,15 @@ const AdjustingToMissionChaptersView = () => {
 
 const style = StyleSheet.create ({
     header: {
-      paddingVertical:20,
-      flexDirection:'row',
-      justifyContent: 'space-between',
-      backgroundColor: COLORS.primary,
+        paddingVertical: 20,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.primary,
     },
     headerTitle: {
-        color:COLORS.white,
-        fontWeight:'bold',
+        color: COLORS.white,
         fontSize: 23,
+        marginLeft: 10,
     },
     categoryContainer: {
         marginHorizontal: 20,
