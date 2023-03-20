@@ -13,7 +13,7 @@ const Home = () => {
   const handleSearch = (value) => {
     setSearchQuery(value);
     if (value.length === 0) {
-      setFilteredJournalData(randomDocs);
+      setFilteredData(randomDocs);
     } else {
       const filteredData = randomDocs.filter((doc) => {
         const docValues = Object.values(doc);
