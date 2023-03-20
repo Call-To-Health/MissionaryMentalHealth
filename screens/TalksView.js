@@ -13,46 +13,69 @@ const screenWidth = Dimensions.get('screen').width
 
 const TalksView = () => {
     const [talksData, setData] = useState([]);
+    const [talksByTag, setTalksByTag] = useState({});
     const [selectedTags, setSelectedTags] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
-      const fetchData = async () => {
-        const result = await getTalksData();
-        setData(result);
-      };
-  
-      fetchData();
+        const fetchData = async () => {
+            const result = await getTalksData();
+            setData(result);
+
+            const talksByTagObj = {};
+            result.forEach((talk) => {
+                const tags = talk.tags.split(", ");
+                tags.forEach((tag) => {
+                    if (!talksByTagObj[tag]) {
+                        talksByTagObj[tag] = [];
+                    }
+                    talksByTagObj[tag].push(talk);
+                });
+            });
+            setTalksByTag(talksByTagObj);
+        };
+
+        fetchData();
     }, []);
+
+    const handleTagPress = (tag) => {
+        if (selectedTags.includes(tag)) {
+            setSelectedTags(selectedTags.filter((selectedTag) => selectedTag !== tag));
+        } else {
+            setSelectedTags([...selectedTags, tag]);
+        }
+    };
+
+
     return (
-        <SafeAreaView style={{flex: 1,backgroundColor: COLORS.primary}}>
-            <Header />
-            <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
-            <View style={style.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons name="chevron-back" size={32} color={COLORS.white} />
-            </TouchableOpacity>
-            </View>
-            <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
-                <View style={{backgroundColor: COLORS.primary, height: 80}}>
-                    <View style={{ marginLeft: 10, marginRight: 10}}>
-                        <Text style={style.headerTitle}>Talks</Text>
-                    </View>
-                </View>
-                <Text style={style.sectionTitle}>Helpful Talks</Text>
-                <View style={style.categoryContainer}>
-                    {talksData.map(talk => (
-                        <View key={talk.id}>
-                            <Pressable onPress={() => navigation.navigate('TalkWebView', {url: talk.url, title: talk.title})}> 
-                                    <View style={style.iconContainer}>
-                                        <Text>{talk.title}</Text>
-                                    </View>
-                            </Pressable>
-                        </View>
-                    ))}
-                </View>
-            </ScrollView>
-        </SafeAreaView>
+  <SafeAreaView style={{flex: 1,backgroundColor: COLORS.primary}}>
+    <Header />
+    <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
+    <View style={style.header}>
+      <TouchableOpacity onPress={() => navigation.goBack()}>
+        <Ionicons name="chevron-back" size={32} color={COLORS.white} />
+      </TouchableOpacity>
+    </View>
+    <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
+      <View style={{backgroundColor: COLORS.primary, height: 80}}>
+        <View style={{ marginLeft: 10, marginRight: 10}}>
+          <Text style={style.headerTitle}>Talks</Text>
+        </View>
+      </View>
+      <Text style={style.sectionTitle}>Helpful Talks</Text>
+      <View style={style.categoryContainer}>
+        {talksData.map(talk => (
+          <View key={talk.id}>
+            <Pressable onPress={() => navigation.navigate('TalkWebView', {url: talk.url, title: talk.title})}> 
+              <View style={style.iconContainer}>
+                <Text>{talk.title}</Text>
+              </View>
+            </Pressable>
+          </View>
+        ))}
+      </View>
+    </ScrollView>
+  </SafeAreaView>
         
     )
 };
@@ -82,7 +105,7 @@ const style = StyleSheet.create ({
         backgroundColor: COLORS.lightgray,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 10,
+        borderRadius: 20,
         elevation: 12,
         margin: 13,
         paddingHorizontal: 10,
