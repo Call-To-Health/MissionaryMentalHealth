@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet,FlatList, TextInput,SafeAreaView, Keyboard, TouchableOpacity} from 'react-native';
+import { View, Text, StyleSheet,ScrollView, FlatList, TextInput,SafeAreaView, Keyboard, TouchableOpacity} from 'react-native';
 import FocusedStatusBar from '../components/FocusedStatusBar';
 import React, {useState,useCallback,useEffect} from 'react';
 import { JournalSearch, JournalCard } from '../components';
@@ -13,6 +13,7 @@ const Navigator = createStackNavigator();
 const Journal = () => {
   const navigation = useNavigation();
   const journalsCollection = firebase.firestore().collection('journals');
+  const [tags,setTags] = useState([])
   const [addData, setAddData] = useState('');
   const [journals, setJournals] = useState([]);
   const [data, setData] = useState([]);
@@ -24,6 +25,7 @@ const Journal = () => {
       const timestamp = firebase.firestore.FieldValue.serverTimestamp();
       const data = {
         journalEntry: addData,
+        tags:tags,
         createdAt: timestamp
       };
       journalsCollection
@@ -76,7 +78,68 @@ const Journal = () => {
             multiline={true}
             underlineColorAndroid='transparent'
             autoCapitalize='none'/>
-            <View style={styles.formContainer}>
+    <View>
+      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+        <View style={styles.tagsContainer}>
+          <TouchableOpacity
+            style={tags.includes('Depression') ? styles.tagButtonActive : styles.tagButton}
+            onPress={() => {
+              if (tags.includes('Depression')) {
+                setTags(tags.filter(tag => tag !== 'Depression'));
+            } else {
+                setTags([...tags, 'Depression']);}}}>
+            <Text style={styles.tagText}>Depression</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={tags.includes('Homesickness') ? styles.tagButtonActive : styles.tagButton}
+            onPress={() => {
+              if (tags.includes('Homesickness')) {
+                setTags(tags.filter(tag => tag !== 'Homesickness'));
+            } else {
+                setTags([...tags, 'Homesickness']);}}}>
+            <Text style={styles.tagText}>Homesickness</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={tags.includes('Anxiety') ? styles.tagButtonActive : styles.tagButton}
+            onPress={() => {
+              if (tags.includes('Anxiety')) {
+                setTags(tags.filter(tag => tag !== 'Anxiety'));
+            } else {
+                setTags([...tags, 'Anxiety']);}}}>
+            <Text style={styles.tagText}>Anxiety</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={tags.includes('Happy') ? styles.tagButtonActive : styles.tagButton}
+            onPress={() => {
+              if (tags.includes('Happy')) {
+                setTags(tags.filter(tag => tag !== 'Happy'));
+            } else {
+                setTags([...tags, 'Happy']);}}}>
+            <Text style={styles.tagText}>Happy</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={tags.includes('Exhaustion') ? styles.tagButtonActive : styles.tagButton}
+            onPress={() => {
+              if (tags.includes('Exhaustion')) {
+                setTags(tags.filter(tag => tag !== 'Exhaustion'));
+            } else {
+                setTags([...tags, 'Exhaustion']);}}}>
+            <Text style={styles.tagText}>Exhaustion</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={tags.includes('Frustration') ? styles.tagButtonActive : styles.tagButton}
+            onPress={() => {
+              if (tags.includes('Frustration')) {
+                setTags(tags.filter(tag => tag !== 'Frustration'));
+            } else {
+                setTags([...tags, 'Frustration']);}}}>
+            <Text style={styles.tagText}>Frustration</Text>
+          </TouchableOpacity>
+        </View>
+        
+      </ScrollView>  
+      </View>
+      <View style={styles.formContainer}>
               <TouchableOpacity style={styles.button} onPress={addField}>
                 <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
@@ -85,6 +148,7 @@ const Journal = () => {
                     <Text style={styles.buttonText}>See Journal Entries</Text>
                   </TouchableOpacity>
           </View>
+            
         </View>
 
         
@@ -103,7 +167,7 @@ const styles = StyleSheet.create({
     fontSize: 23,
   },
   input: {
-    height: 240,
+    height: 200,
     padding: 20,
     margin: 12,
     borderWidth: 1,
@@ -144,6 +208,32 @@ const styles = StyleSheet.create({
     fontWeight: 'bold',
     fontSize: 16,
   },
+  tagsContainer: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    paddingHorizontal: 20,
+    height: 53,
+    paddingTop: 10,
+  },
+  tagButton: {
+    backgroundColor: COLORS.white,
+    borderRadius: 25,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 5,
+  },
+  tagButtonActive: {
+    backgroundColor: COLORS.secondary,
+    borderRadius: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    marginHorizontal: 5,
+  },
+  tagText: {
+    color: COLORS.dark,
+    fontWeight: 'bold',
+    fontSize: 16,
+  }
 });
 
 export default Journal;
