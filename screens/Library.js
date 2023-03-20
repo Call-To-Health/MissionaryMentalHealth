@@ -17,7 +17,7 @@ const Library = () => {
   const navigation = useNavigation();
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "TalksView"},
-    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "User Stories",  navLocation: "AdjustingToMissionChaptersView"},
+    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "AdjustingToMissionChaptersView"},
     {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "AdjustingToMissionChaptersView"},
   ];
   const ListCategories = () => {

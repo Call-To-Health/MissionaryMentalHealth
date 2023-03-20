@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
 import { getAdjustingToMissionaryLifeData } from '../firebase.js'
 import Header from '../components/Header';
@@ -8,6 +8,7 @@ import { COLORS, SIZES } from '../constants';
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
+const screenWidth = Dimensions.get('screen').width
 
 const AdjustingToMissionChaptersView = () => {
     const [adjustToMLData, setData] = useState([]);
@@ -73,13 +74,15 @@ const style = StyleSheet.create ({
         flexWrap: 'wrap',
     },
     iconContainer: {
-        height: 60,
+        height: 70,
         backgroundColor: COLORS.lightgray,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 10,
+        borderRadius: 20,
         elevation: 12,
         margin: 13,
+        padding: 15,
+        marginHorizontal: 40,
       },
       sectionTitle: {
         marginHorizontal: 20,
