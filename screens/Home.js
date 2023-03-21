@@ -26,7 +26,6 @@ const Home = () => {
     }
   };
   
-  
   useEffect(() => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
@@ -61,4 +60,3 @@ const Home = () => {
 };
 
 export default Home;
-
