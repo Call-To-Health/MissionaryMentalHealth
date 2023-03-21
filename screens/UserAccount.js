@@ -1,9 +1,10 @@
 import { View, Text, StyleSheet, Image,SafeAreaView, TouchableOpacity, Button,Pressable  } from 'react-native'
 import {FocusedStatusBar} from "../components";
-import Header from '../components/Header';
+import LoginHeader from '../components/LoginHeader';
 import React, { useState, useEffect } from 'react';
 import { COLORS, FONTS, SIZES, assets} from '../constants';
 import { TextInput } from 'react-native-gesture-handler';
+import { Separator } from '../components';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
 import * as WebBrowser from 'expo-web-browser';
@@ -99,13 +100,13 @@ const UserAccount = () => {
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
-      <Header/>
+      <LoginHeader/>
 
       <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary}}>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
 
           <View style={{justifyContent:'center',alignItems:'center',backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
-            <Text style={styles.headerTitle}>User Account</Text>
+            <Text style={styles.headerTitle}>Log into Resilient Missionary</Text>
             <Text style={styles.buttonText}>{auth.currentUser?.email} </Text>
           </View>
 
@@ -118,6 +119,8 @@ const UserAccount = () => {
             <TouchableOpacity onPress={handleLogin} style={styles.button}>
               <Text style={styles.buttonText}>Log In</Text>
             </TouchableOpacity>
+
+            <Separator/>
 
             <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline]}>
               <Text style={styles.buttonOutlineText}>Register</Text>
@@ -166,7 +169,7 @@ const styles = StyleSheet.create ({
   headerTitle: {
     color:COLORS.white,
     fontWeight:'bold',
-    fontSize: 23,
+    fontSize: 25,
   },
 inputContainer : {
   width: '80%',
