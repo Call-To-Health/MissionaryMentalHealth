@@ -24,16 +24,19 @@ return (
 
   <View style={style.header}></View>
     <View
-    style={{ backgroundColor: COLORS.primary, height: 120, paddingHorizontal: 20 }}>
-    <Text style={style.headerTitle}>Hi Sister/Elder! </Text></View>
+    style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20 }}>
+    <Text style={style.headerTitle}>Welcome, Missionary! </Text></View>
   <View style={style.body}>
     <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
       <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
     </TouchableOpacity>
+    </View>
+    <View style={style.body}>
     <TouchableOpacity onPress={() => navigation.navigate("Journal")} style={[style.button, style.whiteButton]}>
       <Text style={[style.buttonText, { color: COLORS.primary }]}>Start Journal Entry</Text>
     </TouchableOpacity>
   </View>
+
   
   <View style={style.cardContainerWrapper}>
   <View style={style.cardContainer}>
@@ -80,8 +83,8 @@ const style = StyleSheet.create ({
     flexDirection: 'row',
     justifyContent: 'center',
     alignItems: 'center',
-    marginVertical: 30,
-    marginHorizontal:30
+    marginVertical: 15 ,
+    marginHorizontal:20,
   },
   button: {
     paddingVertical: 15,
