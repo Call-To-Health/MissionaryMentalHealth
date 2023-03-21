@@ -137,6 +137,15 @@ const Survey = () => {
     const handleSubmit = () => {
         // Send answers to backend or perform any other necessary actions
         console.log(answers)
+        // for (let i = 1; i < 5; i++) {
+        //     console.log(answers["question" + i]);
+        //     if (answers["question" + i] === null) {
+        //         alert("Please answer all the questions before submitting!");
+        //         break;
+        //     }
+
+        //   }
+          // still goes to the results page, which I don't want
 
         // add scores from questions
         const totalScore = parseInt(answers.question1) + parseInt(answers.question2) + parseInt(answers.question3) + parseInt(answers.question4);

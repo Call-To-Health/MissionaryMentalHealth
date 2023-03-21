@@ -15,6 +15,7 @@ import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
+import DailyResults from "./screens/DailyResults";
 
 const Stack = createStackNavigator();
 
@@ -83,6 +84,11 @@ return (
           options={{headerShown: false}}
           name="Results"
           component={Results}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="DailyResults"
+          component={DailyResults}
         />
 
       </Stack.Navigator>
