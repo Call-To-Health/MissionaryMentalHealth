@@ -17,7 +17,7 @@ const LoginHeader = () => {
             </Pressable>
         </View>
         <View style={{ paddingHorizontal: 20, margin: 10}}>
-            <Text style={styles.headerTitle}>Log into Resilient Missionary</Text>
+            <Text style={styles.headerTitle}>Login to Resilient Missionary</Text>
         </View>
         </View>
 

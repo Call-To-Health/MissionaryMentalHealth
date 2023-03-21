@@ -101,7 +101,7 @@ const UserAccount = () => {
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <ScrollView keyboardShouldPersistTaps="always" contentInsetAdjustmentBehavior="automatic" contentInset={{ bottom: 100 }} scrollIndicatorInsets={{ bottom: 100 }}>
-        <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary, paddingBottom: 100}}>
+        <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary, paddingBottom: 110}}>
           <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
           <LoginHeader />
 
@@ -122,7 +122,7 @@ const UserAccount = () => {
 
             <View style={styles.buttonContainer}>
               <TouchableOpacity onPress={handleLogin} style={styles.button}>
-                <Text style={styles.buttonText}>Log In</Text>
+                <Text style={styles.buttonText}>Login</Text>
               </TouchableOpacity>
 
             <View style={{ flexDirection: 'row', paddingVertical: 25, paddingHorizontal: 50 }}>
@@ -132,12 +132,12 @@ const UserAccount = () => {
 
             </View>
 
-              <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline]}>
-                <Text style={styles.buttonText}>Register</Text>
+              <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline, {backgroundColor: COLORS.green}]}>
+                <Text style={[styles.buttonText, {color: COLORS.white}]}>Register</Text>
               </TouchableOpacity>
-              <TouchableOpacity onPress={HandleSignOut} style={styles.redButton}>
+              {/* <TouchableOpacity onPress={HandleSignOut} style={styles.redButton}>
                 <Text style={[styles.buttonText, {color: COLORS.white}]}>Sign Out</Text>
-              </TouchableOpacity>
+              </TouchableOpacity> */}
             </View>
 
             <View style ={styles.littleContainer}>
@@ -147,11 +147,10 @@ const UserAccount = () => {
             <View style={{ paddingTop: 30 }}> 
               {user && <ShowUserInfo/>}
               {user === null && <>
-              <Text style={{fontSize:20, fontWeight: 'bold',marginBottom: 20,marginLeft: 20, color: 'white'}}>Google Account</Text>
               <TouchableOpacity
                 disabled={!request}
                 onPress={() => {promptAsync();}}>
-                <Image source={assets.google} style={{width:200, height:50}} />
+                <Image source={assets.google} style={{width: 230, height: 50, borderRadius: 10}} />
               </TouchableOpacity></>}
             </View>
           </SafeAreaView>
