@@ -57,7 +57,7 @@ const Library = () => {
           </View>
           
           <ListCategories />
-          <Text style={style.sectionTitle}>Adjusting to Missionary Life</Text>
+          <Text style={style.sectionTitle}>Booklets</Text>
           <View style={{ paddingLeft: 20}}>
             <View style={style.cardContainer}>
               <TouchableOpacity onPress={() => navigation.navigate("AdjustingToMissionChaptersView")}>
@@ -65,6 +65,8 @@ const Library = () => {
                 source={assets.adjustToML}
                 style={style.cardImage}
               />
+              
+              <Text style={style.cardLabel}>Adjusting to Missionary Life</Text>
               </TouchableOpacity>
             </View>
 
@@ -75,7 +77,8 @@ const Library = () => {
 }
 const style = StyleSheet.create ({
   header: {
-    paddingVertical:20,
+    paddingVertical: 20,
+    paddingHorizontal: 10,
     flexDirection:'row',
     justifyContent: 'space-between',
     backgroundColor: COLORS.primary,
@@ -136,6 +139,9 @@ const style = StyleSheet.create ({
     padding: 10,
     overflow: 'hidden',
     borderRadius: 10
+  },
+  cardLabel: {
+    padding: 10,
   }
 })
 export default Library;

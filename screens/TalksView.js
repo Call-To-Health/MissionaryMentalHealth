@@ -68,7 +68,6 @@ const TalksView = () => {
                         ))}
                     </View>
                 </ScrollView>
-                <Text style={style.sectionTitle}>Helpful Talks</Text>
                 <View style={style.categoryContainer}>
                 {talksData.filter((talk) => {
                     if (selectedTags.length === 0) {
@@ -94,15 +93,16 @@ const TalksView = () => {
 
 const style = StyleSheet.create ({
     header: {
-      paddingVertical:20,
-      flexDirection:'row',
-      justifyContent: 'space-between',
-      backgroundColor: COLORS.primary,
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.primary,
     },
     headerTitle: {
         color: COLORS.white,
-        fontWeight: 'bold',
         fontSize: 23,
+        marginLeft: 10,
     },
     categoryContainer: {
         marginHorizontal: 20,

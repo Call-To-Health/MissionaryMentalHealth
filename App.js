@@ -10,6 +10,8 @@ import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
 import Modal from "./screens/Modal";
 import Home from "./screens/Home";
+import Journal from "./screens/Journal";
+import Stories from "./screens/Stories";
 import JournalList from "./screens/JournalList";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
@@ -65,6 +67,16 @@ return (
           options={{headerShown: false}}
           name="Home"
           component={Home}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Journal"
+          component={Journal}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Stories"
+          component={Stories}
         />
         <Stack.Screen
           options={{headerShown: false}}
