@@ -7,18 +7,18 @@ const LoginHeader = () => {
     const navigation = useNavigation();
     return (
         <View style={styles.header}>
-        <View style={{ marginRight: 10 }}>
-            <Pressable onPress={() => navigation.navigate("Home")}>
-            <Image
-                source={assets.heartlogo}
-                resizeMode="contain"
-                style={{ width: 50, height: 50 }}
-            />
-            </Pressable>
-        </View>
-        <View style={{ paddingHorizontal: 20, margin: 10}}>
-            <Text style={styles.headerTitle}>Login to Resilient Missionary</Text>
-        </View>
+            <View style={{ marginRight: 10 }}>
+                <Pressable onPress={() => navigation.navigate("Home")}>
+                <Image
+                    source={assets.heartlogo}
+                    resizeMode="contain"
+                    style={{ width: 50, height: 50 }}
+                />
+                </Pressable>
+            </View>
+            <View style={{ paddingHorizontal: 20, margin: 10}}>
+                <Text style={styles.headerTitle}>Login to Resilient Missionary</Text>
+            </View>
         </View>
 
     )
@@ -30,7 +30,7 @@ const styles = StyleSheet.create ( {
 header: {
     alignItems: "center",
     justifyContent: "center",
-    height: 200
+    paddingTop: 50,
 },
 headerTitle: {
     fontSize: 24,

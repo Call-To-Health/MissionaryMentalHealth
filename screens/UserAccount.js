@@ -105,7 +105,7 @@ const UserAccount = () => {
           <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
           <LoginHeader />
 
-            <View style={styles.loginHeader}>
+            <View>
               <Text style={styles.buttonText}>{auth.currentUser?.email}</Text>
             </View>
           
