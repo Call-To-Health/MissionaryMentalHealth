@@ -6,17 +6,21 @@ import DetailsArticle from "./DetailsArticle";
 import FocusedStatusBar from "./FocusedStatusBar";
 import DetailsDesc from './DetailsDesc';
 import JournalCard from "./JournalCard";
+import Separator from "./Separator";
+import LoginHeader from "./LoginHeader";
 import { JournalSubInfo, JPeople, JEndDate, JTags, JTitle } from "./JournalSubInfo";
 import JournalSearch from "./JournalSearch";
 
 export {
   HomeHeader,
   Card,
+  LoginHeader,
   SubInfo,
   JournalSearch,
   People,
   JournalCard,
   JournalSubInfo,
+  Separator,
   EndDate,
   RectButton,
   CircleButton,
