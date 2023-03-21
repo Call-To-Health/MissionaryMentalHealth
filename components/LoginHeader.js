@@ -1,17 +1,42 @@
 import React from "react";
-import { View, Text, Image, TextInput,Pressable } from "react-native";
+import { View, Text, Image, TextInput, Pressable, StyleSheet } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
 const LoginHeader = () => {
     const navigation = useNavigation();
     return (
-        <View style={{height: 70,flexDirection: "row",justifyContent: "center",alignItems: "center",paddingHorizontal: SIZES.font}}>
-            <Pressable  onPress={() => navigation.navigate("Home")}>
-                <Image source={assets.heartlogo} resizeMode="contain" style={{ width: 50, height: 50 }}/>
+        <View style={styles.header}>
+        <View style={{ marginRight: 10 }}>
+            <Pressable onPress={() => navigation.navigate("Home")}>
+            <Image
+                source={assets.heartlogo}
+                resizeMode="contain"
+                style={{ width: 50, height: 50 }}
+            />
             </Pressable>
         </View>
+        <View style={{ paddingHorizontal: 20, margin: 10}}>
+            <Text style={styles.headerTitle}>Log into Resilient Missionary</Text>
+        </View>
+        </View>
+
     )
 };
 
 export default LoginHeader;
+
+const styles = StyleSheet.create ( {
+header: {
+    alignItems: "center",
+    justifyContent: "center",
+    height: 200
+},
+headerTitle: {
+    fontSize: 24,
+    fontWeight: "bold",
+    color: COLORS.white,
+    padding: 10,
+},
+
+})
