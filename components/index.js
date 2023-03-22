@@ -1,4 +1,6 @@
+import StoryHeader from "./StoryHeader";
 import HomeHeader from "./HomeHeader";
+import Header from "./Header";
 import Card from "./Card";
 import { RectButton, CircleButton } from "./Button";
 import { SubInfo, People, EndDate, Tags, Title } from "./SubInfo";
@@ -13,11 +15,13 @@ import JournalSearch from "./JournalSearch";
 
 export {
   HomeHeader,
+  StoryHeader,
   Card,
   LoginHeader,
   SubInfo,
   JournalSearch,
   People,
+  Header,
   JournalCard,
   JournalSubInfo,
   Separator,

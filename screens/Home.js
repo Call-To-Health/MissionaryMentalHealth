@@ -1,7 +1,7 @@
 import React, {useState,useEffect} from 'react';
 import {View,Text,SafeAreaView,StyleSheet,TouchableOpacity,FlatList,ScrollView,} from 'react-native';
 import { FocusedStatusBar } from '../components';
-import Header from '../components/Header';
+import Header from '../components/HomeHeader';
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from '../constants';
 import { fetchJournals } from '../firebase';
@@ -45,10 +45,8 @@ return (
      translucent={false}
      backgroundColor={COLORS.primary}/>
 
-  <View style={style.header}></View>
-    <View
-    style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20 }}>
-    <Text style={style.headerTitle}>Welcome, Missionary! </Text></View>
+
+
   <View style={style.body}>
     <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
       <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>

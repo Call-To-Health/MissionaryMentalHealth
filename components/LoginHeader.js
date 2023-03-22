@@ -8,7 +8,7 @@ const LoginHeader = () => {
     return (
         <View style={{height: 70,flexDirection: "row",justifyContent: "center",alignItems: "center",paddingHorizontal: SIZES.font}}>
             <Pressable  onPress={() => navigation.navigate("Home")}>
-                <Image source={assets.heartlogo} resizeMode="contain" style={{ width: 50, height: 50 }}/>
+                <Image source={assets.logo} resizeMode="contain" style={{ width: 50, height: 50 }}/>
             </Pressable>
         </View>
     )
