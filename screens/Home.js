@@ -25,7 +25,7 @@ return (
   <View style={style.header}></View>
     <View
     style={{ backgroundColor: COLORS.primary, height: 45, paddingHorizontal: 20 }}>
-      <Text style={style.headerTitle}>Welcome, Missionary! </Text>
+      <Text style={style.headerTitle}>Welcome, Missionary!</Text>
     </View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
 
@@ -91,9 +91,10 @@ const style = StyleSheet.create ({
     marginHorizontal:20,
   },
   instructionalText: {
-    fontSize: SIZES.medium,
-    paddingBottom: 30,
-    paddingTop: 10
+    fontSize: SIZES.large,
+    paddingBottom: 20,
+    paddingTop: 5,
+    fontWeight: "bold"
   },
   button: {
     paddingVertical: 15,

@@ -131,7 +131,6 @@ const UserAccount = () => {
               <Separator />
 
             </View>
-
               <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline, {backgroundColor: COLORS.green}]}>
                 <Text style={[styles.buttonText, {color: COLORS.white}]}>Register</Text>
               </TouchableOpacity>
