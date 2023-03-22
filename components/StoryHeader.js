@@ -8,12 +8,12 @@ const StoryHeader = ({ onSearch }) => {
 
   return (
     <View
-      style={{backgroundColor: COLORS.primary, padding: SIZES.font,}}>
+      style={{backgroundColor: COLORS.primary, padding: SIZES.font,justifyContent:'space-between',}}>
       
       <View style={{ marginVertical: SIZES.font }}>
         <Text
           style={{fontFamily: FONTS.regular,fontSize: SIZES.small,color: COLORS.white,}}>
-          Hello Missionary!  👋
+          Hello, Missionary!  👋
         </Text>
 
         <Text
@@ -24,9 +24,17 @@ const StoryHeader = ({ onSearch }) => {
             marginTop: SIZES.base / 100,
           }}
         >
-          Search below for resources to help you.
+          Search stories like yours!
+          <View style={{ width: 45, height: 45 }}>
+                <Pressable onPress={() => navigation.navigate("UserAccount")}>
+                    <Image source={assets.person01} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, shadowRadius:5}}/>
+                </Pressable>
+            </View>
         </Text>
+        
       </View>
+
+      
 
       <View style={{ marginTop: SIZES.font }}>
         <View
