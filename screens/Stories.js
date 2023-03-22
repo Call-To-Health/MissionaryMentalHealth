@@ -30,7 +30,7 @@ const Stories = () => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
       setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      console.log("Here is the content of randomDocs in the Home component" + randomDocs);
+      console.log("Here is the content of randomDocs in the Stories screen" + randomDocs);
     };
     getRandomDocs();
   }, []);
