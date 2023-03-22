@@ -1,9 +1,11 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import {View,Text,SafeAreaView,StyleSheet,TouchableOpacity,FlatList,ScrollView,} from 'react-native';
 import { FocusedStatusBar } from '../components';
 import Header from '../components/Header';
 import { useNavigation } from "@react-navigation/native";
 import { COLORS } from '../constants';
+import { fetchJournals } from '../firebase';
+import { fetchRandomDocs } from '../firebase';
 // import Card from '../components';
 
 const Home = () => {
@@ -13,7 +15,28 @@ const Home = () => {
     { id: 3, title: 'Yep' },
     { id: 4, title: 'PLease stop scrolling because I aint got more ' },
   ];
-  const othersExperiences = [1,2,3,4]; // Figure out how to include the stories here
+
+  const [journals, setJournals] = useState([]);
+  const [randomDocs, setRandomDocs] = useState([]);
+
+  useEffect(() => {
+    const fetchAndSetJournals = async () => {
+      const fetchedJournals = await fetchJournals();
+      setJournals(fetchedJournals);
+    };
+
+    fetchAndSetJournals();
+  }, []);
+
+  useEffect(() => {
+    const getRandomDocs = async () => {
+      const randomDocs = await fetchRandomDocs();
+      setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      console.log("Here is the content of randomDocs in the Home component" + randomDocs);
+    };
+    getRandomDocs();
+  }, []);
+
   const navigation = useNavigation();
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
@@ -37,7 +60,8 @@ return (
     </TouchableOpacity>
   </View>
 
-  
+  <ScrollView contentContainerStyle={{ paddingBottom: 100 }}
+  showsVerticalScrollIndicator={false}>
   <View style={style.cardContainerWrapper}>
   <View style={style.cardContainer}>
     <Text style={style.scrollTitle}>Recently viewed</Text>
@@ -51,13 +75,30 @@ return (
   </View>
   </View>
   <View style={style.cardContainerWrapper}>
-  <View style={style.cardContainer}>
-    <Text style={style.scrollTitle}>Learn from other's experiences</Text>
-    <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-
-    </ScrollView>
+    <View style={style.cardContainer}>
+      <Text style={style.scrollTitle}>Recent Journal Entries</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {journals.map(journal => (
+          <View key={journal.id} style={style.card}>
+            <Text>{journal.journalEntry}</Text>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   </View>
+  <View style={style.cardContainerWrapper}>
+    <View style={style.cardContainer}>
+      <Text style={style.scrollTitle}>Other's experiences</Text>
+      <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+        {randomDocs.map(doc => (
+          <View key={doc.id} style={style.card}>
+            <Text>{doc.solution}</Text>
+          </View>
+        ))}
+      </ScrollView>
+    </View>
   </View>
+  </ScrollView>
 </SafeAreaView>
   );
 };
@@ -119,14 +160,16 @@ const style = StyleSheet.create ({
     borderRadius: 20,
   },
   cardContainerWrapper: {
-    marginHorizontal: 12,
+    marginHorizontal: 18,
   },
   card: {
-    backgroundColor: COLORS.lightGray,
-    width: 150,
-    height: 100,
+    backgroundColor: COLORS.lightgray,
+    elevation:10,
+    width: 130,
+    height: 80,
     borderRadius: 10,
     marginHorizontal: 10,
+    marginVertical: 4,
     justifyContent: 'center',
     alignItems: 'center',
   },})
