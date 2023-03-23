@@ -3,10 +3,11 @@ import React from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-
+import Stories from './Stories';
+import JournalList from './JournalList';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
-import Header from '../components/Header';
+import LibraryHeader from '../components/LibraryHeader';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 import { assets } from '../constants';
@@ -17,8 +18,8 @@ const Library = () => {
   const navigation = useNavigation();
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "TalksView"},
-    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "AdjustingToMissionChaptersView"},
-    {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "AdjustingToMissionChaptersView"},
+    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "Stories"},
+    {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "JournalList"},
   ];
   const ListCategories = () => {
     return (
@@ -40,16 +41,16 @@ const Library = () => {
   };
   return (
     <SafeAreaView style={{flex: 1,backgroundColor: COLORS.primary}}>
-      <Header/>
+      <LibraryHeader/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
         <View style={style.header}>
         </View>
         
         <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
-          <View style={{backgroundColor: COLORS.primary, height: 80}}>
+          <View style={{backgroundColor: COLORS.primary, height: 0}}>
             <View style={{ marginLeft: 10, marginRight: 10}}>
-              <Text style={style.headerTitle}>Welcome to the Library</Text>
-              {/* <View style={style.inputContainer}>
+              {/* <Text style={style.headerTitle}>Welcome to the Library</Text>
+              <View style={style.inputContainer}>
                 <AntDesign name="search1" size={20} color="black" style={{ marginRight: SIZES.base }} />
                 <TextInput placeholder='Search the library' style={{color: COLORS.black, flex: 1}} />
               </View> */}

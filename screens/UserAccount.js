@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, Image,SafeAreaView, TouchableOpacity, Button,Pressable  } from 'react-native'
+import { View, Text, StyleSheet, Image,SafeAreaView, TouchableOpacity, Button, Pressable, ScrollView  } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import LoginHeader from '../components/LoginHeader';
 import React, { useState, useEffect } from 'react';
@@ -100,61 +100,76 @@ const UserAccount = () => {
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
-      <LoginHeader/>
+      <ScrollView keyboardShouldPersistTaps="always" contentInsetAdjustmentBehavior="automatic" contentInset={{ bottom: 100 }} scrollIndicatorInsets={{ bottom: 100 }}>
+        <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary, paddingBottom: 110}}>
+          <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
+          <LoginHeader />
 
-      <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary}}>
-      <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
+            <View>
+              <Text style={styles.buttonText}>{auth.currentUser?.email}</Text>
+            </View>
+          
+            <View style={styles.inputContainer}>
+              <View>
+                <Text style={styles.inputLabel}>Email</Text>
+                <TextInput placeholder='name@missionary.org' value={email} onChangeText={text => setEmail(text)} style={styles.input}/>
+              </View>
+              <View>
+                <Text style={styles.inputLabel}>Password</Text>
+                <TextInput value={password} onChangeText={text => setPassword(text)} style={styles.input} secureTextEntry/>
+              </View>
+            </View>
 
-          <View style={{justifyContent:'center',alignItems:'center',backgroundColor:COLORS.primary, height:120,paddingHorizontal:20}}>
-            <Text style={styles.headerTitle}>Log into Resilient Missionary</Text>
-            <Text style={styles.buttonText}>{auth.currentUser?.email} </Text>
-          </View>
+            <View style={styles.buttonContainer}>
+              <TouchableOpacity onPress={handleLogin} style={styles.button}>
+                <Text style={styles.buttonText}>Log In</Text>
+              </TouchableOpacity>
 
-          <View style={styles.inputContainer}>
-            <TextInput placeholder='Email'value={email}onChangeText={text => setEmail(text)}style={styles.input}/>
-            <TextInput placeholder='Password'value={password}onChangeText={text => setPassword(text)}style={styles.input}secureTextEntry/>
-          </View>
+            <View style={{ flexDirection: 'row', paddingVertical: 25, paddingHorizontal: 50 }}>
+              <Separator />
+              <Text style={{ color: COLORS.white, paddingHorizontal: 10}}>OR</Text>
+              <Separator />
 
-          <View style={styles.buttonContainer}>
-            <TouchableOpacity onPress={handleLogin} style={styles.button}>
-              <Text style={styles.buttonText}>Log In</Text>
-            </TouchableOpacity>
+            </View>
+              <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline, {backgroundColor: COLORS.green}]}>
+                <Text style={[styles.buttonText, {color: COLORS.white}]}>Register</Text>
+              </TouchableOpacity>
+              {/* <TouchableOpacity onPress={HandleSignOut} style={styles.redButton}>
+                <Text style={[styles.buttonText, {color: COLORS.white}]}>Sign Out</Text>
+              </TouchableOpacity> */}
+            </View>
 
-            <Separator/>
+            <View style ={styles.littleContainer}>
 
-            <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline]}>
-              <Text style={styles.buttonOutlineText}>Register</Text>
-            </TouchableOpacity>
-            <TouchableOpacity onPress={HandleSignOut} style={styles.redButton}>
-              <Text style={styles.buttonText}>Sign Out</Text>
-            </TouchableOpacity>
-          </View>
-          <View style ={styles.littleContainer}>
-            
-            
+            </View>
 
-          </View>
-          <View>
-            {user && <ShowUserInfo/>}
-            {user === null && <>
-            <Text style={{fontSize:20, fontWeight: 'bold',marginBottom: 20,marginLeft: 20, color: 'white'}}>Google Account</Text>
-            <TouchableOpacity
-              disabled={!request}
-              onPress={() => {promptAsync();}}>
-              <Image source={assets.google} style={{width:200, height:50}} />
-            </TouchableOpacity></>}
-          </View>
+            <View style={{ paddingTop: 30 }}> 
+              {user && <ShowUserInfo/>}
+              {user === null && <>
+              <TouchableOpacity
+                disabled={!request}
+                onPress={() => {promptAsync();}}>
+                <Image source={assets.google} style={{width: 230, height: 50, borderRadius: 10}} />
+              </TouchableOpacity></>}
+            </View>
           </SafeAreaView>
+      </ScrollView>
     </SafeAreaView>
 
   )
 }
 const styles = StyleSheet.create ({
   header: {
-    paddingVertical:20,
-    flexDirection:'row',
+    paddingVertical: 20,
+    flexDirection: 'row',
     justifyContent: 'space-between',
     backgroundColor: COLORS.primary,
+  },
+  loginHeader: {
+    justifyContent: 'center', 
+    alignItems: 'center', 
+    backgroundColor: COLORS.primary, 
+    paddingHorizontal: 30,
   },
   container: {
     flex:1,
@@ -167,23 +182,22 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
   },
   headerTitle: {
-    color:COLORS.white,
+    color: COLORS.white,
     fontWeight:'bold',
     fontSize: 25,
   },
-inputContainer : {
-  width: '80%',
-  height: 60,
-  
-},
-input : {
-  backgroundColor: 'white',
-  paddingHorizontal: 15,
-  paddingVertical: 6,
-  borderRadius: 10,
-  marginTop: 5,
-  marginBottom: 2,
-},
+  inputContainer : {
+    width: '80%',
+  },
+  input : {
+    backgroundColor: COLORS.secondary,
+    color: COLORS.white,
+    paddingHorizontal: 15,
+    paddingVertical: 6,
+    borderRadius: 10,
+    marginTop: 5,
+    marginBottom: 2,
+  },
 buttonContainer : {
   width: '60%',
   justifyContent: 'center',
@@ -191,7 +205,7 @@ buttonContainer : {
   marginTop: 40,
 },
 button : {
-  backgroundColor: '#0782F9',
+  backgroundColor: COLORS.white,
   width: '100%',
   padding: 15,
   borderRadius:15,
@@ -204,20 +218,26 @@ redButton : {
   borderRadius:15,
   alignItems: 'center'
 },
-buttonText:{
-  color: 'white',
+buttonText: {
+  color: COLORS.primary,
   fontWeight: '700',
   fontSize:16, 
 },
 buttonOutline : {
   backgroundColor: 'white',
-  marginTop:5,
+  marginTop: 5,
   borderColor: '#0782F9'
 },
 buttonOutlineText : {
   color: '#0782F9',
   fontWeight: '700',
-  fontSize:16, 
+  fontSize: 16, 
+},
+inputLabel: {
+  color: COLORS.white,
+  paddingHorizontal: 5,
+  paddingTop: 10,
+  fontSize: SIZES.medium
 },
 })
 export default UserAccount

@@ -22,7 +22,7 @@ const CustomTabBarButton = ({children, onPress}) => (
     }}
     onPress={onPress}>
 
-        {/* These are the settings to change to change the diary icon  */}
+        {/* These are the settings to change to change the check-in icon  */}
         <View
         style={{
             width:70,
@@ -33,7 +33,8 @@ const CustomTabBarButton = ({children, onPress}) => (
         }}>
             {children}
             
-            <Text style={{ color: '#748c94', fontSize: 12, position:'absolute', bottom:-18 }}>    Check in</Text>
+            {/* The "bottom" setting is what chooses where the "Check in" text goes vertically */}
+            <Text style={{ color: 'white', fontSize: 12, position:'absolute', bottom:10 }}>    Check in</Text>
         </View>
     </TouchableOpacity>
 )
@@ -47,12 +48,12 @@ const Tabs = () => {
             tabBarHideOnKeyboard: true,
             tabBarStyle: {
                 position: 'absolute',
-                bottom: 8,
-                left: 15,
-                right: 15,
+                bottom: 6,
+                left: 14,
+                right: 14,
                 backgroundColor: "#ffffff",
-                borderRadius:22,
-                height: 75,
+                borderRadius:30,
+                height: 65,
                 ...styles.shadow}}}>
 
             <Tab.Screen name="Home" component={Home} 
@@ -67,7 +68,8 @@ const Tabs = () => {
                         style={{
                             width:25,
                             height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94'}}/>
+                            tintColor: focused ? '#e32f45' : '#748c94',
+                            marginTop: -15}}/>
 
                         {/* This is what shows on the navbar */}
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
@@ -86,7 +88,8 @@ const Tabs = () => {
                     style={{ 
                         width: 25, 
                         height: 25, 
-                        tintColor: focused ? '#e32f45' : '#748c94' 
+                        tintColor: focused ? '#e32f45' : '#748c94' ,
+                        marginTop: -15
                     }} /> 
                     <Text style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12 }}> 
                     Journal 
@@ -98,21 +101,17 @@ const Tabs = () => {
 
             <Tab.Screen name="Checkin" component={Checkin}
                 options={{headerShown:false, tabBarIcon: ({focused}) => (
-                    
                 <Image source={require('../assets/icons/calendar.png')}
                     resizeMode="contain"
                     style={{
                         width:30,
                         height:30,
-                        tintColor:'#fff'}}/>),
+                        tintColor:'#fff',
+                    marginTop: -11}}/>),
                 tabBarButton: (props) => (
                     <CustomTabBarButton {...props}/>
                     
-                )
-            }}
-            
-            />
-            
+                )}}/>
 
             <Tab.Screen name="Library" component={Library}
             options={{
@@ -125,7 +124,8 @@ const Tabs = () => {
                         style={{
                             width:25,
                             height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94'
+                            tintColor: focused ? '#e32f45' : '#748c94',
+                            marginTop: -15
                         }}/>
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
                             Library
@@ -146,7 +146,8 @@ const Tabs = () => {
                         style={{
                             width:25,
                             height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94'
+                            tintColor: focused ? '#e32f45' : '#748c94',
+                            marginTop: -15
                         }}/>
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
                             Account
@@ -185,8 +186,8 @@ const styles = StyleSheet.create({
         width: 0,
         height: 10, 
     },
-    shadowOpacity: 0.45,
-    shadowRadius: 6.5,
+    shadowOpacity: 0.35,
+    shadowRadius: 4.5,
     elevation: 20
     }
 });

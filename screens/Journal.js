@@ -2,7 +2,7 @@ import { View, Text, StyleSheet,ScrollView, FlatList, TextInput,SafeAreaView, Ke
 import FocusedStatusBar from '../components/FocusedStatusBar';
 import React, {useState,useCallback,useEffect} from 'react';
 import { JournalSearch, JournalCard } from '../components';
-import Header from '../components/Header';
+import JournalHeader from '../components/JournalHeader';
 import { COLORS } from '../constants';
 import {firebase} from '../firebase.js';
 import { useNavigation } from "@react-navigation/native";
@@ -65,10 +65,10 @@ const Journal = () => {
   return (
 
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
-      <Header/>
+      <JournalHeader/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       <View style={styles.container}>
-        <Text style={styles.headerTitle}>   Add a Journal Entry</Text>
+        {/* <Text style={styles.headerTitle}>   Add a Journal Entry</Text> */}
           <TextInput
             style={styles.input}
             placeholder='Add your journal entry here!'
