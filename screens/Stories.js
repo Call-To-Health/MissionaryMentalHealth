@@ -3,6 +3,7 @@ import { View, SafeAreaView, FlatList } from "react-native";
 import { Card, HomeHeader,FocusedStatusBar } from "../components";
 import StoryHeader from "../components/StoryHeader";
 import { COLORS } from "../constants";
+import Tabs from "../navigation/tabs";
 import {fetchRandomDocs} from "../firebase";
 
 const Stories = () => {
@@ -53,6 +54,7 @@ const Stories = () => {
           <View style={{ height: 160, backgroundColor: COLORS.primary }} />
           <View style={{ flex: 1, backgroundColor: COLORS.white }} />
         </View>
+        <Tabs/>
       </View>
     </SafeAreaView>
   );
