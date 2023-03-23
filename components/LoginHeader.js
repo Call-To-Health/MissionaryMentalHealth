@@ -10,7 +10,7 @@ const LoginHeader = () => {
             <View style={{ marginRight: 10 }}>
                 <Pressable onPress={() => navigation.navigate("Home")}>
                 <Image
-                    source={assets.heartlogo}
+                    source={assets.logo}
                     resizeMode="contain"
                     style={{ width: 50, height: 50 }}
                 />
