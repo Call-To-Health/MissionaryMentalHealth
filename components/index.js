@@ -1,5 +1,8 @@
 import StoryHeader from "./StoryHeader";
 import HomeHeader from "./HomeHeader";
+import JournalHeader from "./JournalHeader";
+import CheckinHeader from "./CheckinHeader";
+import LibraryHeader from "./LibraryHeader";
 import Header from "./Header";
 import Card from "./Card";
 import { RectButton, CircleButton } from "./Button";
@@ -21,6 +24,7 @@ export {
   SubInfo,
   JournalSearch,
   People,
+  LibraryHeader,
   Header,
   JournalCard,
   JournalSubInfo,

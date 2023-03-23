@@ -122,7 +122,7 @@ const UserAccount = () => {
 
             <View style={styles.buttonContainer}>
               <TouchableOpacity onPress={handleLogin} style={styles.button}>
-                <Text style={styles.buttonText}>Login</Text>
+                <Text style={styles.buttonText}>Log In</Text>
               </TouchableOpacity>
 
             <View style={{ flexDirection: 'row', paddingVertical: 25, paddingHorizontal: 50 }}>

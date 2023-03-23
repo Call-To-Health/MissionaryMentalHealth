@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import React from 'react';
-import Header from '../components/Header';
+import CheckinHeader from '../components/CheckinHeader';
 import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS } from '../constants';
 import { Calendar } from 'react-native-calendars';
@@ -12,11 +12,11 @@ const Checkin = () => {
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
-      <Header/>
+      <CheckinHeader/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
         
-        <View style={{backgroundColor:COLORS.primary, height:120, paddingHorizontal:20}}>
-        <Text style={style.headerTitle}>Daily Check-in</Text>
+        <View style={{backgroundColor:COLORS.primary, height:40, paddingHorizontal:20}}>
+
         </View>
 
         <View>
