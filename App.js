@@ -8,7 +8,6 @@ import Tabs from './navigation/tabs';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
-import Modal from "./screens/Modal";
 import Home from "./screens/Home";
 import Journal from "./screens/Journal";
 import Stories from "./screens/Stories";
@@ -19,6 +18,7 @@ import TalksView from "./screens/TalksView";
 import TalkWebView from "./screens/TalkWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
+import DailyResults from "./screens/DailyResults";
 
 const Stack = createStackNavigator();
 
@@ -52,11 +52,6 @@ return (
           options={{headerShown: false}}
           name="UserAccount"
           component={UserAccount}
-        />
-        <Stack.Screen 
-          options={{headerShown: false}}
-          name="Modal"
-          component={Modal}
         />
         <Stack.Screen
           options={{headerShown: false}}
@@ -103,6 +98,11 @@ return (
           options={{headerShown: false}}
           name="Results"
           component={Results}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="DailyResults"
+          component={DailyResults}
         />
         <Stack.Screen
           options={{headerShown: false}}

@@ -20,25 +20,8 @@ const Checkin = () => {
         </View>
 
         <View>
-        <TouchableOpacity
-            style={{
-                backgroundColor: COLORS.white,
-                padding: SIZES.small,
-                borderRadius: SIZES.medium,
-                width: '60%',
-                alignSelf: 'center',
-                marginBottom: 35
-            }}
-            onPress={() => navigation.navigate("Survey")}
-        >
-            <Text
-                style={{
-                fontFamily: FONTS.semiBold,
-                fontSize: SIZES.medium,
-                color: COLORS.primary,
-                textAlign: "center",
-                }}
-            >
+        <TouchableOpacity style={style.surveyButton} onPress={() => navigation.navigate("Survey")}>
+            <Text style={style.buttonText}>
             Complete Today's Check-in
             </Text>
         </TouchableOpacity>
@@ -46,12 +29,9 @@ const Checkin = () => {
 
         <View>
         <Calendar 
-            style={{
-                marginHorizontal:20,
-                borderRadius: 5,
-            }}
+            style={style.calendar}
             onDayPress= {(day) => {
-                navigation.navigate("Modal", { selectedDate: day.dateString})
+                navigation.navigate("DailyResults", { selectedDate: day.dateString})
             }}
             />
         </View>
@@ -71,6 +51,24 @@ const style = StyleSheet.create ({
     color:COLORS.white,
     fontWeight:'bold',
     fontSize: 23,
+  },
+  surveyButton: {
+    backgroundColor: '#e32f45',
+    padding: SIZES.small,
+    borderRadius: SIZES.medium,
+    width: '60%',
+    alignSelf: 'center',
+    marginBottom: 35
+  },
+  buttonText:{
+    fontFamily: FONTS.semiBold,
+    fontSize: SIZES.medium,
+    color: COLORS.white,
+    textAlign: "center",
+  },
+  calendar: {
+    marginHorizontal:20,
+    borderRadius: 5,
   }
 });
 
