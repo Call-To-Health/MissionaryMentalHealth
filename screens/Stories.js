@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
 import { Card, HomeHeader,FocusedStatusBar } from "../components";
-import Header from "../components/Header";
+import StoryHeader from "../components/StoryHeader";
 import { COLORS } from "../constants";
 import {fetchRandomDocs} from "../firebase";
 
@@ -30,14 +30,13 @@ const Stories = () => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
       setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      console.log("Here is the content of randomDocs in the Home component" + randomDocs);
+      console.log("Here is the content of randomDocs in the Stories screen" + randomDocs);
     };
     getRandomDocs();
   }, []);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
-      <Header/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
       <View style={{ flex: 1 }}>
         <View style={{ zIndex: 0 }}>
@@ -46,7 +45,7 @@ const Stories = () => {
             renderItem={({item:doc}) => <Card doc={doc}/>}
             keyExtractor={(doc) => doc.id}
             showsVerticalScrollIndicator={true}
-            ListHeaderComponent={<HomeHeader onSearch={handleSearch} />}
+            ListHeaderComponent={<StoryHeader onSearch={handleSearch} />}
           />
         </View>
         <View

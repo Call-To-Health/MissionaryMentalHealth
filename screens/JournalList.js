@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
 import { JournalCard,JournalSearch,FocusedStatusBar } from "../components";
-import Header from '../components/Header';
+import Header from '../components/HomeHeader';
 import { COLORS } from "../constants";
 import {fetchJournals} from "../firebase";
 

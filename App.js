@@ -70,11 +70,6 @@ return (
         />
         <Stack.Screen
           options={{headerShown: false}}
-          name="Journal"
-          component={Journal}
-        />
-        <Stack.Screen
-          options={{headerShown: false}}
           name="Stories"
           component={Stories}
         />

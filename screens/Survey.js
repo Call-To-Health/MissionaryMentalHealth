@@ -19,7 +19,12 @@ const Survey = () => {
       });
 
     // highlight selected options
-    const [selectedOption, setSelectedOption] = useState(null, null);
+    const [selectedOptions, setSelectedOptions] = useState({
+        question1: null,
+        question2: null,
+        question3: null,
+        question4: null,
+    });
 
     // Handle user's answer selection
     const handleAnswerSelection = (question, answer) => {
@@ -27,8 +32,11 @@ const Survey = () => {
         ...prevAnswers,
         [question]: answer,
     }));
-    setSelectedOption(answer);
-    };
+    setSelectedOptions(prevSelectedOptions => ({
+        ...prevSelectedOptions,
+        [question]: answer,
+    }));
+};
 
     // Question 1 is reversed coded
     const Question1 = () => {
@@ -37,20 +45,20 @@ const Survey = () => {
             <View style={style.question}>
                 <Text style={style.questionText}>1. How often have you felt that you were unable to control the important things in your life?</Text>
                 <View style={style.optionGroup}>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '5')} style={style.option}>
-                        <Text style={selectedOption === '5' ? {fontWeight: 'bold'} : {}}>Never</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '5')} style={[style.option, selectedOptions.question1 === '5' && style.selectedOption]}>
+                        <Text style={style.optionText === '5' ? {fontWeight: 'bold'} : {}}>Never</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '4')} style={style.option}>
-                        <Text style={selectedOption === '4' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '4')} style={[style.option, selectedOptions.question1 === '4' && style.selectedOption]}>
+                        <Text style={style.optionText === '4' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '3')} style={style.option}>
-                        <Text style={selectedOption === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '3')} style={[style.option, selectedOptions.question1 === '3' && style.selectedOption]}>
+                        <Text style={style.optionText === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '2')} style={style.option}>
-                        <Text style={selectedOption === '2' ? {fontWeight: 'bold'} : {}}>Often</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '2')} style={[style.option, selectedOptions.question1 === '2' && style.selectedOption]}>
+                        <Text style={style.optionText === '2' ? {fontWeight: 'bold'} : {}}>Often</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '1')} style={style.option}>
-                        <Text style={selectedOption === '1' ? {fontWeight: 'bold'} : {}}>Always</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question1', '1')} style={[style.option, selectedOptions.question1 === '1' && style.selectedOption]}>
+                        <Text style={style.optionText === '1' ? {fontWeight: 'bold'} : {}}>Always</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -62,20 +70,20 @@ const Survey = () => {
             <View style={style.question}>
                 <Text style={style.questionText}>2. How often have you felt confident about your ability to handle your personal problems?</Text>
                 <View style={style.optionGroup}>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '1')} style={style.option}>
-                        <Text style={selectedOption === '1' ? {fontWeight: 'bold'} : {}}>Never</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '1')} style={[style.option, selectedOptions.question2 === '1' && style.selectedOption]}>
+                        <Text style={style.optionText === '1' ? {fontWeight: 'bold'} : {}}>Never</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '2')} style={style.option}>
-                        <Text style={selectedOption === '2' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '2')} style={[style.option, selectedOptions.question2 === '2' && style.selectedOption]}>
+                        <Text style={style.optionText === '2' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '3')} style={style.option}>
-                        <Text style={selectedOption === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '3')} style={[style.option, selectedOptions.question2 === '3' && style.selectedOption]}>
+                        <Text style={style.optionText === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '4')} style={style.option}>
-                        <Text style={selectedOption === '4' ? {fontWeight: 'bold'} : {}}>Often</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '4')} style={[style.option, selectedOptions.question2 === '4' && style.selectedOption]}>
+                        <Text style={style.optionText === '4' ? {fontWeight: 'bold'} : {}}>Often</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '5')} style={style.option}>
-                        <Text style={selectedOption === '5' ? {fontWeight: 'bold'} : {}}>Always</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question2', '5')} style={[style.option, selectedOptions.question2 === '5' && style.selectedOption]}>
+                        <Text style={style.optionText === '5' ? {fontWeight: 'bold'} : {}}>Always</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -87,20 +95,20 @@ const Survey = () => {
             <View style={style.question}>
                 <Text style={style.questionText}>3. How often have you felt that things were going your way?</Text>
                 <View style={style.optionGroup}>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '1')} style={style.option}>
-                        <Text style={selectedOption === '1' ? {fontWeight: 'bold'} : {}}>Never</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '1')} style={[style.option, selectedOptions.question3 === '1' && style.selectedOption]}>
+                        <Text style={style.optionText === '1' ? {fontWeight: 'bold'} : {}}>Never</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '2')} style={style.option}>
-                        <Text style={selectedOption === '2' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '2')} style={[style.option, selectedOptions.question3 === '2' && style.selectedOption]}>
+                        <Text style={style.optionText === '2' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '3')} style={style.option}>
-                        <Text style={selectedOption === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '3')} style={[style.option, selectedOptions.question3 === '3' && style.selectedOption]}>
+                        <Text style={style.optionText === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '4')} style={style.option}>
-                        <Text style={selectedOption === '4' ? {fontWeight: 'bold'} : {}}>Often</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '4')} style={[style.option, selectedOptions.question3 === '4' && style.selectedOption]}>
+                        <Text style={style.optionText === '4' ? {fontWeight: 'bold'} : {}}>Often</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '5')} style={style.option}>
-                        <Text style={selectedOption === '5' ? {fontWeight: 'bold'} : {}}>Always</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question3', '5')} style={[style.option, selectedOptions.question3 === '5' && style.selectedOption]}>
+                        <Text style={style.optionText === '5' ? {fontWeight: 'bold'} : {}}>Always</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -113,20 +121,20 @@ const Survey = () => {
             <View style={style.question}>
                 <Text style={style.questionText}>4. How often have you felt difficulties were piling up so high that you could not overcome them?</Text>
                 <View style={style.optionGroup}>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '5')} style={style.option}>
-                        <Text style={selectedOption === '5' ? {fontWeight: 'bold'} : {}}>Never</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '5')} style={[style.option, selectedOptions.question4 === '5' && style.selectedOption]}>
+                        <Text style={style.optionText === '5' ? {fontWeight: 'bold'} : {}}>Never</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '4')} style={style.option}>
-                        <Text style={selectedOption === '4' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '4')} style={[style.option, selectedOptions.question4 === '4' && style.selectedOption]}>
+                        <Text style={style.optionText === '4' ? {fontWeight: 'bold'} : {}}>Rarely</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '3')} style={style.option}>
-                        <Text style={selectedOption === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '3')} style={[style.option, selectedOptions.question4 === '3' && style.selectedOption]}>
+                        <Text style={style.optionText === '3' ? {fontWeight: 'bold'} : {}}>Sometimes</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '2')} style={style.option}>
-                        <Text style={selectedOption === '2' ? {fontWeight: 'bold'} : {}}>Often</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '2')} style={[style.option, selectedOptions.question4 === '2' && style.selectedOption]}>
+                        <Text style={style.optionText === '2' ? {fontWeight: 'bold'} : {}}>Often</Text>
                     </TouchableOpacity>
-                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '1')} style={style.option}>
-                        <Text style={selectedOption === '1' ? {fontWeight: 'bold'} : {}}>Always</Text>
+                    <TouchableOpacity onPress={() => handleAnswerSelection('question4', '1')} style={[style.option, selectedOptions.question4 === '1' && style.selectedOption]}>
+                        <Text style={style.optionText === '1' ? {fontWeight: 'bold'} : {}}>Always</Text>
                     </TouchableOpacity>
                 </View>
             </View>
@@ -192,6 +200,11 @@ const style = StyleSheet.create ({
       justifyContent: 'space-between',
       backgroundColor: COLORS.primary,
     },
+    selectedOption: {
+        backgroundColor: COLORS.lightgray,
+        borderRadius:SIZES.small,
+        fontWeight:'bold'
+      },
     headerTitle: {
       color:COLORS.white,
       fontWeight:'bold',
