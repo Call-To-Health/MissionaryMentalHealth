@@ -104,6 +104,11 @@ return (
           name="Results"
           component={Results}
         />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Journal"
+          component={Journal}
+        />
 
       </Stack.Navigator>
     </NavigationContainer>
