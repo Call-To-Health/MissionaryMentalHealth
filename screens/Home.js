@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { FocusedStatusBar } from '../components';
-import Header from '../components/HomeHeader';
+import HomeHeader from '../components/HomeHeader';
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
@@ -38,17 +38,15 @@ const Home = () => {
   }, []);
 
   const navigation = useNavigation();
+
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-  <Header />
+  <HomeHeader />
   <FocusedStatusBar
      translucent={false}
      backgroundColor={COLORS.primary}/>
 
   <View style={style.header}></View>
-    <View
-    style={{ backgroundColor: COLORS.primary, height: 45, paddingHorizontal: 20 }}>
-    </View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>

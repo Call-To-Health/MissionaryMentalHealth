@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput,Pressable, StyleSheet } from "react-native
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
-const HomeHeader = () => {
+const LibraryHeader = () => {
     const navigation = useNavigation();
     return (
         <View style={{height: 80,flexDirection: "row",justifyContent: "space-between",alignItems: "center",paddingHorizontal: SIZES.font}}>
@@ -12,7 +12,7 @@ const HomeHeader = () => {
             </Pressable>
             <View
     style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20 }}>
-    <Text style={style.headerTitle}>Welcome, Missionary! </Text></View>
+    <Text style={style.headerTitle}>Library </Text></View>
             <View style={{ width: 45, height: 45 }}>
                 <Pressable onPress={() => navigation.navigate("UserAccount")}>
                     <Image source={assets.person01} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, shadowRadius:5}}/>
@@ -38,4 +38,4 @@ const style = StyleSheet.create ({
       fontWeight:'bold',
       fontSize: 23},})
 
-export default HomeHeader;
+export default LibraryHeader;
