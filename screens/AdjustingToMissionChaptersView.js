@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity } from 'react-native';
+import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
 import { getAdjustingToMissionaryLifeData } from '../firebase.js'
 import Header from '../components/Header';
@@ -8,6 +8,7 @@ import { COLORS, SIZES } from '../constants';
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
+const screenWidth = Dimensions.get('screen').width
 
 const AdjustingToMissionChaptersView = () => {
     const [adjustToMLData, setData] = useState([]);
@@ -25,17 +26,12 @@ const AdjustingToMissionChaptersView = () => {
             <Header />
             <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
             <View style={style.header}>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-                <Ionicons name="chevron-back" size={32} color={COLORS.white} />
-            </TouchableOpacity>
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                    <Ionicons name="chevron-back" size={32} color={COLORS.white} />
+                </TouchableOpacity>
+                <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
             </View>
             <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
-                <View style={{backgroundColor: COLORS.primary, height: 80}}>
-                    <View style={{ marginLeft: 10, marginRight: 10}}>
-                        <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
-                    </View>
-                </View>
-                <Text style={style.sectionTitle}>Chapters</Text>
                 <View>
                     {adjustToMLData.map(chapter => (
                         <View key={chapter.chapter}>
@@ -55,15 +51,16 @@ const AdjustingToMissionChaptersView = () => {
 
 const style = StyleSheet.create ({
     header: {
-      paddingVertical:20,
-      flexDirection:'row',
-      justifyContent: 'space-between',
-      backgroundColor: COLORS.primary,
+        paddingVertical: 20,
+        paddingHorizontal: 10,
+        flexDirection: 'row',
+        alignItems: 'center',
+        backgroundColor: COLORS.primary,
     },
     headerTitle: {
-        color:COLORS.white,
-        fontWeight:'bold',
+        color: COLORS.white,
         fontSize: 23,
+        marginLeft: 10,
     },
     categoryContainer: {
         marginHorizontal: 20,
@@ -73,13 +70,15 @@ const style = StyleSheet.create ({
         flexWrap: 'wrap',
     },
     iconContainer: {
-        height: 60,
+        height: 70,
         backgroundColor: COLORS.lightgray,
         justifyContent: "center",
         alignItems: "center",
-        borderRadius: 10,
+        borderRadius: 20,
         elevation: 12,
         margin: 13,
+        padding: 15,
+        marginHorizontal: 40,
       },
       sectionTitle: {
         marginHorizontal: 20,

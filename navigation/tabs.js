@@ -1,13 +1,16 @@
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Home from '../screens/Home';
-import Chat from '../screens/Chat';
 import Library from '../screens/Library';
 import Journal from "../screens/Journal";
 import Checkin from '../screens/Checkin';
 import UserAccount from '../screens/UserAccount';
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
+import JournalList from "../screens/JournalList";
+import { createStackNavigator } from "@react-navigation/stack";
 
 const Tab = createBottomTabNavigator();
+
+const Stack = createStackNavigator();
 
 const CustomTabBarButton = ({children, onPress}) => (
     <TouchableOpacity
@@ -26,9 +29,11 @@ const CustomTabBarButton = ({children, onPress}) => (
             height:70,
             borderRadius:35,
             backgroundColor: '#e32f45',
-            elevation: 8
+            elevation: 7
         }}>
             {children}
+            
+            <Text style={{ color: '#748c94', fontSize: 12, position:'absolute', bottom:-18 }}>    Check in</Text>
         </View>
     </TouchableOpacity>
 )
@@ -71,64 +76,43 @@ const Tabs = () => {
                     </View>
                 ), }} />
 
-            {/* <Tab.Screen name="Chat" component={Chat}
-            options={{
-                headerShown:false,
-                tabBarIcon: ({focused}) => (
-                    <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
-                        <Image
-                        source={require('../assets/icons/chat.png')}
-                        resizeMode='contain'
-                        style={{
-                            width:25,
-                            height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94'
-                        }}/>
-                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                            Chat
-                            </Text>
-                    </View>
-                ),
+            <Tab.Screen name="JournalStack" component={JournalStack} options={{ 
+                headerShown: false, 
+                tabBarIcon: ({ focused }) => ( 
+                <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}> 
+                    <Image 
+                    source={require('../assets/icons/diary.png')} 
+                    resizeMode='contain' 
+                    style={{ 
+                        width: 25, 
+                        height: 25, 
+                        tintColor: focused ? '#e32f45' : '#748c94' 
+                    }} /> 
+                    <Text style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12 }}> 
+                    Journal 
+                    </Text> 
+                </View> 
+                ), 
             }} 
-            /> */}
+            />
 
             <Tab.Screen name="Checkin" component={Checkin}
-            options={{
-                headerShown:false,
-                tabBarIcon: ({focused}) => (
-                    <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
-                        <Image
-                        source={require('../assets/icons/calendar.png')}
-                        resizeMode='contain'
-                        style={{
-                            width:25,
-                            height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94'
-                        }}/>
-                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                            Check-in
-                            </Text>
-                    </View>
-                ),
-            }} />
-
-            <Tab.Screen name="Journal" component={Journal}
-            options={{
-                headerShown:false,
-                tabBarIcon: ({focused}) => (
-                <Image source={require('../assets/icons/diary.png')} resizeMode="contain"
+                options={{headerShown:false, tabBarIcon: ({focused}) => (
+                    
+                <Image source={require('../assets/icons/calendar.png')}
+                    resizeMode="contain"
                     style={{
                         width:30,
                         height:30,
-                        tintColor:'#fff'
-                }}
-                />
-                ),
+                        tintColor:'#fff'}}/>),
                 tabBarButton: (props) => (
                     <CustomTabBarButton {...props}/>
+                    
                 )
             }}
+            
             />
+            
 
             <Tab.Screen name="Library" component={Library}
             options={{
@@ -175,6 +159,24 @@ const Tabs = () => {
         
     )
 }
+
+function JournalStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Journal" 
+          component={Journal} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="JournalList" 
+          component={JournalList} 
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    );
+  }
+  
 
 const styles = StyleSheet.create({
     shadow: {

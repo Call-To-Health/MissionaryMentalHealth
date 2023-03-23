@@ -26,15 +26,16 @@ const db = firebase.firestore();
 const storiesCollection = db.collection('stories');
 const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
+const talksCollection = db.collection('Talks');
 
 let count = 0;
 
 // Make randomDocs which is a collection of 20 random stories.
 async function fetchRandomDocs() {
   count += 1;
-  console.log("fetchRandomDocs", count);
+  // console.log("fetchRandomDocs", count);
   const querySnapshot = await storiesCollection.orderBy(firebase.firestore.FieldPath.documentId()).get();
-  console.log(querySnapshot.size)
+  // console.log(querySnapshot.size)
   const randomIndices = [];
   while (randomIndices.length < Math.min(20, querySnapshot.size)) {
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);
@@ -42,27 +43,52 @@ async function fetchRandomDocs() {
       randomIndices.push(randomIndex);
     }
   }
+
   const randomDocs = randomIndices.map((randomIndex) => querySnapshot.docs[randomIndex]);
   randomDocs.forEach((doc) => {
-    console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+    // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
   });
-  console.log("Here is the content of RandomDocs :" + randomDocs);
+  // console.log("Here is the content of RandomDocs :" + randomDocs);
   return randomDocs;
 }
 
+const fetchJournals = async () => {
+  const snapshot = await journalsCollection.get();
+  const journalDocs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  return journalDocs;
+};
+
 async function getAdjustingToMissionaryLifeData() {
-  const snapshot = await db.collection('AdjustingToMissionaryLife').orderBy('chapter').get();
+  const snapshot = await adjustingToMissionaryLifeCollection.orderBy('chapter').get();
   const data = snapshot.docs.map(doc => doc.data());
   return data;
 }
 
-journalsCollection.get().then((querySnapshot) => {
-  querySnapshot.forEach((doc) => {
-    console.log(`${doc.id} => ${doc.data()}`);
+// journalsCollection.get().then((querySnapshot) => {
+//   querySnapshot.forEach((doc) => {
+//     console.log(`${doc.id} => ${doc.data()}`);
+//   });
+// });
+
+async function getTalksData() {
+  const talksRef = firebase.firestore().collection('Talks').orderBy('title');
+  const snapshot = await talksRef.get();
+
+  const talks = [];
+  snapshot.forEach((doc) => {
+    talks.push({ id: doc.id, ...doc.data() });
   });
-});
 
-export { firebase, journalsCollection, auth, db, fetchRandomDocs, getAdjustingToMissionaryLifeData};
-// Get a reference to the "journals" collection
-// Read data from the "journals" collection
+  return talks;
+}
 
+export { 
+  firebase, 
+  journalsCollection, 
+  auth, 
+  db, 
+  fetchRandomDocs, 
+  fetchJournals,
+  getAdjustingToMissionaryLifeData,
+  getTalksData,
+};

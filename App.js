@@ -9,9 +9,13 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
 import Home from "./screens/Home";
+import Journal from "./screens/Journal";
+import Stories from "./screens/Stories";
 import JournalList from "./screens/JournalList";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
+import TalksView from "./screens/TalksView";
+import TalkWebView from "./screens/TalkWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 import DailyResults from "./screens/DailyResults";
@@ -61,6 +65,11 @@ return (
         />
         <Stack.Screen
           options={{headerShown: false}}
+          name="Stories"
+          component={Stories}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
           name="AdjustingToMission"
           component={AdjustingToMission}
         />
@@ -69,6 +78,17 @@ return (
           name="AdjustingToMissionChaptersView"
           component={AdjustingToMissionChaptersView}
         />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="TalksView"
+          component={TalksView}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="TalkWebView"
+          component={TalkWebView}
+        />
+
         <Stack.Screen
           options={{headerShown: false}}
           name="Survey"
