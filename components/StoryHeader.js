@@ -8,32 +8,27 @@ const StoryHeader = ({ onSearch }) => {
 
   return (
     <View
-      style={{backgroundColor: COLORS.primary, padding: SIZES.font,justifyContent:'space-between',}}>
+      style={{backgroundColor: COLORS.primary, padding: SIZES.font,justifyContent:'space-between'}}>
       
-      <View style={{ marginVertical: SIZES.font }}>
-        <Text
+      <View style={{ flexDirection: 'row', justifyContent: 'space-between', alignItems: 'center', marginVertical: SIZES.font }}>
+        {/* <Text
           style={{fontFamily: FONTS.regular,fontSize: SIZES.small,color: COLORS.white,}}>
-          Hello, Missionary!  👋
-        </Text>
+          Hello, Missionary!
+        </Text> */}
 
-        <Text
-          style={{
-            fontFamily: FONTS.bold,
-            fontSize: SIZES.large,
-            color: COLORS.white,
-            marginTop: SIZES.base / 100,
-          }}
-        >
-          Search stories like yours!
-          <View style={{ width: 45, height: 45 }}>
-                <Pressable onPress={() => navigation.navigate("UserAccount")}>
-                    <Image source={assets.person01} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, shadowRadius:5}}/>
-                </Pressable>
-            </View>
-        </Text>
-        
+        <View style={{ flexDirection: 'row', alignItems: 'center'}}>
+          <Text style={{ fontFamily: FONTS.bold, fontSize: SIZES.large, color: COLORS.white }}>
+            Search stories like yours!         
+          </Text>
+
+          <View style={{ alignItems: 'center', justifyContent: 'flex-end',flex:1, flexDirection:'row' }}>
+            <Pressable onPress={() => navigation.navigate('UserAccount')}>
+              <Image source={assets.person01} resizeMode="contain" style={{width: 45,height: 45,borderRadius: 50,elevation: 10,shadowRadius: 5}}/>
+            </Pressable>
+          </View>
+
+        </View>
       </View>
-
       
 
       <View style={{ marginTop: SIZES.font }}>

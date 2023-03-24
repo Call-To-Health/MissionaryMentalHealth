@@ -32,7 +32,7 @@ const Home = () => {
     const getRandomDocs = async () => {
       const randomDocs = await fetchRandomDocs();
       setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-      console.log("Here is the content of randomDocs in the Home component" + randomDocs);
+      
     };
     getRandomDocs();
   }, []);
@@ -56,7 +56,7 @@ return (
         </View>
         <View style={style.body}>
           <Text style={style.instructionalText}>Write about how you're feeling today.</Text>
-        <TouchableOpacity onPress={() => navigation.navigate("Journal")} style={[style.button, style.primaryButton]}>
+          <TouchableOpacity onPress={() => navigation.navigate('JournalStack', { screen: 'Journal' })} style={[style.button, style.primaryButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Journal Entry</Text>
         </TouchableOpacity>
       </View>
