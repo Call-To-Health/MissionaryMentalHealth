@@ -1,6 +1,7 @@
 import React from "react";
 import { View, Text, Image, TextInput,Pressable, StyleSheet } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
+import tabs from "../navigation/tabs"
 import { useNavigation } from "@react-navigation/native";
 
 const JournalHeader = () => {
@@ -14,7 +15,7 @@ const JournalHeader = () => {
     style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20 }}>
     <Text style={style.headerTitle}>Add to Your Journal </Text></View>
             <View style={{ width: 45, height: 45 }}>
-                <Pressable onPress={() => navigation.navigate("UserAccount")}>
+                <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'Settings' })}>
                     <Image source={assets.person01} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, shadowRadius:5}}/>
                 </Pressable>
             </View>
