@@ -1,6 +1,7 @@
 import StoryHeader from "./StoryHeader";
 import HomeHeader from "./HomeHeader";
 import JournalHeader from "./JournalHeader";
+import JournalListHeader from "./JournalListHeader";
 import CheckinHeader from "./CheckinHeader";
 import LibraryHeader from "./LibraryHeader";
 import Header from "./Header";
@@ -22,6 +23,7 @@ export {
   Card,
   LoginHeader,
   SubInfo,
+  JournalListHeader,
   JournalSearch,
   People,
   LibraryHeader,

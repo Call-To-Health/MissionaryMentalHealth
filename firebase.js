@@ -24,6 +24,7 @@ const auth = firebase.auth()
 const db = firebase.firestore();
 
 const storiesCollection = db.collection('stories');
+const quoteCollection = db.collection('Quotes')
 const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
 const talksCollection = db.collection('Talks');
@@ -50,6 +51,27 @@ async function fetchRandomDocs() {
   });
   // console.log("Here is the content of RandomDocs :" + randomDocs);
   return randomDocs;
+}
+
+async function fetchRandomQuote() {
+  count += 1;
+  // console.log("fetchRandomQuote ", count);
+  const querySnapshot = await quoteCollection.orderBy(firebase.firestore.FieldPath.documentId()).get();
+  // console.log(querySnapshot.size)
+  const randomIndices = [];
+  while (randomIndices.length < Math.min(1, querySnapshot.size)) {
+    const randomIndex = Math.floor(Math.random() * querySnapshot.size);
+    if (!randomIndices.includes(randomIndex)) {
+      randomIndices.push(randomIndex);
+    }
+  }
+
+  const randomQuote = randomIndices.map((randomIndex) => querySnapshot.docs[randomIndex]);
+  randomQuote.forEach((doc) => {
+    // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
+  });
+  console.log("Here is the content of RandomQuote from firebase.js :" + randomQuote);
+  return randomQuote;
 }
 
 const fetchJournals = async () => {
@@ -88,6 +110,7 @@ export {
   auth, 
   db, 
   fetchRandomDocs, 
+  fetchRandomQuote,
   fetchJournals,
   getAdjustingToMissionaryLifeData,
   getTalksData,
