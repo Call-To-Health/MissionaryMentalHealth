@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput,Pressable } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
-const JournalSearch = ({ onSearch }) => {
+const LibrarySearch = ({ onSearch }) => {
 
   return (
     <View
@@ -11,7 +11,6 @@ const JournalSearch = ({ onSearch }) => {
       
       {/* <View style={{ marginVertical: SIZES.font }}>
       
-
         <Text
           style={{
             fontFamily: FONTS.bold,
@@ -20,7 +19,7 @@ const JournalSearch = ({ onSearch }) => {
             marginTop: SIZES.base / 100,
           }}
         >
-          Search below in your journal entries.
+          Search the Library
         </Text>
       </View> */}
 
@@ -42,7 +41,7 @@ const JournalSearch = ({ onSearch }) => {
             style={{ width: 20, height: 20, marginRight: SIZES.base }}
           />
           <TextInput
-            placeholder="Search your journal entries here..."
+            placeholder="Search the library here..."
             style={{ flex: 1 }}
             onChangeText={onSearch}
           />
@@ -52,4 +51,4 @@ const JournalSearch = ({ onSearch }) => {
   );
 };
 
-export default JournalSearch;
+export default LibrarySearch;

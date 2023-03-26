@@ -5,6 +5,7 @@ import HomeHeader from '../components/HomeHeader';
 import { useNavigation } from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
+import { fetchRandomQuote } from '../firebase';
 import { fetchRandomDocs } from '../firebase';
 // import Card from '../components';
 
@@ -16,6 +17,8 @@ const Home = () => {
     { id: 4, title: 'PLease stop scrolling because I aint got more ' },
   ];
 
+  const navigation = useNavigation();
+  const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
   const [randomDocs, setRandomDocs] = useState([]);
 
@@ -37,7 +40,14 @@ const Home = () => {
     getRandomDocs();
   }, []);
 
-  const navigation = useNavigation();
+  useEffect(() => {
+    const getRandomQuote = async () => {
+      const randomQuote = await fetchRandomQuote();
+      setRandomQuote(randomQuote.map((doc) => ({ id: doc.id, ...doc.data() })));
+      console.log("Here is the content of randomQuote in the Home component" + randomQuote);
+    };
+    getRandomQuote();
+  }, []);
 
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
@@ -60,6 +70,21 @@ return (
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Journal Entry</Text>
         </TouchableOpacity>
       </View>
+
+      <View style={style.cardContainerWrapper}>
+        <View style={style.cardContainer}>
+          <Text style={style.scrollTitle}>Quote of the Day</Text>
+          
+            <View style={style.quoteCard}>
+              {randomQuote.map(doc => (
+              <View key={doc.id}>
+                <Text>{doc.text}</Text>
+                <Text>  -{doc.speaker}</Text>
+            </View>))}
+            </View>
+        </View>
+      </View>
+
   <ScrollView contentContainerStyle={{ paddingBottom: 100 }}
     showsVerticalScrollIndicator={false}>
     <View style={style.cardContainerWrapper}>
@@ -74,6 +99,7 @@ return (
         </ScrollView>
       </View>
     </View>
+
     <View style={style.cardContainerWrapper}>
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recent Journal Entries</Text>
@@ -86,6 +112,7 @@ return (
         </ScrollView>
       </View>
     </View>
+
     <View style={style.cardContainerWrapper}>
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Other's experiences</Text>
@@ -128,7 +155,7 @@ const style = StyleSheet.create ({
   },
   instructionalText: {
     fontSize: SIZES.large,
-    paddingBottom: 20,
+    paddingBottom: 12,
     paddingTop: 5,
     fontWeight: "bold"
   },
@@ -160,8 +187,7 @@ const style = StyleSheet.create ({
   },
   cardContainer: {
     backgroundColor: COLORS.white,
-    marginVertical: 10,
-    paddingVertical: 10,
+    // paddingVertical: 10,
     paddingHorizontal:10,
     borderRadius: 20,
   },
@@ -172,6 +198,17 @@ const style = StyleSheet.create ({
     backgroundColor: COLORS.lightgray,
     elevation:10,
     width: 130,
+    height: 80,
+    borderRadius: 10,
+    marginHorizontal: 10,
+    marginVertical: 4,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  quoteCard: {
+    backgroundColor: COLORS.lightgray,
+    elevation:10,
+    width: 318,
     height: 80,
     borderRadius: 10,
     marginHorizontal: 10,

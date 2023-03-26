@@ -1,7 +1,7 @@
 import React, { useState, useEffect} from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
 import { JournalCard,JournalSearch,FocusedStatusBar } from "../components";
-import Header from '../components/HomeHeader';
+import JournalListHeader from '../components/JournalListHeader';
 import { COLORS } from "../constants";
 import {fetchJournals} from "../firebase";
 
@@ -26,7 +26,6 @@ const JournalList= () => {
     }
   };
   
-  
   useEffect(() => {
     const getJournals = async () => {
       const journalDocs = await fetchJournals();
@@ -38,7 +37,7 @@ const JournalList= () => {
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
-      <Header/>
+      <JournalListHeader/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary} />
       <View style={{ flex: 1 }}>
         <View style={{ zIndex: 0 }}>
