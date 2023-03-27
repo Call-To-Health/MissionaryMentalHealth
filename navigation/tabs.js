@@ -4,8 +4,11 @@ import Library from '../screens/Library';
 import Journal from "../screens/Journal";
 import Checkin from '../screens/Checkin';
 import UserAccount from '../screens/UserAccount';
+import UserAccountLoggedIn from "../screens/UserAccountLoggedIn";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import JournalList from "../screens/JournalList";
+import React, { useState, useEffect } from 'react';
+import { auth } from '../firebase';
 import { createStackNavigator } from "@react-navigation/stack";
 
 const Tab = createBottomTabNavigator();
@@ -40,8 +43,18 @@ const CustomTabBarButton = ({children, onPress}) => (
 )
 
 const Tabs = () => {
+    const [userEmail, setUserEmail] = useState(null);
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          if (user) {
+            setUserEmail(user.email);
+          } else {
+            setUserEmail(null);
+          }
+        });
+        return unsubscribe;
+      }, []);
     return(
-        
         <Tab.Navigator
         screenOptions = {{
             tabBarShowLabel:false,
@@ -133,8 +146,7 @@ const Tabs = () => {
                     </View>
                 ),
             }} />
-
-            <Tab.Screen name="Settings" component={UserAccount}
+            <Tab.Screen name="Settings" component={userEmail ? UserAccountLoggedIn : UserAccount}
             options={{
                 headerShown:false,
                 tabBarIcon: ({focused}) => (
@@ -144,14 +156,14 @@ const Tabs = () => {
                         resizeMode='contain'
                         
                         style={{
-                            width:25,
-                            height:25,
+                            width: 25,
+                            height: 25,
                             tintColor: focused ? '#e32f45' : '#748c94',
                             marginTop: -15
                         }}/>
                         <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
                             Account
-                            </Text>
+                        </Text>
                     </View>
                 ),
             }} />

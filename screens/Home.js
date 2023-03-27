@@ -7,6 +7,8 @@ import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
 import { fetchRandomQuote } from '../firebase';
 import { fetchRandomDocs } from '../firebase';
+import { auth } from '../firebase';
+
 // import Card from '../components';
 
 const Home = () => {
@@ -17,10 +19,22 @@ const Home = () => {
     { id: 4, title: 'PLease stop scrolling because I aint got more ' },
   ];
 
+  const [userEmail, setUserEmail] = useState(null);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
   const [randomDocs, setRandomDocs] = useState([]);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUserEmail(user.email);
+      } else {
+        setUserEmail(null);
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     const fetchAndSetJournals = async () => {
@@ -59,6 +73,7 @@ return (
   <View style={style.header}></View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
+        <Text>{userEmail}</Text>
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
