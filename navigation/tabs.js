@@ -1,6 +1,7 @@
 import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Home from '../screens/Home';
 import Library from '../screens/Library';
+import SearchResults from "../screens/SearchResults";
 import Journal from "../screens/Journal";
 import Checkin from '../screens/Checkin';
 import UserAccount from '../screens/UserAccount';
@@ -125,28 +126,7 @@ const Tabs = () => {
                     <CustomTabBarButton {...props}/>
                     
                 )}}/>
-
-            <Tab.Screen name="Library" component={Library}
-            options={{
-                headerShown:false,
-                tabBarIcon: ({focused}) => (
-                    <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
-                        <Image
-                        source={require('../assets/icons/library.png')}
-                        resizeMode='contain'
-                        style={{
-                            width:25,
-                            height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94',
-                            marginTop: -15
-                        }}/>
-                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                            Library
-                            </Text>
-                    </View>
-                ),
-            }} />
-            <Tab.Screen name="Settings" component={userEmail ? UserAccountLoggedIn : UserAccount}
+      <Tab.Screen name="Settings" component={userEmail ? UserAccountLoggedIn : UserAccount}
             options={{
                 headerShown:false,
                 tabBarIcon: ({focused}) => (
@@ -184,6 +164,23 @@ function JournalStack() {
         <Stack.Screen 
           name="JournalList" 
           component={JournalList} 
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+  function LibraryStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Library" 
+          component={Library} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="SearchResults" 
+          component={SearchResults} 
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

@@ -12,6 +12,7 @@ import Home from "./screens/Home";
 import Journal from "./screens/Journal";
 import Stories from "./screens/Stories";
 import JournalList from "./screens/JournalList";
+import SearchResults from "./screens/SearchResults";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
 import TalksView from "./screens/TalksView";
@@ -103,6 +104,11 @@ return (
           options={{headerShown: false}}
           name="DailyResults"
           component={DailyResults}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="SearchResults"
+          component={SearchResults}
         />
 
 
