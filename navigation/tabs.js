@@ -18,22 +18,21 @@ const Stack = createStackNavigator();
 
 const CustomTabBarButton = ({children, onPress}) => (
     <TouchableOpacity
-    style={{
-        top:-20,
-        justifyContent:'center',
-        alignItems:'center',
-        ...styles.shadow
+        style={{
+            top:-20,
+            justifyContent:'center',
+            alignItems:'center',
+            ...styles.shadow
     }}
     onPress={onPress}>
-
         {/* These are the settings to change to change the check-in icon  */}
         <View
-        style={{
-            width:70,
-            height:70,
-            borderRadius:35,
-            backgroundColor: '#e32f45',
-            elevation: 7
+            style={{
+                width:70,
+                height:70,
+                borderRadius:35,
+                backgroundColor: '#e32f45',
+                elevation: 7
         }}>
             {children}
             
@@ -90,7 +89,7 @@ const Tabs = () => {
                             Home
                             </Text>
                     </View>
-                ), }} />
+            ), }} />
 
             <Tab.Screen name="JournalStack" component={JournalStack} options={{ 
                 headerShown: false, 
@@ -125,27 +124,47 @@ const Tabs = () => {
                 tabBarButton: (props) => (
                     <CustomTabBarButton {...props}/>
                     
-                )}}/>
-      <Tab.Screen name="Settings" component={userEmail ? UserAccountLoggedIn : UserAccount}
-            options={{
-                headerShown:false,
-                tabBarIcon: ({focused}) => (
-                    <View style= {{alignItems: 'center', justifyContent: 'center',top:10}}>
-                        <Image
-                        source={require('../assets/icons/settings.png')}
-                        resizeMode='contain'
-                        
-                        style={{
-                            width: 25,
-                            height: 25,
-                            tintColor: focused ? '#e32f45' : '#748c94',
-                            marginTop: -15
-                        }}/>
-                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                            Account
-                        </Text>
-                    </View>
-                ),
+            )}}/>
+            <Tab.Screen name="LibraryStack" component={LibraryStack} options={{ 
+                headerShown: false, 
+                tabBarIcon: ({ focused }) => ( 
+                <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}> 
+                    <Image 
+                    source={require('../assets/icons/library.png')} 
+                    resizeMode='contain' 
+                    style={{ 
+                        width: 25, 
+                        height: 25, 
+                        tintColor: focused ? '#e32f45' : '#748c94' ,
+                        marginTop: -15
+                    }} /> 
+                    <Text style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12 }}> 
+                    Library
+                    </Text> 
+                </View> 
+                ), 
+            }} 
+            />
+            <Tab.Screen name="Settings" component={userEmail ? UserAccountLoggedIn : UserAccount}
+                options={{
+                    headerShown:false,
+                    tabBarIcon: ({focused}) => (
+                        <View style= {{alignItems: 'center', justifyContent: 'center',top:10}}>
+                            <Image
+                            source={require('../assets/icons/settings.png')}
+                            resizeMode='contain'
+                            
+                            style={{
+                                width: 25,
+                                height: 25,
+                                tintColor: focused ? '#e32f45' : '#748c94',
+                                marginTop: -15
+                            }}/>
+                            <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
+                                Account
+                            </Text>
+                        </View>
+                    ),
             }} />
 
         </Tab.Navigator>
