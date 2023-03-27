@@ -12,16 +12,12 @@ import LibrarySearch from '../components/LibrarySearch';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 import { assets } from '../constants';
-import { getAdjustingToMissionaryLifeData } from '../firebase';
-import { getTalksData } from '../firebase';
+
 
 const {width} = Dimensions.get('screen');
   
 const Library = () => {  
   const navigation = useNavigation();
-  const [combinedData, setCombinedData] = useState([]);
-  const [searchQuery, setSearchQuery] = useState("");
-  const [filteredJournalData, setFilteredJournalData] = useState([]);
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "TalksView"},
     {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "Stories"},
@@ -44,32 +40,6 @@ const Library = () => {
         ))}
       </View>
     );
-  };
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const talksData = await getTalksData();
-      const adjustingToMissionaryLifeData = await getAdjustingToMissionaryLifeData();
-      setCombinedData([...talksData, ...adjustingToMissionaryLifeData]);
-    };
-  
-    fetchData();
-  }, []);
-
-  const handleSearch = (value) => {
-    setSearchQuery(value);
-    if (value.length === 0) {
-      setFilteredLibraryData(combinedData);
-    } else {
-      const filteredLibraryData = combinedData.filter((doc) => {
-        const docValues = Object.values(doc);
-        return docValues.some((fieldValue) =>
-          String(fieldValue).toLowerCase().includes(value.toLowerCase())
-        );
-      });
-      setFilteredLibraryData(filteredLibraryData);
-      console.log("here is the filtered Library Data: " + JSON.stringify(filteredLibraryData));
-    }
   };
   
   return (

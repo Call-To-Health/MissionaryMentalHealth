@@ -12,16 +12,20 @@ import DetailsArticle from "./DetailsArticle";
 import FocusedStatusBar from "./FocusedStatusBar";
 import DetailsDesc from './DetailsDesc';
 import JournalCard from "./JournalCard";
+import SearchResultCard from "./SearchResultCard";
 import Separator from "./Separator";
 import LoginHeader from "./LoginHeader";
 import { JournalSubInfo, JPeople, JEndDate, JTags, JTitle } from "./JournalSubInfo";
+import { LibrarySubInfo} from "./LibrarySubInfo";
 import JournalSearch from "./JournalSearch";
 
 export {
   HomeHeader,
   StoryHeader,
+  LibrarySubInfo,
   Card,
   LoginHeader,
+  SearchResultCard,
   SubInfo,
   JournalListHeader,
   JournalSearch,
