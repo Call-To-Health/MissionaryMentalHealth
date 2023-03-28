@@ -1,6 +1,7 @@
 import StoryHeader from "./StoryHeader";
 import HomeHeader from "./HomeHeader";
 import JournalHeader from "./JournalHeader";
+import JournalListHeader from "./JournalListHeader";
 import CheckinHeader from "./CheckinHeader";
 import LibraryHeader from "./LibraryHeader";
 import Header from "./Header";
@@ -11,17 +12,22 @@ import DetailsArticle from "./DetailsArticle";
 import FocusedStatusBar from "./FocusedStatusBar";
 import DetailsDesc from './DetailsDesc';
 import JournalCard from "./JournalCard";
+import SearchResultCard from "./SearchResultCard";
 import Separator from "./Separator";
 import LoginHeader from "./LoginHeader";
 import { JournalSubInfo, JPeople, JEndDate, JTags, JTitle } from "./JournalSubInfo";
+import { LibrarySubInfo} from "./LibrarySubInfo";
 import JournalSearch from "./JournalSearch";
 
 export {
   HomeHeader,
   StoryHeader,
+  LibrarySubInfo,
   Card,
   LoginHeader,
+  SearchResultCard,
   SubInfo,
+  JournalListHeader,
   JournalSearch,
   People,
   LibraryHeader,

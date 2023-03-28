@@ -9,7 +9,7 @@ const JournalSearch = ({ onSearch }) => {
     <View
       style={{backgroundColor: COLORS.primary, padding: SIZES.font,}}>
       
-      <View style={{ marginVertical: SIZES.font }}>
+      {/* <View style={{ marginVertical: SIZES.font }}>
       
 
         <Text
@@ -22,7 +22,7 @@ const JournalSearch = ({ onSearch }) => {
         >
           Search below in your journal entries.
         </Text>
-      </View>
+      </View> */}
 
       <View style={{ marginTop: SIZES.font }}>
         <View
@@ -42,7 +42,7 @@ const JournalSearch = ({ onSearch }) => {
             style={{ width: 20, height: 20, marginRight: SIZES.base }}
           />
           <TextInput
-            placeholder="Search here..."
+            placeholder="Search your journal entries here..."
             style={{ flex: 1 }}
             onChangeText={onSearch}
           />

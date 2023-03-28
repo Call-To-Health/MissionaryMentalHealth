@@ -1,5 +1,5 @@
-import { SafeAreaView, View, StyleSheet, StatusBar,ScrollView, Text, Pressable, Dimensions, Image, TouchableOpacity } from 'react-native'
-import React from 'react';
+import { SafeAreaView, View, StyleSheet,StatusBar,ScrollView, Text, Pressable, Dimensions, Image, TouchableOpacity } from 'react-native'
+import React, {useState, useEffect} from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
@@ -8,9 +8,11 @@ import JournalList from './JournalList';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
 import LibraryHeader from '../components/LibraryHeader';
+import LibrarySearch from '../components/LibrarySearch';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 import { assets } from '../constants';
+
 
 const {width} = Dimensions.get('screen');
   
@@ -39,9 +41,11 @@ const Library = () => {
       </View>
     );
   };
+  
   return (
     <SafeAreaView style={{flex: 1,backgroundColor: COLORS.primary}}>
       <LibraryHeader/>
+      <LibrarySearch/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
         <View style={style.header}>
         </View>
