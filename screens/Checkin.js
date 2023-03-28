@@ -31,9 +31,9 @@ const Checkin = () => {
         <Calendar 
             style={style.calendar}
             onDayPress= {(day) => {
-                navigation.navigate("DailyResults", { selectedDate: day.dateString})
+                navigation.navigate("DayResult", { selectedDate: day.dateString})
             }}
-            />
+          />
         </View>
         
     </SafeAreaView>

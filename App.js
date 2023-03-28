@@ -19,7 +19,7 @@ import TalksView from "./screens/TalksView";
 import GeneralWebView from "./screens/GeneralWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
-import DailyResults from "./screens/DailyResults";
+import DayResult from "./screens/DayResult";
 
 const Stack = createStackNavigator();
 
@@ -102,15 +102,19 @@ return (
         />
         <Stack.Screen
           options={{headerShown: false}}
-          name="DailyResults"
-          component={DailyResults}
+          name="Journal"
+          component={Journal}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="DayResult"
+          component={DayResult}
         />
         <Stack.Screen
           options={{headerShown: false}}
           name="SearchResults"
           component={SearchResults}
         />
-
 
       </Stack.Navigator>
     </NavigationContainer>
