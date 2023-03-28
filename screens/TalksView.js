@@ -87,7 +87,6 @@ const TalksView = () => {
                 </View>
             </ScrollView>
         </SafeAreaView>
-        
     )
 };
 

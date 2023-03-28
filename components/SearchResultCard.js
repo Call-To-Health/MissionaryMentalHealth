@@ -1,6 +1,6 @@
 import React, {useState,useEffect} from "react";
 import { useNavigation } from "@react-navigation/native";
-import { View, Image, Text } from "react-native";
+import { View, Image, Pressable,Text } from "react-native";
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
 import { LibrarySubInfo, TaggedItems, Title } from "./LibrarySubInfo";
 import { RectButton, CircleButton } from "./Button";
@@ -15,6 +15,7 @@ const SearchResultCard = ({ doc }) => {
   const createdAt = doc?.createdAt?.toDate()?.toLocaleString().substring(0, 16);
 
   return (
+    <Pressable onPress={() => navigation.navigate('GeneralWebView', {url: doc.url, title: doc.title})}>
     <View
       key={doc?.id}
       style={{
@@ -64,6 +65,7 @@ const SearchResultCard = ({ doc }) => {
         </View>
       </View>
     </View>
+    </Pressable>
   );
 };
 
