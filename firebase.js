@@ -28,6 +28,7 @@ const quoteCollection = db.collection('Quotes')
 const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
 const talksCollection = db.collection('Talks');
+const recentViewsCollection = db.collection('recentViews');
 
 let count = 0;
 
@@ -82,9 +83,52 @@ const fetchJournals = async () => {
 
 async function getAdjustingToMissionaryLifeData() {
   const snapshot = await adjustingToMissionaryLifeCollection.orderBy('chapter').get();
-  const data = snapshot.docs.map(doc => doc.data());
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   return data;
 }
+
+const addRecentView = async (uid, docId, type) => {
+  const recentViewsRef = recentViewsCollection.doc(uid);
+  const viewsQuerySnapshot = await recentViewsRef.collection('views').where('docId', '==', docId).get();
+  if (viewsQuerySnapshot.empty) {
+    // docId doesn't exist in views collection, create new document
+    const newDocRef = recentViewsRef.collection('views').doc();
+    await newDocRef.set({
+      docId: docId,
+      type: type,
+      viewedAt: firebase.firestore.Timestamp.now()
+    });
+  } else {
+    // docId exists in views collection, update timestamp
+    const docRef = viewsQuerySnapshot.docs[0].ref;
+    await docRef.set({ viewedAt: firebase.firestore.Timestamp.now() }, { merge: true });
+  }
+};
+
+
+const getTopViewed = async (uid) => {
+  const recentViewsRef = recentViewsCollection.doc(uid);
+  const recentViewsSnapshot = await recentViewsRef.collection('views').orderBy('viewedAt', 'desc').limit(5).get();
+  const topViewed = [];
+  const docPromises = [];
+  recentViewsSnapshot.forEach((doc) => {
+    const data = doc.data();
+    if (data.type == 'Talks') {
+      docPromises.push(talksCollection.doc(data.docId).get());
+    } else if (data.type == 'AdjustingToMissionaryLife') {
+      docPromises.push(adjustingToMissionaryLifeCollection.doc(data.docId).get());
+    }
+    topViewed.push({
+      id: doc.id,
+      ...data
+    });
+  });
+  const talkSnapshots = await Promise.all(docPromises);
+  talkSnapshots.forEach((snapshot, index) => {
+    topViewed[index].talk = snapshot.data();
+  });
+  return topViewed;
+};
 
 // journalsCollection.get().then((querySnapshot) => {
 //   querySnapshot.forEach((doc) => {
@@ -114,4 +158,6 @@ export {
   fetchJournals,
   getAdjustingToMissionaryLifeData,
   getTalksData,
+  addRecentView,
+  getTopViewed
 };

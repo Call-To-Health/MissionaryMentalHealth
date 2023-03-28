@@ -5,9 +5,8 @@ import HomeHeader from '../components/HomeHeader';
 import { useNavigation} from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
-import { fetchRandomQuote } from '../firebase';
-import { fetchRandomDocs } from '../firebase';
-import { auth } from '../firebase';
+import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView } from '../firebase';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 // import Card from '../components';
 
@@ -19,7 +18,8 @@ const Home = () => {
     { id: 4, title: 'PLease stop scrolling because I aint got more ' },
   ];
 
-  const [userEmail, setUserEmail] = useState(null);
+  const [user, setUser] = useState(null);
+  const [topViewed, setTopViewed] = useState([]);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
@@ -28,9 +28,9 @@ const Home = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUserEmail(user.email);
+        setUser(user);
       } else {
-        setUserEmail(null);
+        setUser(null);
       }
     });
     return unsubscribe;
@@ -63,6 +63,15 @@ const Home = () => {
     getRandomQuote();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      getTopViewed(user.uid).then((topViewed) => {
+        setTopViewed(topViewed);
+      });
+    }
+  }, [user]);
+  
+
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
   <HomeHeader />
@@ -73,7 +82,7 @@ return (
   <View style={style.header}></View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
-        <Text>{userEmail}</Text>
+        {user ? <Text>{user.email}</Text> : null}
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
@@ -102,14 +111,21 @@ return (
 
   <ScrollView contentContainerStyle={{ paddingBottom: 100 }}
     showsVerticalScrollIndicator={false}>
+
     <View style={style.cardContainerWrapper}>
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recently viewed</Text>
+
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {recentlyViewed.map(item => (
-            <View key={item.id} style={style.card}>
-              <Text>{item.title}</Text>
-            </View>
+          {topViewed.map((topViewed) => (
+            <Pressable onPress={() => {
+                addRecentView(user.uid, topViewed.docId, topViewed.talk.type);
+                navigation.navigate('GeneralWebView', {url: topViewed.talk.url, title: topViewed.talk.title});
+            }}>
+              <View key={topViewed.docId} style={style.card}>
+                <Text numberOfLines={2} ellipsizeMode='tail'>{topViewed.talk.title}</Text>
+              </View>
+              </Pressable>
           ))}
         </ScrollView>
       </View>
@@ -121,7 +137,7 @@ return (
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {journals.map(journal => (
             <View key={journal.id} style={style.card}>
-              <Text>{journal.journalEntry}</Text>
+              <Text numberOfLines={2} ellipsizeMode='tail'>{journal.journalEntry}</Text>
             </View>
           ))}
         </ScrollView>
@@ -215,6 +231,7 @@ const style = StyleSheet.create ({
     width: 130,
     height: 80,
     borderRadius: 10,
+    padding: 6,
     marginHorizontal: 10,
     marginVertical: 4,
     justifyContent: 'center',
