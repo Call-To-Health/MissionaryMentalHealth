@@ -2,6 +2,8 @@ import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Home from '../screens/Home';
 import Library from '../screens/Library';
 import SearchResults from "../screens/SearchResults";
+import Stories from "../screens/Stories";
+import TalksView from "../screens/TalksView";
 import Journal from "../screens/Journal";
 import Checkin from '../screens/Checkin';
 import UserAccount from '../screens/UserAccount';
@@ -202,9 +204,30 @@ function JournalStack() {
           component={SearchResults} 
           options={{ headerShown: false }}
         />
+
+        <Stack.Screen 
+          name="JournalList" 
+          component={JournalList} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="Stories" 
+          component={Stories} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="TalksView" 
+          component={TalksView} 
+          options={{ headerShown: false }}
+        />
+
       </Stack.Navigator>
+
+
     );
   }
+
+  
   
 
 const styles = StyleSheet.create({

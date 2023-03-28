@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from "react";
-import { View, Text, Image, TextInput,StyleSheet,TouchableOpacity, Pressable } from "react-native";
+import { View, Text, Image, TextInput,StyleSheet,TouchableOpacity, Pressable, Alert } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 import { getAdjustingToMissionaryLifeData } from '../firebase';
@@ -14,11 +14,7 @@ const LibrarySearch = ({ onSearch }) => {
   const navigation = useNavigation();
 
   const handleSearch = (value) => {
-    navigation.navigate('SearchResults', { filteredData: filteredLibraryData, combinedData });
-    setSearchQuery(value);
-    if (value.length === 0) {
-      setFilteredLibraryData(combinedData);
-    } else {
+    
       const filteredLibraryData = combinedData.filter((doc) => {
         const docValues = Object.values(doc);
         return docValues.some((fieldValue) =>
@@ -26,9 +22,22 @@ const LibrarySearch = ({ onSearch }) => {
         );
       });
       setFilteredLibraryData(filteredLibraryData);
-      console.log("here is the filtered Library Data: " + JSON.stringify(filteredLibraryData));
+    
+    const filteredDataLength = filteredLibraryData.length;
+    if (filteredDataLength === 0) {
+      Alert.alert(
+        "No Results Found",
+        "Please try a different search term."
+      );
+    } else {
+      navigation.navigate("SearchResults", {
+        searchQuery: value,
+        combinedData,
+      });
     }
   };
+  
+  
 
   useEffect(() => {
     const fetchData = async () => {

@@ -6,7 +6,22 @@ import SearchResultsHeader from '../components/SearchResultsHeader';
 import { COLORS, SIZES } from '../constants';
 
 const SearchResults = ({ route }) => {
-  const { filteredData, combinedData } = route.params;
+  const { searchQuery, combinedData } = route.params;
+  const [filteredData, setFilteredData] = useState([]);
+
+  useEffect(() => {
+    if (searchQuery.length === 0) {
+      setFilteredData(combinedData);
+    } else {
+      const filteredData = combinedData.filter((doc) => {
+        const docValues = Object.values(doc);
+        return docValues.some((fieldValue) =>
+          String(fieldValue).toLowerCase().includes(searchQuery.toLowerCase())
+        );
+      });
+      setFilteredData(filteredData);
+    }
+  }, [combinedData, searchQuery]);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>
@@ -17,7 +32,7 @@ const SearchResults = ({ route }) => {
         <FlatList
             data={filteredData.length > 0 ? filteredData : combinedData}
             renderItem={({ item:doc }) => <SearchResultCard doc={doc} />}
-            keyExtractor={(doc) => doc.id}
+            keyExtractor={(doc, index) => doc.id + index.toString()}
             showsVerticalScrollIndicator={true}
             // ListHeaderComponent={<LibrarySearch onSearch={handleSearch} />}
             />
