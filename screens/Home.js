@@ -182,12 +182,15 @@ const style = StyleSheet.create ({
   },
   redButton: {
     backgroundColor: COLORS.red,
+    elevation:12
   },
   whiteButton: {
     backgroundColor: COLORS.white,
+    elevation:12
   },
   primaryButton: {
     backgroundColor: COLORS.primary,
+    elevation:12
   },
   buttonText: {
     fontSize: 16,
@@ -209,23 +212,23 @@ const style = StyleSheet.create ({
   },
   card: {
     backgroundColor: COLORS.lightgray,
-    elevation:10,
+    elevation:5,
     width: 130,
     height: 80,
     borderRadius: 10,
     marginHorizontal: 10,
-    marginVertical: 4,
+    marginVertical: 9,
     justifyContent: 'center',
     alignItems: 'center',
   },
   quoteCard: {
     backgroundColor: COLORS.lightgray,
-    elevation:10,
+    elevation:5,
     width: 318,
-    height: 80,
+    height: 120,
     borderRadius: 10,
     marginHorizontal: 10,
-    marginVertical: 4,
+    marginVertical: 9,
     justifyContent: 'center',
     alignItems: 'center',
   },})
