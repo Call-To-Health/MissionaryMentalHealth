@@ -11,7 +11,7 @@ const HomeHeader = () => {
                 <Image source={assets.logo} resizeMode="contain" style={{ width: 50, height: 50 }}/>
             </Pressable>
             <View
-    style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20 }}>
+    style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 0}}>
     <Text style={style.headerTitle}>Welcome, Missionary! </Text></View>
             <View style={{ width: 45, height: 45 }}>
                 <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'Settings' })}>

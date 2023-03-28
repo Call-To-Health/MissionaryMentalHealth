@@ -9,8 +9,6 @@ import { fetchRandomQuote } from '../firebase';
 import { fetchRandomDocs } from '../firebase';
 import { auth } from '../firebase';
 
-// import Card from '../components';
-
 const Home = () => {
   const recentlyViewed = [
     { id: 1, title: 'Adjusting to Missionary Life' },
