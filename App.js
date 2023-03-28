@@ -16,7 +16,7 @@ import SearchResults from "./screens/SearchResults";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
 import TalksView from "./screens/TalksView";
-import TalkWebView from "./screens/TalkWebView";
+import GeneralWebView from "./screens/GeneralWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 import DailyResults from "./screens/DailyResults";
@@ -86,8 +86,8 @@ return (
         />
         <Stack.Screen
           options={{headerShown: false}}
-          name="TalkWebView"
-          component={TalkWebView}
+          name="GeneralWebView"
+          component={GeneralWebView}
         />
 
         <Stack.Screen
