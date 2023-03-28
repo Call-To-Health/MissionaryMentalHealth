@@ -4,7 +4,7 @@ import { WebpageView } from "../components/WebpageView";
 import { useRoute } from '@react-navigation/native';
 
 
-const TalkWebView = () => {
+const GeneralWebView = () => {
     const route = useRoute();
     const { url, title } = route.params;
     return (
@@ -18,4 +18,4 @@ const TalkWebView = () => {
     )
 };
 
-export default TalkWebView;
+export default GeneralWebView;

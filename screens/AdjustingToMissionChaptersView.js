@@ -35,7 +35,7 @@ const AdjustingToMissionChaptersView = () => {
                 <View>
                     {adjustToMLData.map(chapter => (
                         <View key={chapter.chapter}>
-                        <Pressable onPress={() => navigation.navigate('AdjustingToMission', {url: chapter.url, title: chapter.title})}> 
+                        <Pressable onPress={() => navigation.navigate('GeneralWebView', {url: chapter.url, title: chapter.title})}> 
                             <View style={style.iconContainer}>
                                 <Text>{chapter.chapter}. {chapter.title}</Text>
                             </View>
