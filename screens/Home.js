@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
 import { FocusedStatusBar } from '../components';
 import HomeHeader from '../components/HomeHeader';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation, useRoute } from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
 import { fetchRandomDocs } from '../firebase';

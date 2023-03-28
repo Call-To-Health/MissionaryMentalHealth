@@ -1,4 +1,4 @@
-import { View, Text, StyleSheet, TouchableOpacity, Image, useColorScheme } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, Image, useColorScheme } from 'react-native';
 import {FocusedStatusBar} from "../components";
 import React from 'react';
 import Header from '../components/Header';
@@ -108,7 +108,7 @@ const Results = ({ route }) => {
 
         <View style={style.container}>
             <View style={style.body}>
-              <Text style={{marginTop: -50, margin: 20}}>
+              <Text style={{marginTop: -50, margin: 20, textAlign:'center'}}>
                 <Text style={style.titleText}>You are in the </Text>
                 <Text style={style.zoneText(zone)}>{zone}</Text>
                 <Text style={style.titleText}> zone</Text>
@@ -198,12 +198,6 @@ const style = StyleSheet.create ({
   },
   body: {
     flex:1,
-  },
-  image: {
-    flex: 1,
-    resizeMode: 'contain',
-    alignSelf: 'center',
-
   },
   imgView: {
     flex: 1,
