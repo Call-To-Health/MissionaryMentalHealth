@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView, Pressable } from 'react-native';
 import { FocusedStatusBar } from '../components';
 import HomeHeader from '../components/HomeHeader';
 import { useNavigation} from "@react-navigation/native";
@@ -22,6 +22,11 @@ const Home = () => {
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
   const [randomDocs, setRandomDocs] = useState([]);
+
+  const handleStoryPress = (story) => {
+    navigation.navigate('Details', { story: story });
+    console.log(`Story id ${story.id} clicked. ${story.experience}` );
+  };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -131,9 +136,13 @@ return (
         <Text style={style.scrollTitle}>Other's experiences</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {randomDocs.map(doc => (
+            <Pressable
+            key={doc.id}
+            onPress={() => handleStoryPress(doc)}>
             <View key={doc.id} style={style.card}>
               <Text>{doc.solution}</Text>
             </View>
+            </Pressable>
           ))}
         </ScrollView>
       </View>
