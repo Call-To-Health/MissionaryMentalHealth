@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView } from 'react-native';
+import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView, Pressable } from 'react-native';
 import { FocusedStatusBar } from '../components';
 import HomeHeader from '../components/HomeHeader';
 import { useNavigation} from "@react-navigation/native";
@@ -8,8 +8,6 @@ import { fetchJournals } from '../firebase';
 import { fetchRandomQuote } from '../firebase';
 import { fetchRandomDocs } from '../firebase';
 import { auth } from '../firebase';
-
-// import Card from '../components';
 
 const Home = () => {
   const recentlyViewed = [
@@ -24,6 +22,11 @@ const Home = () => {
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
   const [randomDocs, setRandomDocs] = useState([]);
+
+  const handleStoryPress = (story) => {
+    navigation.navigate('Details', { story: story });
+    console.log(`Story id ${story.id} clicked. ${story.experience}` );
+  };
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
@@ -133,9 +136,13 @@ return (
         <Text style={style.scrollTitle}>Other's experiences</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {randomDocs.map(doc => (
+            <Pressable
+            key={doc.id}
+            onPress={() => handleStoryPress(doc)}>
             <View key={doc.id} style={style.card}>
               <Text>{doc.solution}</Text>
             </View>
+            </Pressable>
           ))}
         </ScrollView>
       </View>
@@ -184,12 +191,15 @@ const style = StyleSheet.create ({
   },
   redButton: {
     backgroundColor: COLORS.red,
+    elevation:12
   },
   whiteButton: {
     backgroundColor: COLORS.white,
+    elevation:12
   },
   primaryButton: {
     backgroundColor: COLORS.primary,
+    elevation:12
   },
   buttonText: {
     fontSize: 16,
@@ -211,23 +221,23 @@ const style = StyleSheet.create ({
   },
   card: {
     backgroundColor: COLORS.lightgray,
-    elevation:10,
+    elevation:5,
     width: 130,
     height: 80,
     borderRadius: 10,
     marginHorizontal: 10,
-    marginVertical: 4,
+    marginVertical: 9,
     justifyContent: 'center',
     alignItems: 'center',
   },
   quoteCard: {
     backgroundColor: COLORS.lightgray,
-    elevation:10,
+    elevation:5,
     width: 318,
-    height: 80,
+    height: 120,
     borderRadius: 10,
     marginHorizontal: 10,
-    marginVertical: 4,
+    marginVertical: 9,
     justifyContent: 'center',
     alignItems: 'center',
   },})

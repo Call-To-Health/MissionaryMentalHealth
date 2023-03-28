@@ -5,7 +5,7 @@ import JournalListHeader from "./JournalListHeader";
 import CheckinHeader from "./CheckinHeader";
 import LibraryHeader from "./LibraryHeader";
 import Header from "./Header";
-import Card from "./Card";
+import StoryCard from "./StoryCard";
 import { RectButton, CircleButton } from "./Button";
 import { SubInfo, People, EndDate, Tags, Title } from "./SubInfo";
 import DetailsArticle from "./DetailsArticle";
@@ -23,7 +23,7 @@ export {
   HomeHeader,
   StoryHeader,
   LibrarySubInfo,
-  Card,
+  StoryCard,
   LoginHeader,
   SearchResultCard,
   SubInfo,

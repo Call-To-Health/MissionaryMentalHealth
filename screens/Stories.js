@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { View, SafeAreaView, FlatList } from "react-native";
-import { Card, HomeHeader,FocusedStatusBar } from "../components";
+import { StoryCard, HomeHeader,FocusedStatusBar } from "../components";
 import StoryHeader from "../components/StoryHeader";
 import { COLORS } from "../constants";
 import {fetchRandomDocs} from "../firebase";
@@ -42,7 +42,7 @@ const Stories = () => {
         <View style={{ zIndex: 0 }}>
         <FlatList
             data={searchQuery.length === 0 ? randomDocs : filteredData}
-            renderItem={({item:doc}) => <Card doc={doc}/>}
+            renderItem={({item:doc}) => <StoryCard doc={doc}/>}
             keyExtractor={(doc) => doc.id}
             showsVerticalScrollIndicator={true}
             ListHeaderComponent={<StoryHeader onSearch={handleSearch} />}

@@ -6,7 +6,7 @@ import { CircleButton } from "./Button";
 import { COLORS, SIZES, SHADOWS, assets } from "../constants";
 // import { fetchRandomDocs } from "../firebase";
 
-const Card = ({doc}) => {
+const StoryCard = ({doc}) => {
   const navigation = useNavigation();
 
   const handlePress = (story) => {
@@ -85,4 +85,4 @@ const Card = ({doc}) => {
   );
 };
 
-export default Card;
+export default StoryCard;
