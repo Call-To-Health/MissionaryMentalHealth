@@ -118,11 +118,11 @@ return (
 
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
           {topViewed.map((topViewed) => (
-            <Pressable onPress={() => {
-                addRecentView(user.uid, topViewed.docId, topViewed.talk.type);
+            <Pressable key={topViewed.id} onPress={() => {
+                addRecentView(user.uid, topViewed.docId, topViewed.type);
                 navigation.navigate('GeneralWebView', {url: topViewed.talk.url, title: topViewed.talk.title});
             }}>
-              <View key={topViewed.docId} style={style.card}>
+              <View key={topViewed.id} style={style.card}>
                 <Text numberOfLines={2} ellipsizeMode='tail'>{topViewed.talk.title}</Text>
               </View>
               </Pressable>
