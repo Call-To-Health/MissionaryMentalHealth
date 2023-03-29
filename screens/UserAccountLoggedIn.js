@@ -4,6 +4,7 @@ import LoginHeader from '../components/LoginHeader';
 import React, { useState, useEffect } from 'react';
 import { COLORS, FONTS, SIZES, assets} from '../constants';
 import { TextInput } from 'react-native-gesture-handler';
+import { Separator } from '../components';
 import { auth } from '../firebase';
 import { useNavigation } from '@react-navigation/native';
 import * as WebBrowser from 'expo-web-browser';
@@ -20,10 +21,6 @@ const UserAccountLoggedIn = () => {
 
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
-  const [email, setEmail] = useState('')
-  const [password, setPassword] = useState('')
-  const navigation = useNavigation()
-
   const [request, response, promptAsync] = Google.useAuthRequest({
     clientId: "733294962332-vlsshtk13q21uc5hosvd6l4pmk8nivs4.apps.googleusercontent.com",
     iosClientId: "733294962332-497egn0ig9480umhto7rvtplh8boc6du.apps.googleusercontent.com",
@@ -44,17 +41,39 @@ const UserAccountLoggedIn = () => {
     })
     .catch(error => alert(error.message))
   }
+  const [email, setEmail] = useState('')
+  const [password, setPassword] = useState('')
 
+  const navigation = useNavigation()
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.navigate("Home");
-        setUser(user);
+        navigation.navigate("Home")
       }
     })
     return unsubscribe
-  }, []);
+  }, [])
+
+  const handleSignUp = () => {
+    auth 
+    .createUserWithEmailAndPassword(email,password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log(user.email); 
+    })
+    .catch(error=> alert(error.message))
+  }
+
+  const handleLogin = () => {
+    auth
+    .signInWithEmailAndPassword(email,password)
+    .then(userCredentials => {
+      const user = userCredentials.user;
+      console.log('Logged in with: ', user.email);
+    })
+    .catch(error=> alert(error.message))
+  }
 
   async function fetchUserInfo() {
     let response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
@@ -62,7 +81,7 @@ const UserAccountLoggedIn = () => {
         Authorization: 'Bearer ${accessToken}' }});
     const useInfo = await response.json();
     setUser(useInfo);
-  };
+  }
 
   const ShowUserInfo = ()  => {
     if(user) {

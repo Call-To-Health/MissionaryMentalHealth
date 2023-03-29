@@ -1,36 +1,23 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
-import { getTalksData, addRecentView } from '../firebase.js'
+import { getTalksData } from '../firebase.js'
 import { FocusedStatusBar } from "../components";
 import Header from "../components/Header";
 import TagButton from "../components/TagButton";
 import { COLORS, SIZES } from '../constants';
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
-import { auth } from '../firebase';
+
 
 const screenWidth = Dimensions.get('screen').width
 
 
 const TalksView = () => {
-    const [userId, setUserId] = useState(null);
     const [talksData, setData] = useState([]);
     const [selectedTags, setSelectedTags] = useState([]);
     const navigation = useNavigation();
 
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-          if (user) {
-            setUserId(user.uid);
-          } else {
-            setUserId(null);
-          }
-        });
-        return unsubscribe;
-      }, []);
-
-      
     useEffect(() => {
       const fetchData = async () => {
         const result = await getTalksData();
@@ -90,10 +77,7 @@ const TalksView = () => {
                     return selectedTags.every((tag) => tags.includes(tag));
                 }).map(talk => (
                     <View key={talk.id}>
-                        <Pressable onPress={() => {
-                            addRecentView(userId, talk.id, 'Talks');
-                            navigation.navigate('GeneralWebView', {url: talk.url, title: talk.title});
-                        }}>
+                        <Pressable onPress={() => navigation.navigate('GeneralWebView', {url: talk.url, title: talk.title})}> 
                                 <View style={style.iconContainer}>
                                     <Text>{talk.title}</Text>
                                 </View>

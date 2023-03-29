@@ -13,6 +13,7 @@ import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 import { assets } from '../constants';
 
+
 const {width} = Dimensions.get('screen');
   
 const Library = () => {  
@@ -52,6 +53,11 @@ const Library = () => {
         <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
           <View style={{backgroundColor: COLORS.primary, height: 0}}>
             <View style={{ marginLeft: 10, marginRight: 10}}>
+              {/* <Text style={style.headerTitle}>Welcome to the Library</Text>
+              <View style={style.inputContainer}>
+                <AntDesign name="search1" size={20} color="black" style={{ marginRight: SIZES.base }} />
+                <TextInput placeholder='Search the library' style={{color: COLORS.black, flex: 1}} />
+              </View> */}
             </View>
           </View>
           

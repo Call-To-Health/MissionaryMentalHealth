@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
-import { getAdjustingToMissionaryLifeData, addRecentView, auth } from '../firebase.js'
+import { getAdjustingToMissionaryLifeData } from '../firebase.js'
 import Header from '../components/Header';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
@@ -11,22 +11,8 @@ import { Ionicons } from '@expo/vector-icons';
 const screenWidth = Dimensions.get('screen').width
 
 const AdjustingToMissionChaptersView = () => {
-
-    const [userId, setUserId] = useState(null);
     const [adjustToMLData, setData] = useState([]);
     const navigation = useNavigation();
-
-    useEffect(() => {
-        const unsubscribe = auth.onAuthStateChanged((user) => {
-          if (user) {
-            setUserId(user.uid);
-          } else {
-            setUserId(null);
-          }
-        });
-        return unsubscribe;
-      }, []);
-
     useEffect(() => {
       const fetchData = async () => {
         const result = await getAdjustingToMissionaryLifeData();
@@ -48,11 +34,8 @@ const AdjustingToMissionChaptersView = () => {
             <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
                 <View>
                     {adjustToMLData.map(chapter => (
-                        <View key={chapter.id}>
-                        <Pressable onPress={() => {
-                            addRecentView(userId, chapter.id, 'AdjustingToMissionaryLife');
-                            navigation.navigate('GeneralWebView', {url: chapter.url, title: chapter.title});
-                        }}>
+                        <View key={chapter.chapter}>
+                        <Pressable onPress={() => navigation.navigate('GeneralWebView', {url: chapter.url, title: chapter.title})}> 
                             <View style={style.iconContainer}>
                                 <Text>{chapter.chapter}. {chapter.title}</Text>
                             </View>

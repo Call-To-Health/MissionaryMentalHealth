@@ -240,4 +240,4 @@ inputLabel: {
   fontSize: SIZES.medium
 },
 })
-export default UserAccount;
+export default UserAccount
