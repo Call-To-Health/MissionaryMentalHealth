@@ -13,6 +13,7 @@ import JournalList from "../screens/JournalList";
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { createStackNavigator } from "@react-navigation/stack";
+import EditJournalEntry from "../screens/EditJournalEntry";
 
 const Tab = createBottomTabNavigator();
 
@@ -185,6 +186,11 @@ function JournalStack() {
         <Stack.Screen 
           name="JournalList" 
           component={JournalList} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="EditJournalEntry" 
+          component={EditJournalEntry} 
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
