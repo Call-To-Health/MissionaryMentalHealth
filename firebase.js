@@ -87,6 +87,22 @@ async function getAdjustingToMissionaryLifeData() {
   return data;
 }
 
+const getUserProfile = async (uid) => {
+  const userContentRef = userContentCollection.doc(uid);
+  const userContentSnapshot = await userContentRef.get();
+  if (userContentSnapshot.exists) {
+    const userInfo = userContentSnapshot.data();
+    return {
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
+      gender: userInfo.gender
+    };
+  } else {
+    console.log('User not found in userContent collection');
+    return null;
+  }
+};
+
 const addRecentView = async (uid, docId, type) => {
   const userContentCollectionRef = userContentCollection.doc(uid);
   const newDocRef = userContentCollectionRef.collection('views').doc();
@@ -161,5 +177,6 @@ export {
   getAdjustingToMissionaryLifeData,
   getTalksData,
   addRecentView,
-  getTopViewed
+  getTopViewed,
+  getUserProfile
 };

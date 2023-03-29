@@ -5,20 +5,14 @@ import HomeHeader from '../components/HomeHeader';
 import { useNavigation} from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
-import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView } from '../firebase';
+import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView, getUserProfile } from '../firebase';
 import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 // import Card from '../components';
 
 const Home = () => {
-  const recentlyViewed = [
-    { id: 1, title: 'Adjusting to Missionary Life' },
-    { id: 2, title: 'Journal Entry' },
-    { id: 3, title: 'Yep' },
-    { id: 4, title: 'PLease stop scrolling because I aint got more ' },
-  ];
-
   const [user, setUser] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
   const [topViewed, setTopViewed] = useState([]);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
@@ -29,11 +23,21 @@ const Home = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+
       } else {
         setUser(null);
       }
     });
     return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const userProfile = await getUserProfile(user.uid);
+      setUserProfile(userProfile);
+    };
+
+    fetchUserProfile();
   }, []);
 
   useEffect(() => {
@@ -74,7 +78,7 @@ const Home = () => {
 
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-  <HomeHeader />
+  <HomeHeader user={userProfile}/>
   <FocusedStatusBar
      translucent={false}
      backgroundColor={COLORS.primary}/>
