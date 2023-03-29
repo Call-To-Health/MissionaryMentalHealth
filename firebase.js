@@ -28,6 +28,7 @@ const quoteCollection = db.collection('Quotes')
 const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
 const talksCollection = db.collection('Talks');
+const userContentCollection = db.collection('userContent');
 
 let count = 0;
 
@@ -82,9 +83,70 @@ const fetchJournals = async () => {
 
 async function getAdjustingToMissionaryLifeData() {
   const snapshot = await adjustingToMissionaryLifeCollection.orderBy('chapter').get();
-  const data = snapshot.docs.map(doc => doc.data());
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   return data;
 }
+
+const getUserProfile = async (uid) => {
+  const userContentRef = userContentCollection.doc(uid);
+  const userContentSnapshot = await userContentRef.get();
+  if (userContentSnapshot.exists) {
+    const userInfo = userContentSnapshot.data();
+    return {
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
+      gender: userInfo.gender
+    };
+  } else {
+    console.log('User not found in userContent collection');
+    return null;
+  }
+};
+
+const addRecentView = async (uid, docId, type) => {
+  const userContentCollectionRef = userContentCollection.doc(uid);
+  const newDocRef = userContentCollectionRef.collection('views').doc();
+  await newDocRef.set({
+    docId: docId,
+    type: type,
+    viewedAt: firebase.firestore.Timestamp.now()
+  });
+};
+
+
+const getTopViewed = async (uid) => {
+  const userContentCollectionRef = userContentCollection.doc(uid);
+  const recentViewsSnapshot = await userContentCollectionRef.collection('views').orderBy('viewedAt', 'desc').limit(5).get();
+  const topViewed = [];
+  const docPromises = [];
+  const docIds = new Set();
+  recentViewsSnapshot.forEach((doc) => {
+    const data = doc.data();
+    const docId = data.docId;
+    if (!docIds.has(docId)) {
+      docIds.add(docId);
+      if (data.type === 'Talks') {
+        docPromises.push(talksCollection.doc(docId).get());
+      } else if (data.type === 'AdjustingToMissionaryLife') {
+        docPromises.push(adjustingToMissionaryLifeCollection.doc(docId).get());
+      }
+      topViewed.push({
+        id: doc.id,
+        ...data
+      });
+    }
+  });
+  const talkSnapshots = await Promise.all(docPromises);
+  talkSnapshots.forEach((snapshot, index) => {
+    const talkData = snapshot.data();
+    if (talkData) {
+      topViewed[index].talk = talkData;
+    }
+  });
+  return topViewed;
+};
+
+
 
 // journalsCollection.get().then((querySnapshot) => {
 //   querySnapshot.forEach((doc) => {
@@ -114,4 +176,7 @@ export {
   fetchJournals,
   getAdjustingToMissionaryLifeData,
   getTalksData,
+  addRecentView,
+  getTopViewed,
+  getUserProfile
 };

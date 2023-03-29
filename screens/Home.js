@@ -5,18 +5,13 @@ import HomeHeader from '../components/HomeHeader';
 import { useNavigation} from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
-import { fetchRandomQuote } from '../firebase';
-import { fetchRandomDocs } from '../firebase';
-import { auth } from '../firebase';
+import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView, getUserProfile } from '../firebase';
+import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const Home = () => {
-  const recentlyViewed = [
-    { id: 1, title: 'Adjusting to Missionary Life' },
-    { id: 2, title: 'Journal Entry' },
-    { id: 3, title: 'Yep' },
-    { id: 4, title: 'Please stop scrolling because I aint got more ' },
-  ];
-
+  const [user, setUser] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
+  const [topViewed, setTopViewed] = useState([]);
   const [userEmail, setUserEmail] = useState(null);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
@@ -36,12 +31,22 @@ const Home = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUserEmail(user.email);
+        setUser(user);
+
       } else {
-        setUserEmail(null);
+        setUser(null);
       }
     });
     return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const fetchUserProfile = async () => {
+      const userProfile = await getUserProfile(user.uid);
+      setUserProfile(userProfile);
+    };
+
+    fetchUserProfile();
   }, []);
 
   useEffect(() => {
@@ -69,9 +74,18 @@ const Home = () => {
     getRandomQuote();
   }, []);
 
+  useEffect(() => {
+    if (user) {
+      getTopViewed(user.uid).then((topViewed) => {
+        setTopViewed(topViewed);
+      });
+    }
+  }, [user]);
+  
+
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-  <HomeHeader />
+  <HomeHeader user={userProfile}/>
   <FocusedStatusBar
      translucent={false}
      backgroundColor={COLORS.primary}/>
@@ -79,7 +93,6 @@ return (
   <View style={style.header}></View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
-        <Text>{userEmail}</Text>
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
@@ -108,14 +121,21 @@ return (
 
   <ScrollView contentContainerStyle={{ paddingBottom: 100 }}
     showsVerticalScrollIndicator={false}>
+
     <View style={style.cardContainerWrapper}>
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recently viewed</Text>
+
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {recentlyViewed.map(item => (
-            <View key={item.id} style={style.card}>
-              <Text>{item.title}</Text>
-            </View>
+          {topViewed.map((topViewed) => (
+            <Pressable key={topViewed.id} onPress={() => {
+                addRecentView(user.uid, topViewed.docId, topViewed.type);
+                navigation.navigate('GeneralWebView', {url: topViewed.talk.url, title: topViewed.talk.title});
+            }}>
+              <View key={topViewed.id} style={style.card}>
+                <Text numberOfLines={2} ellipsizeMode='tail'>{topViewed.talk.title}</Text>
+              </View>
+              </Pressable>
           ))}
         </ScrollView>
       </View>
@@ -130,7 +150,7 @@ return (
             key={doc.id}
             onPress={() => handleJournalPress(doc)}>
             <View key={doc.id} style={style.card}>
-              <Text>{doc.journalEntry}</Text>
+              <Text numberOfLines={2} ellipsizeMode='tail'>{doc.journalEntry}</Text>
             </View>
             </Pressable>
           ))}
@@ -232,6 +252,7 @@ const style = StyleSheet.create ({
     width: 130,
     height: 80,
     borderRadius: 10,
+    padding: 6,
     marginHorizontal: 10,
     marginVertical: 9,
     justifyContent: 'center',
