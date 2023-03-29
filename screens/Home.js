@@ -6,7 +6,6 @@ import { useNavigation} from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
 import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView, getUserProfile } from '../firebase';
-import Pressable from 'react-native/Libraries/Components/Pressable/Pressable';
 
 const Home = () => {
   const [user, setUser] = useState(null);
