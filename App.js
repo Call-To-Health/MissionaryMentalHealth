@@ -20,6 +20,7 @@ import GeneralWebView from "./screens/GeneralWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 import DayResult from "./screens/DayResult";
+import EditJournalEntry from "./screens/EditJournalEntry";
 
 const Stack = createStackNavigator();
 
@@ -94,6 +95,11 @@ return (
           options={{headerShown: false}}
           name="Survey"
           component={Survey}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="EditJournalEntry"
+          component={EditJournalEntry}
         />
         <Stack.Screen
           options={{headerShown: false}}

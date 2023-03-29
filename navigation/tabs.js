@@ -13,6 +13,7 @@ import JournalList from "../screens/JournalList";
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { createStackNavigator } from "@react-navigation/stack";
+import EditJournalEntry from "../screens/EditJournalEntry";
 
 const Tab = createBottomTabNavigator();
 
@@ -71,27 +72,26 @@ const Tabs = () => {
                 height: 65,
                 ...styles.shadow}}}>
 
-            <Tab.Screen name="Home" component={Home} 
-            options={{
-                //  this is what removes the header! 
-                headerShown:false,
-                tabBarIcon: ({focused}) => (
-                    <View style= {{alignItems: 'center', justifyContent: 'center', top:10}}>
-                        <Image
-                        source={require('../assets/icons/home.png')}
-                        resizeMode='contain'
-                        style={{
-                            width:25,
-                            height:25,
-                            tintColor: focused ? '#e32f45' : '#748c94',
-                            marginTop: -15}}/>
-
-                        {/* This is what shows on the navbar */}
-                        <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                            Home
-                            </Text>
-                    </View>
-            ), }} />
+          <Tab.Screen name="HomeStack" component={HomeStack} options={{ 
+                headerShown: false, 
+                tabBarIcon: ({ focused }) => ( 
+                <View style={{ alignItems: 'center', justifyContent: 'center', top: 10 }}> 
+                    <Image 
+                    source={require('../assets/icons/home.png')} 
+                    resizeMode='contain' 
+                    style={{ 
+                        width: 25, 
+                        height: 25, 
+                        tintColor: focused ? '#e32f45' : '#748c94' ,
+                        marginTop: -15
+                    }} /> 
+                    <Text style={{ color: focused ? '#e32f45' : '#748c94', fontSize: 12 }}> 
+                    Home 
+                    </Text> 
+                </View> 
+                ), 
+            }} 
+            />
 
             <Tab.Screen name="JournalStack" component={JournalStack} options={{ 
                 headerShown: false, 
@@ -187,6 +187,34 @@ function JournalStack() {
           component={JournalList} 
           options={{ headerShown: false }}
         />
+        <Stack.Screen 
+          name="EditJournalEntry" 
+          component={EditJournalEntry} 
+          options={{ headerShown: false }}
+        />
+      </Stack.Navigator>
+    );
+  }
+
+  function HomeStack() {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen 
+          name="Home" 
+          component={Home} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="EditJournalEntry" 
+          component={EditJournalEntry} 
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen 
+          name="JournalList" 
+          component={JournalList} 
+          options={{ headerShown: false }}
+        />
+        
       </Stack.Navigator>
     );
   }
@@ -204,7 +232,6 @@ function JournalStack() {
           component={SearchResults} 
           options={{ headerShown: false }}
         />
-
         <Stack.Screen 
           name="JournalList" 
           component={JournalList} 
@@ -226,9 +253,6 @@ function JournalStack() {
 
     );
   }
-
-  
-  
 
 const styles = StyleSheet.create({
     shadow: {

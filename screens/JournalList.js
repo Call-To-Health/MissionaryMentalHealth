@@ -60,7 +60,7 @@ const JournalList= () => {
             zIndex: -1,
           }}
         >
-          <View style={{ height: 160, backgroundColor: COLORS.primary }} />
+          <View style={{ height: 0, backgroundColor: COLORS.primary }} />
           <View style={{ flex: 1, backgroundColor: COLORS.white }} />
         </View>
       </View>
