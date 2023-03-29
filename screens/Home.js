@@ -41,8 +41,10 @@ const Home = () => {
 
   useEffect(() => {
     const fetchUserProfile = async () => {
-      const userProfile = await getUserProfile(user.uid);
-      setUserProfile(userProfile);
+      if (user) {
+        const userProfile = await getUserProfile(user.uid);
+        setUserProfile(userProfile);
+      }
     };
 
     fetchUserProfile();
