@@ -12,7 +12,9 @@ const HomeHeader = (userProfile) => {
                 <Image source={assets.logo} resizeMode="contain" style={{ width: 50, height: 50 }}/>
             </Pressable>
             <View style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20, flexWrap: 'wrap' }}>
-                <Text style={style.headerTitle}>Welcome, {userInfo.gender == 'M' ? 'Elder' : 'Sister' }!</Text>
+                <Text style={style.headerTitle}>
+                    Welcome, {userInfo ? (userInfo.gender == 'M' ? 'Elder' : 'Sister') : 'Missionary'}!
+                </Text>
             </View>
             <View style={{ width: 45, height: 45 }}>
                 <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'Settings' })}>
