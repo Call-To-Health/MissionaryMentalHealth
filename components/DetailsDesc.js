@@ -37,7 +37,7 @@ const DetailsDesc = ({ story }) => {
             color: COLORS.primary,
           }}
         >
-          {story.name}'s Expierence with {story.tag}
+          {story.name}'s Experience with {story.tag}
         </Text>
         <View
           style={{
