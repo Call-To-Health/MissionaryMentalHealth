@@ -79,7 +79,7 @@ const Home = () => {
     };
 
     fetchTopViewed();
-  }, []);
+  }, [user]);
 
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>

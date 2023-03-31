@@ -9,7 +9,7 @@ import LibraryHeader from '../components/LibraryHeader';
 import LibrarySearch from '../components/LibrarySearch';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
-import {getTopViewed } from '../firebase';
+import { getTopViewed, auth } from '../firebase';
 import { assets } from '../constants';
 import { GrantType } from 'expo-auth-session';
 
@@ -17,11 +17,24 @@ const Library = () => {
   const [topViewed, setTopViewed] = useState(null);
   const [user, setUser] = useState(null);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return unsubscribe;
+  }, []);
+
   useEffect(() => {
     const fetchTopViewed = async () => {
       if (user) {
         const topViewed = await getTopViewed(user.uid);
         setTopViewed(topViewed);
+        console.log(topViewed);
       }
     };
 
@@ -69,7 +82,20 @@ const Library = () => {
           
           {/* <ListCategories /> */}
           <Text style={style.sectionTitle}>Recently Viewed</Text>
-
+            {/* {user ? 
+             topViewed?.map(doc => (
+              <View key={doc.id} style={style.card}>
+                  <Pressable onPress={() => 
+                      {addRecentView(user.uid, doc.docId, doc.type);
+                      navigation.navigate('GeneralWebView', {url: doc.talk.url, title: doc.talk.title})
+                  }}> 
+                          <View style={style.iconContainer}>
+                              <Text numberOfLines={2} ellipsizeMode='tail'>{doc.talk.title}</Text>
+                          </View>
+                  </Pressable>
+              </View>
+            ))
+          : '' } */}
 
           <Text style={style.sectionTitle}>Resources</Text>
           <View>
