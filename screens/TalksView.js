@@ -100,6 +100,7 @@ const TalksView = () => {
                     </View>
                 ))}
                 </View>
+                <View style={{backgroundColor: COLORS.white, height: 70}}></View>
             </ScrollView>
         </SafeAreaView>
     )
