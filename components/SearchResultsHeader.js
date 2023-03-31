@@ -14,7 +14,7 @@ const SearchResultsHeader = () => {
     style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20 }}>
     <Text style={style.headerTitle}>Search Results</Text></View>
             <View style={{ width: 45, height: 45 }}>
-                <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'Settings' })}>
+            <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'AccountStack' })}>
                     <Image source={assets.person00} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, shadowRadius:5}}/>
                 </Pressable>
             </View>
