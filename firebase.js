@@ -77,9 +77,6 @@ const fetchJournals = async () => {
 };
 
 const fetchCheckinResults = async (selectedDate) => {
-  // const snapshot = await checkinResultsCollection.get();
-  // const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  // return data;
   if (auth.currentUser) {
     const currentUserUid = auth.currentUser.uid;
     const querySnapshot = await userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', selectedDate).get();
