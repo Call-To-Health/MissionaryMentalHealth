@@ -76,13 +76,13 @@ const LibrarySearch = ({ onSearch }) => {
             flexDirection: "row",
             alignItems: "center",
             paddingHorizontal: SIZES.font,
-            paddingVertical: SIZES.small - 5,
+            paddingVertical: SIZES.small - 6,
           }}
         >
           <Image
             source={assets.search}
             resizeMode="contain"
-            style={{ width: 20, height: 20, marginRight: SIZES.base }}
+            style={{ width: 20, height: 20, marginRight: SIZES.base}}
           />
           <TextInput
             placeholder="Search the library here..."
@@ -103,14 +103,15 @@ const LibrarySearch = ({ onSearch }) => {
 const styles = StyleSheet.create({
   searchButton: {
     paddingVertical: 10,
-    paddingHorizontal: 20,
+    paddingHorizontal: 25,
     backgroundColor: COLORS.red,
-    borderRadius: 10,
+    borderRadius: 12,
+    elevation:20,
     alignItems: 'center',
   },
   searchButtonText: {
     color: COLORS.white,
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: 'bold',
   },
 });

@@ -24,6 +24,8 @@ import person03 from "../assets/images/person03.png";
 import person04 from "../assets/images/person04.png";
 
 import adjustToML from "../assets/images/adjustingtomissionarylife.jpeg";
+import Christ from "../assets/images/Christ.png";
+import journal from "../assets/images/journal.png";
 
 export default {
   badge,
@@ -50,5 +52,7 @@ export default {
   person02,
   person03,
   person04,
+  Christ,
   adjustToML,
+  journal,
 };
