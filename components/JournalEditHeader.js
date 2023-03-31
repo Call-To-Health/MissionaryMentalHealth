@@ -3,7 +3,7 @@ import { View, Text, Image, TextInput,Pressable, StyleSheet } from "react-native
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
-const LibraryHeader = () => {
+const JournalEditHeader = () => {
     const navigation = useNavigation();
     return (
         <View style={{height: 80,flexDirection: "row",justifyContent: "space-between",alignItems: "center",paddingHorizontal: SIZES.font}}>
@@ -12,10 +12,10 @@ const LibraryHeader = () => {
             </Pressable>
             <View
     style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 20 }}>
-    <Text style={style.headerTitle}>Library </Text></View>
+    <Text style={style.headerTitle}>Edit Journal Entry </Text></View>
             <View style={{ width: 45, height: 45 }}>
-                <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'Settings' })}>
-                    <Image source={assets.person00} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, shadowRadius:5}}/>
+                <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'AccountStack' })}>
+                    <Image source={assets.person00} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, backgroundColor: 'lightgray', shadowRadius:5}}/>
                 </Pressable>
             </View>
         </View>
@@ -38,4 +38,4 @@ const style = StyleSheet.create ({
       fontWeight:'bold',
       fontSize: 23},})
 
-export default LibraryHeader;
+export default JournalEditHeader;

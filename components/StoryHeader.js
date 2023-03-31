@@ -23,7 +23,7 @@ const StoryHeader = ({ onSearch }) => {
 
           <View style={{ alignItems: 'center', justifyContent: 'flex-end',flex:1, flexDirection:'row' }}>
             <Pressable onPress={() => navigation.navigate('UserAccount')}>
-              <Image source={assets.person01} resizeMode="contain" style={{width: 45,height: 45,borderRadius: 50,elevation: 10,shadowRadius: 5}}/>
+              <Image source={assets.person00} resizeMode="contain" style={{width: 45,height: 45,borderRadius: 50,elevation: 10,shadowRadius: 5}}/>
             </Pressable>
           </View>
 
