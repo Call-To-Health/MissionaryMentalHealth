@@ -3,6 +3,8 @@ import { View, Text, Image, TextInput,Pressable } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { AntDesign } from '@expo/vector-icons';
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
+
 
 const StoryHeader = ({ onSearch }) => {
 
@@ -24,9 +26,8 @@ const StoryHeader = ({ onSearch }) => {
           <View style={{ alignItems: 'center', justifyContent: 'flex-end',flex:1, flexDirection:'row' }}>
 
           <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'AccountStack' })}>
-              <Image source={assets.person00} resizeMode="contain" style={{width: 45,height: 45,borderRadius: 50,elevation: 10,shadowRadius: 5}}/>
-
-            </Pressable>
+            <Ionicons name="person-circle-outline" size={45} color="white" />
+          </Pressable>
           </View>
 
         </View>
