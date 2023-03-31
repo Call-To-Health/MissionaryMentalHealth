@@ -9,18 +9,31 @@ import LibraryHeader from '../components/LibraryHeader';
 import LibrarySearch from '../components/LibrarySearch';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
+import {getTopViewed } from '../firebase';
 import { assets } from '../constants';
 import { GrantType } from 'expo-auth-session';
 
-const {width} = Dimensions.get('screen');
-  
 const Library = () => {  
+  const [topViewed, setTopViewed] = useState(null);
+  const [user, setUser] = useState(null);
   const navigation = useNavigation();
+  useEffect(() => {
+    const fetchTopViewed = async () => {
+      if (user) {
+        const topViewed = await getTopViewed(user.uid);
+        setTopViewed(topViewed);
+      }
+    };
+
+    fetchTopViewed();
+  }, []);
+
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "TalksView"},
     {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "Stories"},
     {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "JournalList"},
   ];
+
 
   const ListCategories = () => {
     return (
@@ -54,8 +67,11 @@ const Library = () => {
             </View>
           </View>
           
-          <ListCategories />
-          {/* <Text style={style.sectionTitle}>Resources</Text> */}
+          {/* <ListCategories /> */}
+          <Text style={style.sectionTitle}>Recently Viewed</Text>
+
+
+          <Text style={style.sectionTitle}>Resources</Text>
           <View>
             
           <ScrollView>

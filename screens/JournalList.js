@@ -48,6 +48,7 @@ const JournalList= () => {
             showsVerticalScrollIndicator={true}
             ListHeaderComponent={<JournalSearch onSearch={handleSearch} />}
             />
+            
         </View>
 
         <View
