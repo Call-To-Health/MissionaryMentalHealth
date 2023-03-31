@@ -3,8 +3,6 @@ import React, {useState, useEffect} from 'react';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Feather } from '@expo/vector-icons';
 import { FontAwesome5 } from '@expo/vector-icons';
-import Stories from './Stories';
-import JournalList from './JournalList';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
 import LibraryHeader from '../components/LibraryHeader';
@@ -12,7 +10,6 @@ import LibrarySearch from '../components/LibrarySearch';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 import { assets } from '../constants';
-
 
 const {width} = Dimensions.get('screen');
   
@@ -47,24 +44,22 @@ const Library = () => {
       <LibraryHeader/>
       <LibrarySearch/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
-        <View style={style.header}>
-        </View>
+        
         
         <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
           <View style={{backgroundColor: COLORS.primary, height: 0}}>
             <View style={{ marginLeft: 10, marginRight: 10}}>
-              {/* <Text style={style.headerTitle}>Welcome to the Library</Text>
-              <View style={style.inputContainer}>
-                <AntDesign name="search1" size={20} color="black" style={{ marginRight: SIZES.base }} />
-                <TextInput placeholder='Search the library' style={{color: COLORS.black, flex: 1}} />
-              </View> */}
+              
             </View>
           </View>
           
           <ListCategories />
-          <Text style={style.sectionTitle}>Booklets</Text>
+          <Text style={style.sectionTitle}>Resources</Text>
           <View style={{ paddingLeft: 20}}>
-            <View style={style.cardContainer}>
+            
+          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+
+          <View style={style.cardContainer}>
               <TouchableOpacity onPress={() => navigation.navigate("AdjustingToMissionChaptersView")}>
               <Image
                 source={assets.adjustToML}
@@ -75,6 +70,40 @@ const Library = () => {
               </TouchableOpacity>
             </View>
 
+            <View style={style.cardContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate("TalksView")}>
+              <Image
+                source={assets.Christ}
+                style={style.cardImage}
+              />
+              
+              <Text style={style.cardLabel}>Talks</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={style.cardContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate("JournalList")}>
+              <Image
+                source={assets.journal}
+                style={style.cardImage}
+              />
+              
+              <Text style={style.cardLabel}>My Journal Entries</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={style.cardContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate("Stories")}>
+              <Image
+                source={assets.missionaries3}
+                style={style.cardImage}
+              />
+              
+              <Text style={style.cardLabel}>Others' Stories</Text>
+              </TouchableOpacity>
+            </View>
+
+            </ScrollView>
           </View>
         </ScrollView>
     </SafeAreaView>
@@ -106,7 +135,7 @@ const style = StyleSheet.create ({
     elevation: 12
   },
   categoryContainer: {
-    marginTop: 60,
+    marginTop: 40,
     marginHorizontal: 20,
     flexDirection: "row",
     justifyContent: "space-between"
@@ -135,18 +164,22 @@ const style = StyleSheet.create ({
     fontSize: 20,
   },
   cardContainer: {
-    width: width / 2
+    width: 150,
+    elevation: 12, 
+    
   },
   cardImage: {
-    height: 220,
-    width: width / 2.3,
-    marginRight: 20,
-    padding: 10,
+    height: 180,
+    width: 130,
+    marginRight: 2,
+    padding: 2,
     overflow: 'hidden',
-    borderRadius: 10
+    borderRadius: 15,
+    elevation: 10
   },
   cardLabel: {
-    padding: 10,
+    padding: 3,
+    fontSize:10
   }
 })
 export default Library;

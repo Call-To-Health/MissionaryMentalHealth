@@ -1,15 +1,15 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import {FocusedStatusBar} from "../components";
-import React from 'react';
+import React, {Component} from 'react';
 import CheckinHeader from '../components/CheckinHeader';
 import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS } from '../constants';
 import { Calendar } from 'react-native-calendars';
+// import MyCalendar from '../components/Calendar';
 import { useNavigation } from "@react-navigation/native";
 
 const Checkin = () => {
   const navigation = useNavigation();
-
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <CheckinHeader/>
@@ -19,21 +19,23 @@ const Checkin = () => {
 
         </View>
 
-        <View>
-        <TouchableOpacity style={style.surveyButton} onPress={() => navigation.navigate("Survey")}>
-            <Text style={style.buttonText}>
-            Complete Today's Check-in
-            </Text>
-        </TouchableOpacity>
-        </View>
+        <View style={{justifyContent: 'center'}}>
+          <View>
+            <TouchableOpacity style={style.surveyButton} onPress={() => navigation.navigate("Survey")}>
+                <Text style={style.buttonText}>
+                Complete Today's Check-in
+                </Text>
+            </TouchableOpacity>
+          </View>
 
-        <View>
-        <Calendar 
-            style={style.calendar}
-            onDayPress= {(day) => {
-                navigation.navigate("DayResult", { selectedDate: day.dateString})
-            }}
-          />
+          <View>
+            <Calendar 
+                style={style.calendar}
+                onDayPress= {(day) => {
+                    navigation.navigate("DayResult", { selectedDate: day.dateString})
+                }}
+              />
+          </View>
         </View>
         
     </SafeAreaView>
@@ -58,7 +60,7 @@ const style = StyleSheet.create ({
     borderRadius: SIZES.medium,
     width: '60%',
     alignSelf: 'center',
-    marginBottom: 35
+    marginBottom: 35,
   },
   buttonText:{
     fontFamily: FONTS.semiBold,
