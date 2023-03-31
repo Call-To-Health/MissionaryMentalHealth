@@ -19,12 +19,10 @@ const Home = () => {
 
   const handleStoryPress = (story) => {
     navigation.navigate('Details', { story: story });
-    console.log(`Story id ${story.id} clicked. ${story.experience}` );
   };
 
   const handleJournalPress = (journal) => {
     navigation.navigate('EditJournalEntry', { doc: journal });
-    console.log(`Journal id ${journals.id} clicked. ${journals.journalEntry}` );
   };
 
   const handleLayout = event => {
@@ -37,22 +35,13 @@ const Home = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+        setUserProfile(getUserProfile(user.uid));
       } else {
         setUser(null);
+        setUserProfile(null);
       }
     });
     return unsubscribe;
-  }, []);
-
-  useEffect(() => {
-    const fetchUserProfile = async () => {
-      if (user) {
-        const userProfile = await getUserProfile(user.uid);
-        setUserProfile(userProfile);
-      }
-    };
-
-    fetchUserProfile();
   }, []);
 
   useEffect(() => {
@@ -85,6 +74,7 @@ const Home = () => {
       if (user) {
         const topViewed = await getTopViewed(user.uid);
         setTopViewed(topViewed);
+        console.log(topViewed);
       }
     };
 
@@ -101,6 +91,7 @@ return (
   <View style={style.header}></View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
+        <Text>{user ? user.email : ''}</Text>
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
@@ -133,18 +124,22 @@ return (
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recently viewed</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {topViewed?.map(doc => (
-            <View key={doc.id} style={style.card}>
-                <Pressable onPress={() => 
-                    {addRecentView(user.uid, doc.docId, doc.type);
-                    navigation.navigate('GeneralWebView', {url: doc.talk.url, title: doc.talk.title})
-                }}> 
-                        <View style={style.iconContainer}>
-                            <Text numberOfLines={2} ellipsizeMode='tail'>{doc.talk.title}</Text>
-                        </View>
-                </Pressable>
-            </View>
-          ))}
+          { user ? 
+            topViewed?.map(doc => (
+              <View key={doc.id} style={style.card}>
+                  <Pressable onPress={() => 
+                      {addRecentView(user.uid, doc.docId, doc.type);
+                      navigation.navigate('GeneralWebView', {url: doc.talk.url, title: doc.talk.title})
+                  }}> 
+                          <View style={style.iconContainer}>
+                              <Text numberOfLines={2} ellipsizeMode='tail'>{doc.talk.title}</Text>
+                          </View>
+                  </Pressable>
+              </View>
+            ))
+            : 
+            ''
+          }
           
         </ScrollView>
       </View>
