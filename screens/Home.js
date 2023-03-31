@@ -64,7 +64,7 @@ const Home = () => {
     const getRandomQuote = async () => {
       const randomQuote = await fetchRandomQuote();
       setRandomQuote(randomQuote.map((doc) => ({ id: doc.id, ...doc.data() })));
-      console.log("Here is the content of randomQuote in the Home component" + randomQuote);
+      // console.log("Here is the content of randomQuote in the Home component" + randomQuote);
     };
     getRandomQuote();
   }, []);

@@ -1,15 +1,32 @@
 import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
 import {FocusedStatusBar} from "../components";
-import React, {Component} from 'react';
+import React, {Component, useState, useEffect} from 'react';
 import CheckinHeader from '../components/CheckinHeader';
 import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS } from '../constants';
 import { Calendar } from 'react-native-calendars';
 // import MyCalendar from '../components/Calendar';
 import { useNavigation } from "@react-navigation/native";
+import { fetchMarkedCheckinResults } from '../firebase';
 
 const Checkin = () => {
+  const markedDates = {
+    '2023-04-01': { selected: true, selectedColor: 'green' },
+  };
+  const [checkinResults, setCheckinResults] = useState(null);
+
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const results = await fetchMarkedCheckinResults();
+      setCheckinResults(results);
+      console.log(checkinResults);
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <CheckinHeader/>
@@ -23,7 +40,7 @@ const Checkin = () => {
           <View>
             <TouchableOpacity style={style.surveyButton} onPress={() => navigation.navigate("Survey")}>
                 <Text style={style.buttonText}>
-                Complete Today's Check-in
+                  Complete Today's Check-in
                 </Text>
             </TouchableOpacity>
           </View>
@@ -31,6 +48,7 @@ const Checkin = () => {
           <View>
             <Calendar 
                 style={style.calendar}
+                markedDates={checkinResults}
                 onDayPress= {(day) => {
                     navigation.navigate("DayResult", { selectedDate: day.dateString})
                 }}

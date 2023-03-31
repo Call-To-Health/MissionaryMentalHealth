@@ -2,7 +2,7 @@
   "expo": {
     "name": "Missionary Mental Health",
     "scheme": "com.missionarymentalhealth.login",
-    "slug": "MissionaryMentalHealth",
+    "slug": "missionary-wellness",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
@@ -30,6 +30,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "6c03569b-dee6-4636-a0ee-e6353b21c9d8"
+      }
+    },
+    "owner": "hdy3so"
   }
 }

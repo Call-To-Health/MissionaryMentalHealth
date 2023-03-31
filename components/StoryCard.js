@@ -11,7 +11,7 @@ const StoryCard = ({doc}) => {
 
   const handlePress = (story) => {
     navigation.navigate('Details', { story: story });
-    console.log(`Story id ${story.id} clicked. ${story.experience}` );
+    // console.log(`Story id ${story.id} clicked. ${story.experience}` );
   };
 
   const imageIndex = Math.floor(Math.random() * 7) + 1; // numImages is the total number of available images
