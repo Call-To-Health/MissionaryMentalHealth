@@ -147,32 +147,28 @@ const Tabs = () => {
                 ), 
             }} 
             />
-            <Tab.Screen name="Settings" component={userEmail ? UserAccountLoggedIn : UserAccount}
-                options={{
-                    headerShown:false,
-                    tabBarIcon: ({focused}) => (
-                        <View style= {{alignItems: 'center', justifyContent: 'center',top:10}}>
-                            <Image
-                            source={require('../assets/icons/settings.png')}
-                            resizeMode='contain'
-                            
-                            style={{
-                                width: 25,
-                                height: 25,
-                                tintColor: focused ? '#e32f45' : '#748c94',
-                                marginTop: -15
-                            }}/>
-                            <Text style={{color: focused ? '#e32f45' : '#748c94', fontSize: 12}}>
-                                Account
-                            </Text>
-                        </View>
-                    ),
-            }} />
-
-        </Tab.Navigator>
-        
-    )
-}
+            <Tab.Screen name="AccountStack" children={() => <AccountStack userEmail={userEmail} />} options={{
+              headerShown: false,
+              tabBarIcon: ({ focused }) => (
+              <View style={{ alignItems: "center", justifyContent: "center", top: 10 }}>
+                <Image
+                  source={require("../assets/icons/settings.png")}
+                  resizeMode="contain"
+                  style={{
+                    width: 25,
+                    height: 25,
+                    tintColor: focused ? "#e32f45" : "#748c94",
+                    marginTop: -15,
+                  }}
+                />
+                <Text style={{ color: focused ? "#e32f45" : "#748c94", fontSize: 12 }}>
+                  Account
+                </Text>
+              </View>
+    ),
+  }}
+/>
+        </Tab.Navigator>)}
 
 function JournalStack() {
     return (
@@ -215,6 +211,23 @@ function JournalStack() {
           options={{ headerShown: false }}
         />
         
+      </Stack.Navigator>
+    );
+  }
+
+  function AccountStack({ userEmail }) {
+    return (
+      <Stack.Navigator>
+        <Stack.Screen
+          name="UserAccount"
+          component={userEmail ? UserAccountLoggedIn : UserAccount}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Home"
+          component={Home}
+          options={{ headerShown: false }}
+        />
       </Stack.Navigator>
     );
   }

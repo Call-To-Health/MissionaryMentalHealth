@@ -37,7 +37,7 @@ const UserAccount = () => {
     .then(()=> {
       setEmail("");
       setPassword("");
-      navigation.navigate("Home")
+      navigation.navigate('Tabs', { screen: 'Home' })
     })
     .catch(error => alert(error.message))
   }
@@ -49,7 +49,7 @@ const UserAccount = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
-        navigation.navigate("Home")
+        navigation.navigate('Tabs', { screen: 'Home' })
       }
     })
     return unsubscribe
@@ -89,7 +89,7 @@ const UserAccount = () => {
         <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
           <Text style={{fontSize:35,marginTop: 500, color: "white", fontWeight: 'bold', marginBottom:20}}>Google Sign In Successful! {user.name}</Text>
           <Image source={{uri:user.picture}} style={{width: 100, height:100, borderRadius:50}}/>
-          <Pressable onPress={() => navigation.navigate("Home")}>
+          <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'Home' })}>
             <Text>Go Home</Text>
           </Pressable>
           <Text style={{fontSize:20, fontWeight: 'bold'}}>{user.name}</Text>
@@ -240,4 +240,4 @@ inputLabel: {
   fontSize: SIZES.medium
 },
 })
-export default UserAccount;
+export default UserAccount
