@@ -10,7 +10,7 @@ import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
 import Home from "./screens/Home";
 import Journal from "./screens/Journal";
-import Stories from "./screens/Stories";
+import StoriesView from "./screens/StoriesView";
 import JournalList from "./screens/JournalList";
 import SearchResults from "./screens/SearchResults";
 import AdjustingToMission from "./screens/AdjustingToMission";
@@ -67,8 +67,8 @@ return (
         />
         <Stack.Screen
           options={{headerShown: false}}
-          name="Stories"
-          component={Stories}
+          name="StoriesView"
+          component={StoriesView}
         />
         <Stack.Screen
           options={{headerShown: false}}
