@@ -15,7 +15,8 @@ const Home = () => {
     { id: 4, title: 'Please stop scrolling because I aint got more ' },
   ];
 
-  const [userEmail, setUserEmail] = useState(null);
+  const [user, setUser] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
@@ -34,9 +35,9 @@ const Home = () => {
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUserEmail(user.email);
+        setUser(user);
       } else {
-        setUserEmail(null);
+        setUser(null);
       }
     });
     return unsubscribe;
@@ -80,7 +81,7 @@ const Home = () => {
 
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-  <HomeHeader />
+  <HomeHeader userProfile={userProfile}/>
   <FocusedStatusBar
      translucent={false}
      backgroundColor={COLORS.primary}/>
@@ -88,7 +89,7 @@ return (
   <View style={style.header}></View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
-        <Text>{userEmail}</Text>
+        <Text>{ user ? user.email : ''}</Text>
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
