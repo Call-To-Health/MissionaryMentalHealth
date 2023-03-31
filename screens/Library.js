@@ -10,6 +10,7 @@ import LibrarySearch from '../components/LibrarySearch';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
 import { assets } from '../constants';
+import { GrantType } from 'expo-auth-session';
 
 const {width} = Dimensions.get('screen');
   
@@ -20,6 +21,7 @@ const Library = () => {
     {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "Stories"},
     {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "JournalList"},
   ];
+
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
@@ -54,11 +56,11 @@ const Library = () => {
           </View>
           
           <ListCategories />
-          <Text style={style.sectionTitle}>Resources</Text>
-          <View style={{ paddingLeft: 20}}>
+          {/* <Text style={style.sectionTitle}>Resources</Text> */}
+          <View>
             
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-
+          <ScrollView>
+            <View style={style.gridContainer}>
           <View style={style.cardContainer}>
               <TouchableOpacity onPress={() => navigation.navigate("AdjustingToMissionChaptersView")}>
               <Image
@@ -102,14 +104,23 @@ const Library = () => {
               <Text style={style.cardLabel}>Others' Stories</Text>
               </TouchableOpacity>
             </View>
-
+            </View>
             </ScrollView>
           </View>
+          <View style={{backgroundColor: COLORS.white, height: 100}}></View>
         </ScrollView>
+
     </SafeAreaView>
   )
 }
+
 const style = StyleSheet.create ({
+  gridContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
   header: {
     paddingVertical: 20,
     paddingHorizontal: 10,
@@ -165,21 +176,27 @@ const style = StyleSheet.create ({
   },
   cardContainer: {
     width: 150,
-    elevation: 12, 
+    backgroundColor:'white',
+    marginBottom:20,
+    marginTop:10,
+    marginLeft:5,
+    padding:10,
+    marginRight:5,
+    elevation: 10, 
+    borderRadius: 15,
     
   },
   cardImage: {
     height: 180,
+    borderRadius:15,
     width: 130,
-    marginRight: 2,
-    padding: 2,
-    overflow: 'hidden',
-    borderRadius: 15,
-    elevation: 10
+    padding: 20,
   },
   cardLabel: {
-    padding: 3,
-    fontSize:10
+    padding: 5,
+    textAlign:'center',
+    fontSize:12,
+    fontWeight:'bold'
   }
 })
 export default Library;
