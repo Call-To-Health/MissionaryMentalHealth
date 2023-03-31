@@ -74,7 +74,6 @@ const Home = () => {
       if (user) {
         const topViewed = await getTopViewed(user.uid);
         setTopViewed(topViewed);
-        console.log(topViewed);
       }
     };
 

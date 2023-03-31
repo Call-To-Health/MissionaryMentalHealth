@@ -80,7 +80,8 @@ const fetchCheckinResults = async (selectedDate) => {
   // const snapshot = await checkinResultsCollection.get();
   // const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   // return data;
-  const querySnapshot = await checkinResultsCollection.where('date', '==', selectedDate).get();
+  const currentUserUid = auth.currentUser.uid;
+  const querySnapshot = await userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', selectedDate).get();
 
   if (querySnapshot.docs.length > 0) {
     const matchingDoc = querySnapshot.docs[0];
@@ -92,8 +93,10 @@ const fetchCheckinResults = async (selectedDate) => {
 };
 
 const updateCheckinResults = (date, answers, score, zone) => {
+  const currentUserUid = auth.currentUser.uid;
+  // const query = checkinResultsCollection.where('date', '==', date);
+  const query = userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', date);
 
-  const query = checkinResultsCollection.where('date', '==', date);
   query.get().then((querySnapshot) => {
     if (!querySnapshot.empty) {
       // There is already a document with the specified date, update it
@@ -108,7 +111,7 @@ const updateCheckinResults = (date, answers, score, zone) => {
       });
     } else {
       // There is no document with the specified date, add a new one
-      checkinResultsCollection.add({
+      userContentCollection.doc(currentUserUid).collection('check_in').add({
         date: date,
         question1: answers['question1'],
         question2: answers['question2'],

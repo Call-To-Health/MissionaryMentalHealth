@@ -34,7 +34,6 @@ const Library = () => {
       if (user) {
         const topViewed = await getTopViewed(user.uid);
         setTopViewed(topViewed);
-        console.log(topViewed);
       }
     };
 
