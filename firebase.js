@@ -82,7 +82,7 @@ const fetchCheckinResults = async (selectedDate) => {
     const querySnapshot = await userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', selectedDate).get();
   
     if (querySnapshot.docs.length > 0) {
-      const matchingDoc = querySnapshot.docs[0];
+      const matchingDoc  = querySnapshot.docs[0];
       const matchingData = matchingDoc.data();
       return matchingData;
     } else {
