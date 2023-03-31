@@ -77,9 +77,10 @@ const fetchJournals = async () => {
 
 async function getAdjustingToMissionaryLifeData() {
   const snapshot = await adjustingToMissionaryLifeCollection.orderBy('chapter').get();
-  const data = snapshot.docs.map(doc => doc.data());
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   return data;
 }
+
 
 // journalsCollection.get().then((querySnapshot) => {
 //   querySnapshot.forEach((doc) => {
