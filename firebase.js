@@ -115,6 +115,69 @@ async function getUserProfile(uid) {
   }
 }
 
+const addRecentView = async (uid, docId, type) => {
+  const userContentCollectionRef = userContentCollection.doc(uid);
+  const newDocRef = userContentCollectionRef.collection('views').doc();
+  await newDocRef.set({
+    docId: docId,
+    type: type,
+    viewedAt: firebase.firestore.Timestamp.now()
+  });
+};
+
+
+const getTopViewed = async (uid) => {
+  const recentViewsRef = userContentCollection.doc(uid);
+  const recentViewsSnapshot = await recentViewsRef.collection('views').orderBy('viewedAt', 'desc').get();
+  const topViewed = [];
+  const docIds = new Set(); // keep track of unique docIds
+
+  recentViewsSnapshot.forEach((doc) => {
+    const data = doc.data();
+    const docId = data.docId;
+
+    if (!docIds.has(docId)) { // only add to topViewed if docId is unique
+      if (data.type === 'Talks') {
+        topViewed.push({
+          id: doc.id,
+          docId: docId,
+          type: 'Talks'
+        });
+      } else if (data.type === 'AdjustingToMissionaryLife') {
+        topViewed.push({
+          id: doc.id,
+          docId: docId,
+          type: 'AdjustingToMissionaryLife'
+        });
+      }
+
+      docIds.add(docId); // add docId to set of unique docIds
+    }
+
+    // exit loop when we have top 5 unique docIds
+    if (docIds.size === 5) {
+      return false;
+    }
+  });
+
+  const docPromises = topViewed.map((doc) => {
+    if (doc.type === 'Talks') {
+      return talksCollection.doc(doc.docId).get();
+    } else if (doc.type === 'AdjustingToMissionaryLife') {
+      return adjustingToMissionaryLifeCollection.doc(doc.docId).get();
+    }
+  });
+
+  const talkSnapshots = await Promise.all(docPromises);
+  talkSnapshots.forEach((snapshot, index) => {
+    topViewed[index].talk = snapshot.data();
+  });
+
+  return topViewed;
+};
+
+
+
 
 export { 
   firebase, 
@@ -126,5 +189,7 @@ export {
   fetchJournals,
   getAdjustingToMissionaryLifeData,
   getTalksData,
-  getUserProfile
+  getUserProfile,
+  addRecentView,
+  getTopViewed
 };
