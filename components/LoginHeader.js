@@ -8,7 +8,7 @@ const LoginHeader = () => {
     return (
         <View style={styles.header}>
             <View style={{ marginRight: 10 }}>
-                <Pressable onPress={() => navigation.navigate("Home")}>
+            <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'HomeStack' })}>
                 <Image
                     source={assets.logo}
                     resizeMode="contain"

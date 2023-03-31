@@ -9,7 +9,7 @@ const JournalEditHeader = () => {
     const navigation = useNavigation();
     return (
         <View style={{height: 80,flexDirection: "row",justifyContent: "space-between",alignItems: "center",paddingHorizontal: SIZES.font}}>
-            <Pressable  onPress={() => navigation.navigate("Home")}>
+            <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'HomeStack' })}>
                 <Image source={assets.logo} resizeMode="contain" style={{ width: 50, height: 50 }}/>
             </Pressable>
             <View
