@@ -80,43 +80,52 @@ const fetchCheckinResults = async (selectedDate) => {
   // const snapshot = await checkinResultsCollection.get();
   // const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   // return data;
-  const currentUserUid = auth.currentUser.uid;
-  const querySnapshot = await userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', selectedDate).get();
-
-  if (querySnapshot.docs.length > 0) {
-    const matchingDoc = querySnapshot.docs[0];
-    const matchingData = matchingDoc.data();
-    return matchingData;
+  if (auth.currentUser) {
+    const currentUserUid = auth.currentUser.uid;
+    const querySnapshot = await userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', selectedDate).get();
+  
+    if (querySnapshot.docs.length > 0) {
+      const matchingDoc = querySnapshot.docs[0];
+      const matchingData = matchingDoc.data();
+      return matchingData;
+    } else {
+      return null;
+    }
   } else {
     return null;
   }
+
 };
 
 const fetchMarkedCheckinResults = async() => {
-  const currentUserUid = auth.currentUser.uid;
-  const querySnapshot = await userContentCollection.doc(currentUserUid).collection('check_in').get();
-
-  if (querySnapshot.docs.length > 0) {
-    const markedDates = {};
-
-    querySnapshot.docs.forEach((doc) => {
-      var zone = '';
-      const textColor = '';
-      const matchingData = doc.data();
-      if (matchingData.zone == 'yellow') {
-        zone = '#d9d021';
-      } else if (matchingData.zone == 'red') {
-        zone = '#b81c1c';
-      } else {
-        zone = matchingData.zone;
-      }
-      markedDates[matchingData.date] = { selected: true, selectedColor: zone };
-    });
-    
-    return markedDates;
+  if (auth.currentUser) {
+    const currentUserUid = auth.currentUser.uid;
+    const querySnapshot = await userContentCollection.doc(currentUserUid).collection('check_in').get();
+  
+    if (querySnapshot.docs.length > 0) {
+      const markedDates = {};
+  
+      querySnapshot.docs.forEach((doc) => {
+        var zone = '';
+        const textColor = '';
+        const matchingData = doc.data();
+        if (matchingData.zone == 'yellow') {
+          zone = '#d9d021';
+        } else if (matchingData.zone == 'red') {
+          zone = '#b81c1c';
+        } else {
+          zone = matchingData.zone;
+        }
+        markedDates[matchingData.date] = { selected: true, selectedColor: zone };
+      });
+      return markedDates;
+    } else {
+      return null;
+    }
   } else {
     return null;
   }
+ 
 }
 
 

@@ -7,7 +7,7 @@ import { COLORS, SIZES, FONTS } from '../constants';
 import { Calendar } from 'react-native-calendars';
 // import MyCalendar from '../components/Calendar';
 import { useNavigation } from "@react-navigation/native";
-import { fetchMarkedCheckinResults } from '../firebase';
+import { fetchMarkedCheckinResults, auth } from '../firebase';
 
 const Checkin = () => {
   const markedDates = {
@@ -21,11 +21,10 @@ const Checkin = () => {
     const fetchData = async () => {
       const results = await fetchMarkedCheckinResults();
       setCheckinResults(results);
-      console.log(checkinResults);
     };
 
     fetchData();
-  }, []);
+  }, [auth.currentUser]);
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
