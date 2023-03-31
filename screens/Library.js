@@ -47,7 +47,6 @@ const Library = () => {
       <LibrarySearch/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
         
-        
         <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
           <View style={{backgroundColor: COLORS.primary, height: 0}}>
             <View style={{ marginLeft: 10, marginRight: 10}}>
