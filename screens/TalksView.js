@@ -77,7 +77,7 @@ const TalksView = () => {
                     return selectedTags.every((tag) => tags.includes(tag));
                 }).map(talk => (
                     <View key={talk.id}>
-                        <Pressable onPress={() => navigation.navigate('TalkWebView', {url: talk.url, title: talk.title})}> 
+                        <Pressable onPress={() => navigation.navigate('GeneralWebView', {url: talk.url, title: talk.title})}> 
                                 <View style={style.iconContainer}>
                                     <Text>{talk.title}</Text>
                                 </View>
@@ -87,7 +87,6 @@ const TalksView = () => {
                 </View>
             </ScrollView>
         </SafeAreaView>
-        
     )
 };
 

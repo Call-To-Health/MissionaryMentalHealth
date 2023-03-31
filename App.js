@@ -16,10 +16,11 @@ import SearchResults from "./screens/SearchResults";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
 import TalksView from "./screens/TalksView";
-import TalkWebView from "./screens/TalkWebView";
+import GeneralWebView from "./screens/GeneralWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 import DayResult from "./screens/DayResult";
+import EditJournalEntry from "./screens/EditJournalEntry";
 
 const Stack = createStackNavigator();
 
@@ -86,14 +87,19 @@ return (
         />
         <Stack.Screen
           options={{headerShown: false}}
-          name="TalkWebView"
-          component={TalkWebView}
+          name="GeneralWebView"
+          component={GeneralWebView}
         />
 
         <Stack.Screen
           options={{headerShown: false}}
           name="Survey"
           component={Survey}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="EditJournalEntry"
+          component={EditJournalEntry}
         />
         <Stack.Screen
           options={{headerShown: false}}
