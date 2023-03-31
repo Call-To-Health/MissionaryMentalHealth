@@ -4,7 +4,7 @@ import React, {useState,useCallback,useEffect} from 'react';
 import { JournalSearch, JournalCard } from '../components';
 import JournalHeader from '../components/JournalHeader';
 import { COLORS } from '../constants';
-import {firebase} from '../firebase.js';
+import { firebase, auth } from '../firebase.js';
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -13,6 +13,7 @@ const Navigator = createStackNavigator();
 const Journal = () => {
   const navigation = useNavigation();
   const journalsCollection = firebase.firestore().collection('journals');
+  const userContentCollection = firebase.firestore().collection('userContent');
   const [tags,setTags] = useState([])
   const [addData, setAddData] = useState('');
   const [journals, setJournals] = useState([]);
@@ -28,7 +29,7 @@ const Journal = () => {
         tags:tags,
         createdAt: timestamp
       };
-      journalsCollection
+      userContentCollection.doc(auth.currentUser.uid).collection('journals')
       .add(data)
       .then(() => {
         //release the new field state 

@@ -71,7 +71,7 @@ async function fetchRandomQuote() {
 }
 
 const fetchJournals = async () => {
-  const snapshot = await journalsCollection.get();
+  const snapshot = await userContentCollection.doc(auth.currentUser.uid).collection('journals').get();
   const journalDocs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   return journalDocs;
 };
