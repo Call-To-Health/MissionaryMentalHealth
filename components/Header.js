@@ -2,6 +2,7 @@ import React from "react";
 import { View, Text, Image, TextInput,Pressable } from "react-native";
 import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
+import { Ionicons } from '@expo/vector-icons';
 
 const Header = () => {
     const navigation = useNavigation();
@@ -13,7 +14,7 @@ const Header = () => {
 
             <View style={{ width: 45, height: 45 }}>
                 <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'AccountStack' })}>
-                    <Image source={assets.person00} resizeMode="contain" style={{ width: "100%", height: "100%", borderRadius: 50, elevation:10, backgroundColor: 'lightgray', shadowRadius:5}}/>
+                    <Ionicons name="person-circle-outline" size={45} color="white" />
                 </Pressable>
             </View>
         </View>

@@ -29,6 +29,7 @@ const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
 const talksCollection = db.collection('Talks');
 const userContentCollection = db.collection('userContent');
+const checkinResultsCollection = db.collection('Checkin');
 
 let count = 0;
 
@@ -74,6 +75,53 @@ const fetchJournals = async () => {
   const journalDocs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
   return journalDocs;
 };
+
+const fetchCheckinResults = async (selectedDate) => {
+  // const snapshot = await checkinResultsCollection.get();
+  // const data = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+  // return data;
+  const querySnapshot = await checkinResultsCollection.where('date', '==', selectedDate).get();
+
+  if (querySnapshot.docs.length > 0) {
+    const matchingDoc = querySnapshot.docs[0];
+    const matchingData = matchingDoc.data();
+    return matchingData;
+  } else {
+    return null;
+  }
+};
+
+const updateCheckinResults = (date, answers, score, zone) => {
+
+  const query = checkinResultsCollection.where('date', '==', date);
+  query.get().then((querySnapshot) => {
+    if (!querySnapshot.empty) {
+      // There is already a document with the specified date, update it
+      const docRef = querySnapshot.docs[0].ref;
+      docRef.update({
+        question1: answers['question1'],
+        question2: answers['question2'],
+        question3: answers['question3'],
+        question4: answers['question4'],
+        score: score,
+        zone: zone,
+      });
+    } else {
+      // There is no document with the specified date, add a new one
+      checkinResultsCollection.add({
+        date: date,
+        question1: answers['question1'],
+        question2: answers['question2'],
+        question3: answers['question3'],
+        question4: answers['question4'],
+        score: score,
+        zone: zone,
+      });
+    }
+  }).catch((error) => {
+    console.error('Error getting documents: ', error);
+  });
+}
 
 async function getAdjustingToMissionaryLifeData() {
   const snapshot = await adjustingToMissionaryLifeCollection.orderBy('chapter').get();
@@ -192,5 +240,7 @@ export {
   getTalksData,
   getUserProfile,
   addRecentView,
-  getTopViewed
+  getTopViewed,
+  fetchCheckinResults,
+  updateCheckinResults,
 };

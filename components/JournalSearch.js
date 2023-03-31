@@ -33,7 +33,7 @@ const JournalSearch = ({ onSearch }) => {
             flexDirection: "row",
             alignItems: "center",
             paddingHorizontal: SIZES.font,
-            paddingVertical: SIZES.small - 3,
+            paddingVertical: SIZES.small,
           }}
         >
           <Image

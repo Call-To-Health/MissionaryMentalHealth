@@ -16,6 +16,8 @@ import missionaries4 from "../assets/images/missionaries4.jpeg";
 import missionaries5 from "../assets/images/missionaries5.jpeg";
 import missionaries6 from "../assets/images/missionaries6.jpg";
 import missionaries7 from "../assets/images/missionaries7.jpeg";
+import Christ from "../assets/images/Christ.png";
+import journal from "../assets/images/journal.png";
 
 import person00 from "../assets/images/person00.png";
 import person01 from "../assets/images/person01.png";
@@ -44,6 +46,8 @@ export default {
   missionaries5,
   missionaries6,
   missionaries7,
+  Christ,
+  journal,
 
   person00,
   person01,
