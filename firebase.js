@@ -28,6 +28,7 @@ const quoteCollection = db.collection('Quotes')
 const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
 const talksCollection = db.collection('Talks');
+const userContentCollection = db.collection('userContent');
 const checkinResultsCollection = db.collection('Checkin');
 
 let count = 0;
@@ -35,9 +36,7 @@ let count = 0;
 // Make randomDocs which is a collection of 20 random stories.
 async function fetchRandomDocs() {
   count += 1;
-  // console.log("fetchRandomDocs", count);
   const querySnapshot = await storiesCollection.orderBy(firebase.firestore.FieldPath.documentId()).get();
-  // console.log(querySnapshot.size)
   const randomIndices = [];
   while (randomIndices.length < Math.min(20, querySnapshot.size)) {
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);
@@ -45,20 +44,17 @@ async function fetchRandomDocs() {
       randomIndices.push(randomIndex);
     }
   }
+  
 
   const randomDocs = randomIndices.map((randomIndex) => querySnapshot.docs[randomIndex]);
   randomDocs.forEach((doc) => {
-    // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
   });
-  // console.log("Here is the content of RandomDocs :" + randomDocs);
   return randomDocs;
 }
 
 async function fetchRandomQuote() {
   count += 1;
-  // console.log("fetchRandomQuote ", count);
   const querySnapshot = await quoteCollection.orderBy(firebase.firestore.FieldPath.documentId()).get();
-  // console.log(querySnapshot.size)
   const randomIndices = [];
   while (randomIndices.length < Math.min(1, querySnapshot.size)) {
     const randomIndex = Math.floor(Math.random() * querySnapshot.size);
@@ -69,7 +65,6 @@ async function fetchRandomQuote() {
 
   const randomQuote = randomIndices.map((randomIndex) => querySnapshot.docs[randomIndex]);
   randomQuote.forEach((doc) => {
-    // console.log(`${doc.id} => ${JSON.stringify(doc.data())}`);
   });
   console.log("Here is the content of RandomQuote from firebase.js :" + randomQuote);
   return randomQuote;
@@ -130,9 +125,10 @@ const updateCheckinResults = (date, answers, score, zone) => {
 
 async function getAdjustingToMissionaryLifeData() {
   const snapshot = await adjustingToMissionaryLifeCollection.orderBy('chapter').get();
-  const data = snapshot.docs.map(doc => doc.data());
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
   return data;
 }
+
 
 // journalsCollection.get().then((querySnapshot) => {
 //   querySnapshot.forEach((doc) => {
@@ -152,6 +148,86 @@ async function getTalksData() {
   return talks;
 }
 
+async function getUserProfile(uid) {
+  const userContentRef = userContentCollection.doc(uid);
+  const userContentSnapshot = await userContentRef.get();
+  if (userContentSnapshot.exists) {
+    const userInfo = userContentSnapshot.data();
+    return {
+      first_name: userInfo.first_name,
+      last_name: userInfo.last_name,
+      gender: userInfo.gender
+    };
+  } else {
+    console.log('User not found in userContent collection');
+    return null;
+  }
+}
+
+const addRecentView = async (uid, docId, type) => {
+  const userContentCollectionRef = userContentCollection.doc(uid);
+  const newDocRef = userContentCollectionRef.collection('views').doc();
+  await newDocRef.set({
+    docId: docId,
+    type: type,
+    viewedAt: firebase.firestore.Timestamp.now()
+  });
+};
+
+
+const getTopViewed = async (uid) => {
+  const recentViewsRef = userContentCollection.doc(uid);
+  const recentViewsSnapshot = await recentViewsRef.collection('views').orderBy('viewedAt', 'desc').get();
+  const topViewed = [];
+  const docIds = new Set(); // keep track of unique docIds
+
+  recentViewsSnapshot.forEach((doc) => {
+    const data = doc.data();
+    const docId = data.docId;
+
+    if (!docIds.has(docId)) { // only add to topViewed if docId is unique
+      if (data.type === 'Talks') {
+        topViewed.push({
+          id: doc.id,
+          docId: docId,
+          type: 'Talks'
+        });
+      } else if (data.type === 'AdjustingToMissionaryLife') {
+        topViewed.push({
+          id: doc.id,
+          docId: docId,
+          type: 'AdjustingToMissionaryLife'
+        });
+      }
+
+      docIds.add(docId); // add docId to set of unique docIds
+    }
+
+    // exit loop when we have top 5 unique docIds
+    if (docIds.size === 5) {
+      return false;
+    }
+  });
+
+  const docPromises = topViewed.map((doc) => {
+    if (doc.type === 'Talks') {
+      return talksCollection.doc(doc.docId).get();
+    } else if (doc.type === 'AdjustingToMissionaryLife') {
+      return adjustingToMissionaryLifeCollection.doc(doc.docId).get();
+    }
+  });
+
+  const talkSnapshots = await Promise.all(docPromises);
+  talkSnapshots.forEach((snapshot, index) => {
+    topViewed[index].talk = snapshot.data();
+  });
+
+  return topViewed;
+};
+
+
+
+
 export { 
   firebase, 
   journalsCollection, 
@@ -162,6 +238,9 @@ export {
   fetchJournals,
   getAdjustingToMissionaryLifeData,
   getTalksData,
+  getUserProfile,
+  addRecentView,
+  getTopViewed,
   fetchCheckinResults,
   updateCheckinResults,
 };

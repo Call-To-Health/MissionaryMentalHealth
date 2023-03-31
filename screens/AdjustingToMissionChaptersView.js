@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
-import { getAdjustingToMissionaryLifeData } from '../firebase.js'
+import { getAdjustingToMissionaryLifeData, addRecentView, auth } from '../firebase.js'
 import Header from '../components/Header';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
@@ -12,7 +12,9 @@ const screenWidth = Dimensions.get('screen').width
 
 const AdjustingToMissionChaptersView = () => {
     const [adjustToMLData, setData] = useState([]);
+    const [user, setUser] = useState([]);
     const navigation = useNavigation();
+
     useEffect(() => {
       const fetchData = async () => {
         const result = await getAdjustingToMissionaryLifeData();
@@ -21,6 +23,18 @@ const AdjustingToMissionChaptersView = () => {
   
       fetchData();
     }, []);
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          if (user) {
+            setUser(user);
+          } else {
+            setUser(null);
+          }
+        });
+        return unsubscribe;
+      }, []);
+
     return (
         <SafeAreaView style={{flex: 1,backgroundColor: COLORS.primary}}>
             <Header />
@@ -35,7 +49,10 @@ const AdjustingToMissionChaptersView = () => {
                 <View>
                     {adjustToMLData.map(chapter => (
                         <View key={chapter.chapter}>
-                        <Pressable onPress={() => navigation.navigate('GeneralWebView', {url: chapter.url, title: chapter.title})}> 
+                        <Pressable onPress={() => 
+                            {navigation.navigate('GeneralWebView', {url: chapter.url, title: chapter.title})
+                            addRecentView(user.uid, chapter.id, 'AdjustingToMissionaryLife');
+                        }}> 
                             <View style={style.iconContainer}>
                                 <Text>{chapter.chapter}. {chapter.title}</Text>
                             </View>
