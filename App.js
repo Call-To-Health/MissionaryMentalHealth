@@ -15,6 +15,7 @@ import JournalList from "./screens/JournalList";
 import SearchResults from "./screens/SearchResults";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
+import PsychologyTodayListView from "./screens/PsychologyTodayListView";
 import TalksView from "./screens/TalksView";
 import GeneralWebView from "./screens/GeneralWebView";
 import Survey from "./screens/Survey";
@@ -95,6 +96,11 @@ return (
           options={{headerShown: false}}
           name="AdjustingToMissionChaptersView"
           component={AdjustingToMissionChaptersView}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="PsychologyTodayListView"
+          component={PsychologyTodayListView}
         />
         <Stack.Screen
           options={{headerShown: false}}

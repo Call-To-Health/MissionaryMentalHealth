@@ -135,14 +135,14 @@ const Library = () => {
             </View>
 
             <View style={style.cardContainer}>
-              {/* <TouchableOpacity onPress={() => navigation.navigate("JournalList")}> */}
+              <TouchableOpacity onPress={() => navigation.navigate("PsychologyTodayListView")}>
               <Image
                 source={assets.psychologytoday}
                 style={[style.cardImage, {resizeMode: 'contain'}]}
               />
               
               <Text style={style.cardLabel}>Psychology Today</Text>
-              {/* </TouchableOpacity> */}
+              </TouchableOpacity>
             </View>
 
             <View style={style.cardContainer}>

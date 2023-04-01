@@ -50,7 +50,7 @@ const Home = () => {
       setJournals(fetchedJournals);
     };
     fetchAndSetJournals();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const getRandomDocs = async () => {
@@ -148,8 +148,7 @@ return (
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recent Journal Entries</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          { user ? 
-          journals.map(doc => (
+          {journals?.map(doc => (
             <Pressable
             key={doc.id}
             onPress={() => handleJournalPress(doc)}>
@@ -157,9 +156,7 @@ return (
                 <Text numberOfLines={2} ellipsizeMode='tail'>{doc.journalEntry}</Text>
               </View>
             </Pressable>
-          )) : 
-          ''
-          }
+          ))}
         </ScrollView>
       </View>
     </View>
