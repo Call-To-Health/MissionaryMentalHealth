@@ -71,9 +71,12 @@ async function fetchRandomQuote() {
 }
 
 const fetchJournals = async () => {
-  const snapshot = await userContentCollection.doc(auth.currentUser.uid).collection('journals').get();
-  const journalDocs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
-  return journalDocs;
+  if (auth.currentUser) {
+    const snapshot = await userContentCollection.doc(auth.currentUser.uid).collection('journals').get();
+    const journalDocs = snapshot.docs.map((doc) => ({ id: doc.id, ...doc.data() }));
+    return journalDocs;
+  }
+  return null;
 };
 
 const fetchCheckinResults = async (selectedDate) => {

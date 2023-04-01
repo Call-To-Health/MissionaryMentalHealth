@@ -148,7 +148,8 @@ return (
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recent Journal Entries</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {journals.map(doc => (
+          { user ? 
+          journals.map(doc => (
             <Pressable
             key={doc.id}
             onPress={() => handleJournalPress(doc)}>
@@ -156,7 +157,9 @@ return (
                 <Text numberOfLines={2} ellipsizeMode='tail'>{doc.journalEntry}</Text>
               </View>
             </Pressable>
-          ))}
+          )) : 
+          ''
+          }
         </ScrollView>
       </View>
     </View>
