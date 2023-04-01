@@ -29,7 +29,7 @@ const journalsCollection = db.collection('journals');
 const adjustingToMissionaryLifeCollection = db.collection('AdjustingToMissionaryLife');
 const talksCollection = db.collection('Talks');
 const userContentCollection = db.collection('userContent');
-const checkinResultsCollection = db.collection('Checkin');
+const psychologyTodayCollection = db.collection('Psychology_Today');
 
 let count = 0;
 
@@ -169,6 +169,12 @@ async function getAdjustingToMissionaryLifeData() {
   return data;
 }
 
+async function getPsychTodayData() {
+  const snapshot = await psychologyTodayCollection.orderBy('title').get();
+  const data = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+  return data;
+}
+
 
 // journalsCollection.get().then((querySnapshot) => {
 //   querySnapshot.forEach((doc) => {
@@ -238,6 +244,12 @@ const getTopViewed = async (uid) => {
           docId: docId,
           type: 'AdjustingToMissionaryLife'
         });
+      } else if (data.type === 'Psychology_Today') {
+        topViewed.push({
+          id: doc.id,
+          docId: docId,
+          type: 'Psychology_Today'
+        });
       }
 
       docIds.add(docId); // add docId to set of unique docIds
@@ -254,6 +266,8 @@ const getTopViewed = async (uid) => {
       return talksCollection.doc(doc.docId).get();
     } else if (doc.type === 'AdjustingToMissionaryLife') {
       return adjustingToMissionaryLifeCollection.doc(doc.docId).get();
+    } else if (doc.type === 'Psychology_Today') {
+      return psychologyTodayCollection.doc(doc.docId).get();
     }
   });
 
@@ -277,6 +291,7 @@ export {
   fetchRandomQuote,
   fetchJournals,
   getAdjustingToMissionaryLifeData,
+  getPsychTodayData,
   getTalksData,
   getUserProfile,
   addRecentView,

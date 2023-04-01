@@ -50,7 +50,7 @@ const Home = () => {
       setJournals(fetchedJournals);
     };
     fetchAndSetJournals();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const getRandomDocs = async () => {
@@ -90,7 +90,6 @@ return (
   <View style={style.header}></View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
-        <Text>{user ? user.email : ''}</Text>
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
@@ -148,8 +147,7 @@ return (
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recent Journal Entries</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          { user ? 
-          journals.map(doc => (
+          {journals?.map(doc => (
             <Pressable
             key={doc.id}
             onPress={() => handleJournalPress(doc)}>
@@ -157,9 +155,7 @@ return (
                 <Text numberOfLines={2} ellipsizeMode='tail'>{doc.journalEntry}</Text>
               </View>
             </Pressable>
-          )) : 
-          ''
-          }
+          ))}
         </ScrollView>
       </View>
     </View>
@@ -210,8 +206,7 @@ const style = StyleSheet.create ({
   },
   instructionalText: {
     fontSize: SIZES.large,
-    paddingBottom: 12,
-    paddingTop: 1,
+    padding: 12,
     fontWeight: "bold"
   },
   button: {
