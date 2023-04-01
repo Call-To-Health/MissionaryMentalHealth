@@ -226,8 +226,9 @@ const getTopViewed = async (uid) => {
   const recentViewsSnapshot = await recentViewsRef.collection('views').orderBy('viewedAt', 'desc').get();
   const topViewed = [];
   const docIds = new Set(); // keep track of unique docIds
+  let count = 0;
 
-  recentViewsSnapshot.forEach((doc) => {
+  for (const doc of recentViewsSnapshot.docs) {
     const data = doc.data();
     const docId = data.docId;
 
@@ -253,13 +254,13 @@ const getTopViewed = async (uid) => {
       }
 
       docIds.add(docId); // add docId to set of unique docIds
-    }
+      count++;
 
-    // exit loop when we have top 5 unique docIds
-    if (docIds.size === 5) {
-      return false;
+      if (count === 5) {
+        break;
+      }
     }
-  });
+  }
 
   const docPromises = topViewed.map((doc) => {
     if (doc.type === 'Talks') {
@@ -278,6 +279,7 @@ const getTopViewed = async (uid) => {
 
   return topViewed;
 };
+
 
 
 
