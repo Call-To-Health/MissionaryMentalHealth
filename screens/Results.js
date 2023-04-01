@@ -119,7 +119,7 @@ const Results = ({ route }) => {
               <WhatToDo style={style.section}/>
             </View>
 
-            <TouchableOpacity style={style.button} onPress={() => navigation.navigate("Checkin")}>
+            <TouchableOpacity style={style.button} onPress={() => navigation.navigate("Checkin", {refresh: true})}>
                 <Text style={style.buttonText}>See Previous Results</Text>
             </TouchableOpacity>
         </View>

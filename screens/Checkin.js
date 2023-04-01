@@ -7,13 +7,25 @@ import { COLORS, SIZES, FONTS } from '../constants';
 import { Calendar } from 'react-native-calendars';
 // import MyCalendar from '../components/Calendar';
 import { useNavigation } from "@react-navigation/native";
-import { fetchMarkedCheckinResults, auth } from '../firebase';
+import { fetchMarkedCheckinResults, auth, checkTodaysEntry } from '../firebase';
+import { useRoute } from '@react-navigation/native';
+
 
 const Checkin = () => {
-  const markedDates = {
-    '2023-04-01': { selected: true, selectedColor: 'green' },
-  };
+  const route = useRoute();
   const [checkinResults, setCheckinResults] = useState(null);
+  const [checkinExists, setCheckinExists] = useState(false);
+
+  useEffect(() => {
+    async function checkCheckin() {
+      const exists = await checkTodaysEntry();
+      setCheckinExists(exists);
+    }
+
+    checkCheckin();
+    // console.log("Refresh: " + route.params?.refresh);
+    route.params.refresh = false;
+  }, [auth.currentUser, route.params?.refresh]);
 
   const navigation = useNavigation();
 
@@ -24,13 +36,12 @@ const Checkin = () => {
     };
 
     fetchData();
-  }, [auth.currentUser]);
+  }, [auth.currentUser, route.params?.refresh]);
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <CheckinHeader/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
-        
         <View style={{backgroundColor:COLORS.primary, height:40, paddingHorizontal:20}}>
 
         </View>
@@ -39,7 +50,7 @@ const Checkin = () => {
           <View>
             <TouchableOpacity style={style.surveyButton} onPress={() => navigation.navigate("Survey")}>
                 <Text style={style.buttonText}>
-                  Complete Today's Check-in
+                  {checkinExists ? "Re-complete" : "Complete"} Today's Check-in
                 </Text>
             </TouchableOpacity>
           </View>

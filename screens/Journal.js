@@ -29,7 +29,7 @@ const Journal = () => {
         tags:tags,
         createdAt: timestamp
       };
-      userContentCollection.doc(auth.currentUser.uid).collection('journals')
+      userContentCollection.doc(auth.currentUse?.uid).collection('journals')
       .add(data)
       .then(() => {
         //release the new field state 

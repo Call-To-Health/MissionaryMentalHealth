@@ -122,11 +122,11 @@ const Tabs = () => {
                         width:30,
                         height:30,
                         tintColor:'#fff',
-                    marginTop: -11}}/>),
-                tabBarButton: (props) => (
-                    <CustomTabBarButton {...props}/>
-                    
-            )}}/>
+                        marginTop: -11}}/>),
+                        tabBarButton: (props) => (
+                          <CustomTabBarButton {...props}/>
+                        )
+                    }}/>
             <Tab.Screen name="LibraryStack" component={LibraryStack} options={{ 
                 headerShown: false, 
                 tabBarIcon: ({ focused }) => ( 

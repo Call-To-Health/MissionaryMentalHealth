@@ -97,6 +97,17 @@ const fetchCheckinResults = async (selectedDate) => {
 
 };
 
+const checkTodaysEntry = async () => {
+  const currentUserUid = auth.currentUser?.uid;
+  const today = new Date().toISOString().slice(0, 10);
+  const querySnapshot = await userContentCollection
+    .doc(currentUserUid)
+    .collection('check_in')
+    .where('date', '==', today)
+    .get();
+  return !querySnapshot.empty;
+};
+
 const fetchMarkedCheckinResults = async() => {
   if (auth.currentUser) {
     const currentUserUid = auth.currentUser.uid;
@@ -128,39 +139,41 @@ const fetchMarkedCheckinResults = async() => {
  
 }
 
-
 const updateCheckinResults = (date, answers, score, zone) => {
-  const currentUserUid = auth.currentUser.uid;
-  // const query = checkinResultsCollection.where('date', '==', date);
-  const query = userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', date);
-
-  query.get().then((querySnapshot) => {
-    if (!querySnapshot.empty) {
-      // There is already a document with the specified date, update it
-      const docRef = querySnapshot.docs[0].ref;
-      docRef.update({
-        question1: answers['question1'],
-        question2: answers['question2'],
-        question3: answers['question3'],
-        question4: answers['question4'],
-        score: score,
-        zone: zone,
-      });
-    } else {
-      // There is no document with the specified date, add a new one
-      userContentCollection.doc(currentUserUid).collection('check_in').add({
-        date: date,
-        question1: answers['question1'],
-        question2: answers['question2'],
-        question3: answers['question3'],
-        question4: answers['question4'],
-        score: score,
-        zone: zone,
-      });
-    }
-  }).catch((error) => {
-    console.error('Error getting documents: ', error);
-  });
+  if (auth.currentUser) {
+    const currentUserUid = auth.currentUser.uid;
+    // const query = checkinResultsCollection.where('date', '==', date);
+    const query = userContentCollection.doc(currentUserUid).collection('check_in').where('date', '==', date);
+  
+    query.get().then((querySnapshot) => {
+      if (!querySnapshot.empty) {
+        // There is already a document with the specified date, update it
+        const docRef = querySnapshot.docs[0].ref;
+        docRef.update({
+          question1: answers['question1'],
+          question2: answers['question2'],
+          question3: answers['question3'],
+          question4: answers['question4'],
+          score: score,
+          zone: zone,
+        });
+      } else {
+        // There is no document with the specified date, add a new one
+        userContentCollection.doc(currentUserUid).collection('check_in').add({
+          date: date,
+          question1: answers['question1'],
+          question2: answers['question2'],
+          question3: answers['question3'],
+          question4: answers['question4'],
+          score: score,
+          zone: zone,
+        });
+      }
+    }).catch((error) => {
+      console.error('Error getting documents: ', error);
+    });
+  }
+  return null;
 }
 
 async function getAdjustingToMissionaryLifeData() {
@@ -301,4 +314,5 @@ export {
   fetchCheckinResults,
   fetchMarkedCheckinResults,
   updateCheckinResults,
+  checkTodaysEntry
 };
