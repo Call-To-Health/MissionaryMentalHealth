@@ -135,6 +135,17 @@ const Library = () => {
             </View>
 
             <View style={style.cardContainer}>
+              {/* <TouchableOpacity onPress={() => navigation.navigate("JournalList")}> */}
+              <Image
+                source={assets.psychologytoday}
+                style={[style.cardImage, {resizeMode: 'contain'}]}
+              />
+              
+              <Text style={style.cardLabel}>Psychology Today</Text>
+              {/* </TouchableOpacity> */}
+            </View>
+
+            <View style={style.cardContainer}>
               <TouchableOpacity onPress={() => navigation.navigate("Stories")}>
               <Image
                 source={assets.missionaries3}
