@@ -4,8 +4,11 @@ import { JournalCard,JournalSearch,FocusedStatusBar } from "../components";
 import JournalListHeader from '../components/JournalListHeader';
 import { COLORS } from "../constants";
 import {fetchJournals} from "../firebase";
+import { useRoute } from '@react-navigation/native';
+
 
 const JournalList= () => {
+  const route = useRoute();
   const [journalDocs, setJournals] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredJournalData, setFilteredJournalData] = useState([]);
@@ -33,7 +36,11 @@ const JournalList= () => {
       console.log("Here is the content of journalDocs in the JournalList component" + journalDocs);
     };
     getJournals();
-  }, []);
+
+    if (route.params) {
+      route.params.refresh = false;
+    }
+  }, [route.params?.refresh]);
 
   return (
     <SafeAreaView style={{ backgroundColor: COLORS.primary, flex: 1 }}>

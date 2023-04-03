@@ -29,7 +29,7 @@ const Journal = () => {
         tags:tags,
         createdAt: timestamp
       };
-      userContentCollection.doc(auth.currentUse?.uid).collection('journals')
+      userContentCollection.doc(auth.currentUser?.uid).collection('journals')
       .add(data)
       .then(() => {
         //release the new field state 
@@ -145,7 +145,7 @@ const Journal = () => {
                 <Text style={styles.buttonText}>Add</Text>
               </TouchableOpacity>
     
-              <TouchableOpacity style={styles.buttonPink} onPress={() => navigation.navigate("JournalList")}>
+              <TouchableOpacity style={styles.buttonPink} onPress={() => navigation.navigate("JournalList", {refresh: true})}>
                     <Text style={styles.buttonText}>See Journal Entries</Text>
                   </TouchableOpacity>
           </View>
