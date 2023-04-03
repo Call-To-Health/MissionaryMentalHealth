@@ -43,6 +43,8 @@ const Journal = () => {
         alert(error); 
       })
     }
+
+    navigation.navigate('JournalList', {refresh: true});
   }
 
   // useEffect(() => {
