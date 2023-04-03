@@ -16,8 +16,6 @@ import missionaries4 from "../assets/images/missionaries4.jpeg";
 import missionaries5 from "../assets/images/missionaries5.jpeg";
 import missionaries6 from "../assets/images/missionaries6.jpg";
 import missionaries7 from "../assets/images/missionaries7.jpeg";
-import Christ from "../assets/images/Christ.png";
-import journal from "../assets/images/journal.png";
 
 import person00 from "../assets/images/person00.png";
 import person01 from "../assets/images/person01.png";
@@ -27,6 +25,8 @@ import person04 from "../assets/images/person04.png";
 import psychologytoday from "../assets/images/psychology_today.png";
 
 import adjustToML from "../assets/images/adjustingtomissionarylife.jpeg";
+import Christ from "../assets/images/Christ.png";
+import journal from "../assets/images/journal.png";
 
 export default {
   badge,
@@ -47,7 +47,6 @@ export default {
   missionaries5,
   missionaries6,
   missionaries7,
-  Christ,
   journal,
 
   person00,
@@ -55,6 +54,8 @@ export default {
   person02,
   person03,
   person04,
+  Christ,
   adjustToML,
-  psychologytoday,
+  journal,
+  psychologytoday
 };

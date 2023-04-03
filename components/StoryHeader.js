@@ -7,6 +7,7 @@ import { Ionicons } from '@expo/vector-icons';
 
 
 const StoryHeader = ({ onSearch }) => {
+  const navigation = useNavigation();
 
   return (
     <View

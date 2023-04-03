@@ -14,8 +14,8 @@ const StoryCard = ({doc}) => {
     // console.log(`Story id ${story.id} clicked. ${story.experience}` );
   };
 
-  const imageIndex = Math.floor(Math.random() * 7) + 1; // numImages is the total number of available images
-  const imageSource = (`assets.missionaries${imageIndex}`);
+  // const imageIndex = Math.floor(Math.random() * 7) + 1; // numImages is the total number of available images
+  // const imageSource = (`assets.missionaries${imageIndex}`);
   // console.log("imageSource:", imageSource);
 
   // console.log("Here is randomDocs as it is in the Card.js" + Object.values(randomDocs));
