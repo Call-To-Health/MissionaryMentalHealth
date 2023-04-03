@@ -42,7 +42,7 @@ const Library = () => {
 
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "TalksView"},
-    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "Stories"},
+    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "StoriesView"},
     {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "JournalList"},
   ];
 
@@ -146,7 +146,7 @@ const Library = () => {
             </View>
 
             <View style={style.cardContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate("Stories")}>
+              <TouchableOpacity onPress={() => navigation.navigate("StoriesView")}>
               <Image
                 source={assets.missionaries3}
                 style={style.cardImage}

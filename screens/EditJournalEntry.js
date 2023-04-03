@@ -4,7 +4,7 @@ import React, {useState,useCallback,useEffect} from 'react';
 import { JournalSearch, JournalCard } from '../components';
 import JournalEditHeader from '../components/JournalEditHeader';
 import { COLORS } from '../constants';
-import {firebase} from '../firebase.js';
+import {firebase, auth} from '../firebase.js';
 import { useNavigation } from "@react-navigation/native";
 import { createStackNavigator } from '@react-navigation/stack';
 
@@ -13,6 +13,7 @@ const Navigator = createStackNavigator();
 const EditJournalEntry = ({route}) => {
   const navigation = useNavigation();
   const journalsCollection = firebase.firestore().collection('journals');
+  const userContentCollection = firebase.firestore().collection('userContent');
   const [tags, setTags] = useState(route.params.doc.tags);
   const [addData, setAddData] = useState(route.params.doc.journalEntry);
   const [journals, setJournals] = useState([]);
@@ -25,7 +26,7 @@ const EditJournalEntry = ({route}) => {
       tags: tags,
       createdAt: firebase.firestore.FieldValue.serverTimestamp(),
     };
-    journalsCollection
+    userContentCollection.doc(auth.currentUser?.uid).collection('journals')
       .doc(route.params.doc.id)
       .update(updatedData)
       .then(() => {

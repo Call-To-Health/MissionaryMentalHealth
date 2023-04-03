@@ -2,7 +2,7 @@ import { createBottomTabNavigator} from "@react-navigation/bottom-tabs";
 import Home from '../screens/Home';
 import Library from '../screens/Library';
 import SearchResults from "../screens/SearchResults";
-import Stories from "../screens/Stories";
+import StoriesView from "../screens/StoriesView";
 import TalksView from "../screens/TalksView";
 import Journal from "../screens/Journal";
 import Checkin from '../screens/Checkin';
@@ -251,8 +251,8 @@ function JournalStack() {
           options={{ headerShown: false }}
         />
         <Stack.Screen 
-          name="Stories" 
-          component={Stories} 
+          name="StoriesView" 
+          component={StoriesView} 
           options={{ headerShown: false }}
         />
         <Stack.Screen 
