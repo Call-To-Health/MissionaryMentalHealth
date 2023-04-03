@@ -24,7 +24,9 @@ const Checkin = () => {
 
     checkCheckin();
     // console.log("Refresh: " + route.params?.refresh);
-    route.params.refresh = false;
+    if (route.params) {
+      route.params.refresh = false;
+    }
   }, [auth.currentUser, route.params?.refresh]);
 
   const navigation = useNavigation();
