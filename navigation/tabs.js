@@ -5,6 +5,7 @@ import SearchResults from "../screens/SearchResults";
 import StoriesView from "../screens/StoriesView";
 import TalksView from "../screens/TalksView";
 import Journal from "../screens/Journal";
+import Register from "../screens/Register";
 import Checkin from '../screens/Checkin';
 import UserAccount from '../screens/UserAccount';
 import UserAccountLoggedIn from "../screens/UserAccountLoggedIn";
@@ -198,6 +199,8 @@ function JournalStack() {
         <Stack.Screen 
           name="Home" 
           component={Home} 
+          // This is supposed to make it refresh 
+          key={Math.random().toString()}
           options={{ headerShown: false }}
         />
         <Stack.Screen 
@@ -226,6 +229,11 @@ function JournalStack() {
         <Stack.Screen
           name="Home"
           component={Home}
+          options={{ headerShown: false }}
+        />
+        <Stack.Screen
+          name="Register"
+          component={Register}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>

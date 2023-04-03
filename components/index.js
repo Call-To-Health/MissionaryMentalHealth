@@ -5,6 +5,7 @@ import JournalEditHeader from "./JournalEditHeader";
 import JournalListHeader from "./JournalListHeader";
 import CheckinHeader from "./CheckinHeader";
 import LibraryHeader from "./LibraryHeader";
+import RegisterHeader from "./RegisterHeader";
 import Header from "./Header";
 import StoryCard from "./StoryCard";
 import { RectButton, CircleButton } from "./Button";
@@ -37,6 +38,7 @@ export {
   JournalCard,
   JournalSubInfo,
   Separator,
+  RegisterHeader,
   EndDate,
   RectButton,
   CircleButton,

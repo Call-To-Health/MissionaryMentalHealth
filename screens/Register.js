@@ -1,6 +1,6 @@
 import { View, Text, StyleSheet, Image,SafeAreaView, TouchableOpacity, Button, Pressable, ScrollView  } from 'react-native'
 import {FocusedStatusBar} from "../components";
-import LoginHeader from '../components/LoginHeader';
+import RegisterHeader from '../components/RegisterHeader';
 import React, { useState, useEffect } from 'react';
 import { COLORS, FONTS, SIZES, assets} from '../constants';
 import { TextInput } from 'react-native-gesture-handler';
@@ -17,7 +17,7 @@ import * as Google from 'expo-auth-session/providers/google';
 
 WebBrowser.maybeCompleteAuthSession()
 
-const UserAccount = () => {
+const Register = () => {
 
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
@@ -31,16 +31,7 @@ const UserAccount = () => {
       setAccessToken(response.authentication.accessToken);
       accessToken && fetchUserInfo();}},[response, accessToken])
   
-  const HandleSignOut = () => {
-    auth
-    .signOut()
-    .then(()=> {
-      setEmail("");
-      setPassword("");
-      navigation.navigate('Tabs', { screen: 'Home' })
-    })
-    .catch(error => alert(error.message))
-  }
+
   const [email, setEmail] = useState('')
   const [password, setPassword] = useState('')
 
@@ -52,7 +43,7 @@ const UserAccount = () => {
         navigation.navigate('Tabs', { screen: 'Home' })
       }
     })
-    return unsubscribe
+    return unsubscribe;
   }, [])
 
   const handleSignUp = () => {
@@ -61,49 +52,19 @@ const UserAccount = () => {
     .then(userCredentials => {
       const user = userCredentials.user;
       console.log(user.email); 
+      navigation.navigate('Tabs', { screen: 'Home' })
     })
     .catch(error=> alert(error.message))
   }
 
-  const handleLogin = () => {
-    auth
-    .signInWithEmailAndPassword(email.trim(),password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log('Logged in with: ', user.email);
-    })
-    .catch(error=> alert(error.message))
-  }
 
-  async function fetchUserInfo() {
-    let response = await fetch("https://www.googleapis.com/userinfo/v2/me",{
-      headers: {
-        Authorization: 'Bearer ${accessToken}' }});
-    const useInfo = await response.json();
-    setUser(useInfo);
-  }
-
-  // const ShowUserInfo = ()  => {
-  //   if(user) {
-  //     return(
-  //       <View style={{flex:1, alignItems: 'center', justifyContent:'center'}}>
-  //         <Text style={{fontSize:35,marginTop: 500, color: "white", fontWeight: 'bold', marginBottom:20}}>Google Sign In Successful! {user.name}</Text>
-  //         <Image source={{uri:user.picture}} style={{width: 100, height:100, borderRadius:50}}/>
-  //         <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'Home' })}>
-  //           <Text>Go Home</Text>
-  //         </Pressable>
-  //         <Text style={{fontSize:20, fontWeight: 'bold'}}>{user.name}</Text>
-  //       </View>
-  //     )
-  //   }
-  // }
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <ScrollView keyboardShouldPersistTaps="always" contentInsetAdjustmentBehavior="automatic" contentInset={{ bottom: 100 }} scrollIndicatorInsets={{ bottom: 100 }}>
         <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary, paddingBottom: 110}}>
           <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
-          <LoginHeader />
+          <RegisterHeader />
 
             <View>
               <Text style={styles.buttonText}>{auth.currentUser?.email}</Text>
@@ -121,27 +82,14 @@ const UserAccount = () => {
             </View>
 
             <View style={styles.buttonContainer}>
-              <TouchableOpacity onPress={handleLogin} style={styles.button}>
-                <Text style={styles.buttonText}>Log In</Text>
+              <TouchableOpacity onPress={handleSignUp} style={styles.button}>
+                <Text style={styles.buttonText}>Register</Text>
               </TouchableOpacity>
 
             <View style={{ flexDirection: 'row', paddingVertical: 25, paddingHorizontal: 50 }}>
-              <Separator />
-              <Text style={{ color: COLORS.white, paddingHorizontal: 10}}>OR</Text>
-              <Separator />
 
             </View>
-              {/* <TouchableOpacity onPress={handleSignUp} style={[styles.button, styles.buttonOutline, {backgroundColor: COLORS.green}]}>
-                <Text style={[styles.buttonText, {color: COLORS.white}]}>Register</Text>
-              </TouchableOpacity> */}
-              <TouchableOpacity onPress={() => navigation.navigate("Register")}  style={[styles.button, styles.buttonOutline, {backgroundColor: COLORS.green}]}>
-                <Text style={[styles.buttonText, {color: COLORS.white}]}>Register</Text>
-              </TouchableOpacity>
-              {/* <TouchableOpacity onPress={HandleSignOut} style={styles.redButton}>
-                <Text style={[styles.buttonText, {color: COLORS.white}]}>Sign Out</Text>
-              </TouchableOpacity> */}
             </View>
-
             <View style ={styles.littleContainer}>
 
             </View>
@@ -149,13 +97,7 @@ const UserAccount = () => {
             <View style={{ paddingTop: 30 }}> 
               {user && <ShowUserInfo/>}
 
-              {/* Commenting out the Google sign in button */}
-              {/* {user === null && <>
-              <TouchableOpacity
-                disabled={!request}
-                onPress={() => {promptAsync();}}>
-                <Image source={assets.google} style={{width: 230, height: 50, borderRadius: 10}} />
-              </TouchableOpacity></>} */}
+              
             </View>
           </SafeAreaView>
       </ScrollView>
@@ -245,4 +187,4 @@ inputLabel: {
   fontSize: SIZES.medium
 },
 })
-export default UserAccount
+export default Register;

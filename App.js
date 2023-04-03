@@ -8,6 +8,7 @@ import Tabs from './navigation/tabs';
 import AsyncStorage from "@react-native-async-storage/async-storage";
 import Details from "./screens/Details";
 import UserAccount from "./screens/UserAccount";
+import Register from "./screens/Register";
 import Home from "./screens/Home";
 import Journal from "./screens/Journal";
 import StoriesView from "./screens/StoriesView";
@@ -112,7 +113,11 @@ return (
           name="GeneralWebView"
           component={GeneralWebView}
         />
-
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="Register"
+          component={Register}
+        />
         <Stack.Screen
           options={{headerShown: false}}
           name="Survey"
