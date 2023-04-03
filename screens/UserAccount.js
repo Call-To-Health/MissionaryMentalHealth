@@ -145,12 +145,14 @@ const UserAccount = () => {
 
             <View style={{ paddingTop: 30 }}> 
               {user && <ShowUserInfo/>}
-              {user === null && <>
+
+              {/* Commenting out the Google sign in button */}
+              {/* {user === null && <>
               <TouchableOpacity
                 disabled={!request}
                 onPress={() => {promptAsync();}}>
                 <Image source={assets.google} style={{width: 230, height: 50, borderRadius: 10}} />
-              </TouchableOpacity></>}
+              </TouchableOpacity></>} */}
             </View>
           </SafeAreaView>
       </ScrollView>
