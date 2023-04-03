@@ -3,6 +3,7 @@ import { View, FlatList, StyleSheet } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import { StoryCard, FocusedStatusBar } from "../components";
 import StoryHeader from "../components/StoryHeader";
+import { useNavigation } from "@react-navigation/native";
 import { COLORS } from "../constants";
 import { fetchRandomDocs } from "../firebase";
 
@@ -10,6 +11,7 @@ const StoriesView = () => {
   const [randomDocs, setRandomDocs] = useState([]);
   const [searchQuery, setSearchQuery] = useState("");
   const [filteredStoryData, setFilteredData] = useState([]);
+  const navigation = useNavigation();
 
   const handleSearch = (value) => {
     setSearchQuery(value);
@@ -52,8 +54,8 @@ const StoriesView = () => {
 
 const styles = StyleSheet.create({
   safeArea: {
-    flex: 0.7,
-    backgroundColor: COLORS.red,
+    flex: 1,
+    backgroundColor: COLORS.primary,
   },
 });
 
