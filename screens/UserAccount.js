@@ -67,7 +67,7 @@ const UserAccount = () => {
 
   const handleLogin = () => {
     auth
-    .signInWithEmailAndPassword(email,password)
+    .signInWithEmailAndPassword(email.trim(),password)
     .then(userCredentials => {
       const user = userCredentials.user;
       console.log('Logged in with: ', user.email);

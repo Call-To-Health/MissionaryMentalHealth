@@ -5,6 +5,7 @@ import Header from '../components/Header';
 import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS } from '../constants';
 import { useNavigation } from "@react-navigation/native";
+import { updateCheckinResults } from "../firebase";
 
 const Survey = () => {
 
@@ -146,10 +147,10 @@ const Survey = () => {
         // Send answers to backend or perform any other necessary actions
         console.log(answers)
 
-        // add scores from questions
+        // Add scores from questions
         const totalScore = parseInt(answers.question1) + parseInt(answers.question2) + parseInt(answers.question3) + parseInt(answers.question4);
 
-        // determine zone
+        // Determine zone
         var zone = "";
         if (totalScore > 15) {
             zone = "green";
@@ -164,7 +165,16 @@ const Survey = () => {
             zone = "red";
         }
 
-        // navigate to Checkin for now (working on Results page)        
+        const today = new Date();
+        const year = today.getFullYear();
+        const month = today.getMonth() + 1; // January is 0, so add 1
+        const day = today.getDate();
+
+        const dateString = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
+        updateCheckinResults(dateString, answers, totalScore, zone);
+
+        // navigate to Results page     
         navigation.navigate("Results", { zone: zone});
       };
 

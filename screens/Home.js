@@ -5,40 +5,40 @@ import HomeHeader from '../components/HomeHeader';
 import { useNavigation} from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
-import { fetchRandomQuote } from '../firebase';
-import { fetchRandomDocs } from '../firebase';
-import { auth } from '../firebase';
+import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView, getUserProfile } from '../firebase';
 
 const Home = () => {
-  const recentlyViewed = [
-    { id: 1, title: 'Adjusting to Missionary Life' },
-    { id: 2, title: 'Journal Entry' },
-    { id: 3, title: 'Yep' },
-    { id: 4, title: 'Please stop scrolling because I aint got more ' },
-  ];
-
-  const [userEmail, setUserEmail] = useState(null);
+  const [user, setUser] = useState(null);
+  const [topViewed, setTopViewed] = useState(null);
+  const [userProfile, setUserProfile] = useState(null);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
   const [randomDocs, setRandomDocs] = useState([]);
+  const [height, setHeight] = useState(null);
 
   const handleStoryPress = (story) => {
     navigation.navigate('Details', { story: story });
-    console.log(`Story id ${story.id} clicked. ${story.experience}` );
   };
 
   const handleJournalPress = (journal) => {
     navigation.navigate('EditJournalEntry', { doc: journal });
-    console.log(`Journal id ${journals.id} clicked. ${journals.journalEntry}` );
   };
+
+  const handleLayout = event => {
+    const { height } = event.nativeEvent.layout;
+    setHeight(height);
+  };
+
 
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
-        setUserEmail(user.email);
+        setUser(user);
+        setUserProfile(getUserProfile(user.uid));
       } else {
-        setUserEmail(null);
+        setUser(null);
+        setUserProfile(null);
       }
     });
     return unsubscribe;
@@ -50,7 +50,7 @@ const Home = () => {
       setJournals(fetchedJournals);
     };
     fetchAndSetJournals();
-  }, []);
+  }, [user]);
 
   useEffect(() => {
     const getRandomDocs = async () => {
@@ -64,14 +64,25 @@ const Home = () => {
     const getRandomQuote = async () => {
       const randomQuote = await fetchRandomQuote();
       setRandomQuote(randomQuote.map((doc) => ({ id: doc.id, ...doc.data() })));
-      console.log("Here is the content of randomQuote in the Home component" + randomQuote);
+      // console.log("Here is the content of randomQuote in the Home component" + randomQuote);
     };
     getRandomQuote();
   }, []);
 
+  useEffect(() => {
+    const fetchTopViewed = async () => {
+      if (user) {
+        const topViewed = await getTopViewed(user.uid);
+        setTopViewed(topViewed);
+      }
+    };
+
+    fetchTopViewed();
+  }, [user]);
+
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-  <HomeHeader />
+  <HomeHeader userProfile={userProfile}/>
   <FocusedStatusBar
      translucent={false}
      backgroundColor={COLORS.primary}/>
@@ -79,7 +90,6 @@ return (
   <View style={style.header}></View>
     <ScrollView style={{ backgroundColor: COLORS.white}}>
       <View style={style.body}>
-        <Text>{userEmail}</Text>
         <Text style={style.instructionalText}>Have you done your daily check-in yet?</Text>
         <TouchableOpacity onPress={() => navigation.navigate("Checkin")} style={[style.button, style.redButton]}>
           <Text style={[style.buttonText, { color: COLORS.white }]}>Start Check-in</Text>
@@ -94,11 +104,11 @@ return (
 
       <View style={style.cardContainerWrapper}>
         <View style={style.cardContainer}>
-          <Text style={style.scrollTitle}>Quote of the Day</Text>
+          <Text style={[style.scrollTitle]}>Quote of the Day</Text>
           
-            <View style={style.quoteCard}>
+            <View style={[style.quoteCard, {height}]}>
               {randomQuote.map(doc => (
-              <View key={doc.id}>
+              <View key={doc.id} style={{padding: 10}} onLayout={handleLayout}>
                 <Text>{doc.text}</Text>
                 <Text>  -{doc.speaker}</Text>
             </View>))}
@@ -112,11 +122,23 @@ return (
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recently viewed</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {recentlyViewed.map(item => (
-            <View key={item.id} style={style.card}>
-              <Text>{item.title}</Text>
-            </View>
-          ))}
+          { user ? 
+            topViewed?.map(doc => (
+              <View key={doc.id} style={style.card}>
+                  <Pressable onPress={() => 
+                      {addRecentView(user.uid, doc.docId, doc.type);
+                      navigation.navigate('GeneralWebView', {url: doc.talk.url, title: doc.talk.title})
+                  }}> 
+                          <View style={style.iconContainer}>
+                              <Text numberOfLines={2} ellipsizeMode='tail'>{doc.talk.title}</Text>
+                          </View>
+                  </Pressable>
+              </View>
+            ))
+            : 
+            ''
+          }
+          
         </ScrollView>
       </View>
     </View>
@@ -125,13 +147,13 @@ return (
       <View style={style.cardContainer}>
         <Text style={style.scrollTitle}>Recent Journal Entries</Text>
         <ScrollView horizontal showsHorizontalScrollIndicator={false}>
-          {journals.map(doc => (
+          {journals?.map(doc => (
             <Pressable
             key={doc.id}
             onPress={() => handleJournalPress(doc)}>
-            <View key={doc.id} style={style.card}>
-              <Text>{doc.journalEntry}</Text>
-            </View>
+              <View key={doc.id} style={style.card}>
+                <Text numberOfLines={2} ellipsizeMode='tail'>{doc.journalEntry}</Text>
+              </View>
             </Pressable>
           ))}
         </ScrollView>
@@ -147,7 +169,7 @@ return (
             key={doc.id}
             onPress={() => handleStoryPress(doc)}>
             <View key={doc.id} style={style.card}>
-              <Text>{doc.solution}</Text>
+              <Text numberOfLines={2} ellipsizeMode='tail'>{doc.solution}</Text>
             </View>
             </Pressable>
           ))}
@@ -184,8 +206,7 @@ const style = StyleSheet.create ({
   },
   instructionalText: {
     fontSize: SIZES.large,
-    paddingBottom: 12,
-    paddingTop: 1,
+    padding: 12,
     fontWeight: "bold"
   },
   button: {
@@ -228,9 +249,10 @@ const style = StyleSheet.create ({
   },
   card: {
     backgroundColor: COLORS.lightgray,
-    elevation:5,
-    width: 130,
-    height: 80,
+    padding: 10,
+    elevation: 5,
+    width: 180,
+    height: 100,
     borderRadius: 10,
     marginHorizontal: 10,
     marginVertical: 9,

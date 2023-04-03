@@ -1,4 +1,4 @@
-import {React} from "react";
+import React, { useState, useEffect } from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer, DefaultTheme } from "@react-navigation/native";
 import {StyleSheet,Text,View,Pressable} from 'react-native';
@@ -15,12 +15,14 @@ import JournalList from "./screens/JournalList";
 import SearchResults from "./screens/SearchResults";
 import AdjustingToMission from "./screens/AdjustingToMission";
 import AdjustingToMissionChaptersView from "./screens/AdjustingToMissionChaptersView";
+import PsychologyTodayListView from "./screens/PsychologyTodayListView";
 import TalksView from "./screens/TalksView";
 import GeneralWebView from "./screens/GeneralWebView";
 import Survey from "./screens/Survey";
 import Results from "./screens/Results";
 import DayResult from "./screens/DayResult";
 import EditJournalEntry from "./screens/EditJournalEntry";
+import { auth } from './firebase';
 
 const Stack = createStackNavigator();
 
@@ -32,9 +34,24 @@ const theme = {
   },
 };
 
+
 const App = () => {
+  const [user, setUser] = useState(null);
   const [loaded] = useFonts({InterBold: require("./assets/fonts/Inter-Bold.ttf"), InterSemiBold: require("./assets/fonts/Inter-SemiBold.ttf"),InterMedium: require("./assets/fonts/Inter-Medium.ttf"),InterRegular: require("./assets/fonts/Inter-Regular.ttf"),InterLight: require("./assets/fonts/Inter-Light.ttf"),});
+  
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged(user => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return unsubscribe;
+  }, []);
+
   if (!loaded) return null;
+
 
 return (
     <NavigationContainer theme={theme}>
@@ -79,6 +96,11 @@ return (
           options={{headerShown: false}}
           name="AdjustingToMissionChaptersView"
           component={AdjustingToMissionChaptersView}
+        />
+        <Stack.Screen
+          options={{headerShown: false}}
+          name="PsychologyTodayListView"
+          component={PsychologyTodayListView}
         />
         <Stack.Screen
           options={{headerShown: false}}

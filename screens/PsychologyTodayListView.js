@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
-import { getAdjustingToMissionaryLifeData, addRecentView, auth } from '../firebase.js'
+import { getPsychTodayData, addRecentView, auth } from '../firebase.js'
 import Header from '../components/Header';
 import { FocusedStatusBar } from "../components";
 import { COLORS, SIZES } from '../constants';
@@ -10,14 +10,14 @@ import { Ionicons } from '@expo/vector-icons';
 
 const screenWidth = Dimensions.get('screen').width
 
-const AdjustingToMissionChaptersView = () => {
-    const [adjustToMLData, setData] = useState([]);
+const PsychologyTodayListView = () => {
+    const [psychTodayData, setData] = useState([]);
     const [user, setUser] = useState([]);
     const navigation = useNavigation();
 
     useEffect(() => {
       const fetchData = async () => {
-        const result = await getAdjustingToMissionaryLifeData();
+        const result = await getPsychTodayData();
         setData(result);
       };
   
@@ -43,18 +43,19 @@ const AdjustingToMissionChaptersView = () => {
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                     <Ionicons name="chevron-back" size={32} color={COLORS.white} />
                 </TouchableOpacity>
-                <Text style={style.headerTitle}>Adjusting To Missionary Life</Text>
+                <Text style={style.headerTitle}>Psychology Today</Text>
             </View>
             <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
                 <View>
-                    {adjustToMLData.map(chapter => (
-                        <View key={chapter.chapter}>
+                    {psychTodayData.map(chapter => (
+                        <View key={chapter.id}>
                         <Pressable onPress={() => 
-                            {navigation.navigate('GeneralWebView', {url: chapter.url, title: chapter.title})
-                            addRecentView(user.uid, chapter.id, 'AdjustingToMissionaryLife');
+                            {navigation.navigate('GeneralWebView', {url: chapter.link, title: chapter.title})
+                            if (user)
+                              addRecentView(user.uid, chapter.id, 'Psychology_Today');
                         }}> 
                             <View style={style.iconContainer}>
-                                <Text>{chapter.chapter}. {chapter.title}</Text>
+                                <Text>{chapter.title}</Text>
                             </View>
                         </Pressable>
                         </View>
@@ -105,4 +106,4 @@ const style = StyleSheet.create ({
       },
   })
 
-export default AdjustingToMissionChaptersView;
+export default PsychologyTodayListView;

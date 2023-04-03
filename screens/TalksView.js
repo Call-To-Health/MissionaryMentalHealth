@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { View, SafeAreaView, StatusBar, Text, StyleSheet, ScrollView, Pressable, TouchableOpacity, Dimensions } from 'react-native';
 import { WebpageView } from "../components/WebpageView";
-import { getTalksData } from '../firebase.js'
+import { getTalksData, addRecentView, auth } from '../firebase.js'
 import { FocusedStatusBar } from "../components";
 import Header from "../components/Header";
 import TagButton from "../components/TagButton";
@@ -15,8 +15,20 @@ const screenWidth = Dimensions.get('screen').width
 
 const TalksView = () => {
     const [talksData, setData] = useState([]);
+    const [user, setUser] = useState(null);
     const [selectedTags, setSelectedTags] = useState([]);
     const navigation = useNavigation();
+
+    useEffect(() => {
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+          if (user) {
+            setUser(user);
+          } else {
+            setUser(null);
+          }
+        });
+        return unsubscribe;
+      }, []);
 
     useEffect(() => {
       const fetchData = async () => {
@@ -77,7 +89,10 @@ const TalksView = () => {
                     return selectedTags.every((tag) => tags.includes(tag));
                 }).map(talk => (
                     <View key={talk.id}>
-                        <Pressable onPress={() => navigation.navigate('GeneralWebView', {url: talk.url, title: talk.title})}> 
+                        <Pressable onPress={() => 
+                            {addRecentView(user.uid, talk.id, 'Talks');
+                            navigation.navigate('GeneralWebView', {url: talk.url, title: talk.title})
+                        }}> 
                                 <View style={style.iconContainer}>
                                     <Text>{talk.title}</Text>
                                 </View>
@@ -85,6 +100,7 @@ const TalksView = () => {
                     </View>
                 ))}
                 </View>
+                <View style={{backgroundColor: COLORS.white, height: 70}}></View>
             </ScrollView>
         </SafeAreaView>
     )

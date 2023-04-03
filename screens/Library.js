@@ -9,17 +9,44 @@ import LibraryHeader from '../components/LibraryHeader';
 import LibrarySearch from '../components/LibrarySearch';
 import { FlatList, TextInput } from 'react-native-gesture-handler';
 import { useNavigation } from "@react-navigation/native";
+import { getTopViewed, auth } from '../firebase';
 import { assets } from '../constants';
+import { GrantType } from 'expo-auth-session';
 
-const {width} = Dimensions.get('screen');
-  
 const Library = () => {  
+  const [topViewed, setTopViewed] = useState(null);
+  const [user, setUser] = useState(null);
   const navigation = useNavigation();
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return unsubscribe;
+  }, []);
+
+  useEffect(() => {
+    const fetchTopViewed = async () => {
+      if (user) {
+        const topViewed = await getTopViewed(user.uid);
+        setTopViewed(topViewed);
+      }
+    };
+
+    fetchTopViewed();
+  }, []);
+
   const categoryIcons = [
     {icon: <MaterialCommunityIcons name="bookshelf" size={30} color={COLORS.primary} />, label: "Talks", navLocation: "TalksView"},
-    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "StoriesView"},
+    {icon: <Feather name="book-open" size={30} color={COLORS.primary} />, label: "Missionary Stories",  navLocation: "Stories"},
     {icon: <FontAwesome5 name="pencil-alt" size={24} color={COLORS.primary} />, label: "My Journal Entries",  navLocation: "JournalList"},
   ];
+
+
   const ListCategories = () => {
     return (
       <View style={style.categoryContainer}>
@@ -45,7 +72,6 @@ const Library = () => {
       <LibrarySearch/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
         
-        
         <ScrollView showsVerticalScrollIndicator={false} style={{ backgroundColor: COLORS.white }}>
           <View style={{backgroundColor: COLORS.primary, height: 0}}>
             <View style={{ marginLeft: 10, marginRight: 10}}>
@@ -53,12 +79,28 @@ const Library = () => {
             </View>
           </View>
           
-          <ListCategories />
-          <Text style={style.sectionTitle}>Resources</Text>
-          <View style={{ paddingLeft: 20}}>
-            
-          <ScrollView horizontal showsHorizontalScrollIndicator={false}>
+          {/* <ListCategories /> */}
+          <Text style={style.sectionTitle}>Recently Viewed</Text>
+            {/* {user ? 
+             topViewed?.map(doc => (
+              <View key={doc.id} style={style.card}>
+                  <Pressable onPress={() => 
+                      {addRecentView(user.uid, doc.docId, doc.type);
+                      navigation.navigate('GeneralWebView', {url: doc.talk.url, title: doc.talk.title})
+                  }}> 
+                          <View style={style.iconContainer}>
+                              <Text numberOfLines={2} ellipsizeMode='tail'>{doc.talk.title}</Text>
+                          </View>
+                  </Pressable>
+              </View>
+            ))
+          : '' } */}
 
+          <Text style={style.sectionTitle}>Resources</Text>
+          <View>
+            
+          <ScrollView>
+            <View style={style.gridContainer}>
           <View style={style.cardContainer}>
               <TouchableOpacity onPress={() => navigation.navigate("AdjustingToMissionChaptersView")}>
               <Image
@@ -93,7 +135,18 @@ const Library = () => {
             </View>
 
             <View style={style.cardContainer}>
-              <TouchableOpacity onPress={() => navigation.navigate("StoriesView")}>
+              <TouchableOpacity onPress={() => navigation.navigate("PsychologyTodayListView")}>
+              <Image
+                source={assets.psychologytoday}
+                style={[style.cardImage, {resizeMode: 'contain'}]}
+              />
+              
+              <Text style={style.cardLabel}>Psychology Today</Text>
+              </TouchableOpacity>
+            </View>
+
+            <View style={style.cardContainer}>
+              <TouchableOpacity onPress={() => navigation.navigate("Stories")}>
               <Image
                 source={assets.missionaries3}
                 style={style.cardImage}
@@ -102,14 +155,23 @@ const Library = () => {
               <Text style={style.cardLabel}>Others' Stories</Text>
               </TouchableOpacity>
             </View>
-
+            </View>
             </ScrollView>
           </View>
+          <View style={{backgroundColor: COLORS.white, height: 100}}></View>
         </ScrollView>
+
     </SafeAreaView>
   )
 }
+
 const style = StyleSheet.create ({
+  gridContainer: {
+    flexDirection: "row",
+    flexWrap: "wrap",
+    justifyContent: "center",
+    paddingHorizontal: 20,
+  },
   header: {
     paddingVertical: 20,
     paddingHorizontal: 10,
@@ -165,21 +227,27 @@ const style = StyleSheet.create ({
   },
   cardContainer: {
     width: 150,
-    elevation: 12, 
+    backgroundColor:'white',
+    marginBottom:20,
+    marginTop:10,
+    marginLeft:5,
+    padding:10,
+    marginRight:5,
+    elevation: 10, 
+    borderRadius: 15,
     
   },
   cardImage: {
     height: 180,
+    borderRadius:15,
     width: 130,
-    marginRight: 2,
-    padding: 2,
-    overflow: 'hidden',
-    borderRadius: 15,
-    elevation: 10
+    padding: 20,
   },
   cardLabel: {
-    padding: 3,
-    fontSize:10
+    padding: 5,
+    textAlign:'center',
+    fontSize:12,
+    fontWeight:'bold'
   }
 })
 export default Library;
