@@ -13,8 +13,20 @@ import { useRoute } from '@react-navigation/native';
 
 const Checkin = () => {
   const route = useRoute();
+  const [user, setUser] = useState(null);
   const [checkinResults, setCheckinResults] = useState(null);
   const [checkinExists, setCheckinExists] = useState(false);
+
+  useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        setUser(user);
+      } else {
+        setUser(null);
+      }
+    });
+    return unsubscribe;
+  }, []);
 
   useEffect(() => {
     async function checkCheckin() {
@@ -27,7 +39,7 @@ const Checkin = () => {
     if (route.params) {
       route.params.refresh = false;
     }
-  }, [auth.currentUser, route.params?.refresh]);
+  }, [user, route.params?.refresh]);
 
   const navigation = useNavigation();
 
@@ -38,7 +50,8 @@ const Checkin = () => {
     };
 
     fetchData();
-  }, [auth.currentUser, route.params?.refresh]);
+  }, [user, route.params?.refresh]);
+
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
