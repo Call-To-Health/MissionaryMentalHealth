@@ -19,7 +19,7 @@ WebBrowser.maybeCompleteAuthSession()
 
 const Register = () => {
 
-  const [selectedOption, setSelectedOption] = useState('sister');
+  const [selectedOption, setSelectedOption] = useState('');
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -49,26 +49,25 @@ const Register = () => {
     return unsubscribe;
   }, [])
 
-  const handleSignUp = () => {
-    auth 
-      .createUserWithEmailAndPassword(email,password)
-      .then(userCredentials => {
-        const user = userCredentials.user;
-        console.log(user.email + " user account was created with " + user.gender + " gender.");
+  const handleSignUp = async () => {
+    try {
+      const userCredentials = await auth.createUserWithEmailAndPassword(email, password);
+      const user = userCredentials.user;
+    
+      // Save the selected gender option to the database
+      const gender = selectedOption;
+      await user.updateProfile({
+        displayName: gender
+      });
   
-        // Save the selected gender option to the database
-        const gender = selectedOption;
-        user.updateProfile({
-          displayName: gender
-        });
-
-        // This is making bugs
-        // setUser(auth.currentUser);
+      console.log(user.email + " user account was created with " + user.displayName + " gender.");
+    
+      navigation.navigate('Tabs', { screen: 'HomeStack' });
+    } catch (error) {
+      alert(error.message);
+    }
+  };
   
-        navigation.navigate("Home");
-      })
-      .catch(error=> alert(error.message))
-  }
 
 
   return (
@@ -94,7 +93,7 @@ const Register = () => {
             </View>
 
             <View>
-            <Text style={styles.inputLabel}>I am a...</Text>
+            <Text style={styles.inputLabel}>I am an...</Text>
             <View style={{ flexDirection: 'row'}}>
               <TouchableOpacity onPress={() => handleOptionSelect('elder')} style={selectedOption === 'elder' ? styles.selectedButton : styles.unselectedButton}>
                 <Text style={selectedOption === 'elder' ? styles.selectedButtonText : styles.unselectedButtonText}>{selectedOption === 'elder' ? '●' : '○'} Elder</Text>

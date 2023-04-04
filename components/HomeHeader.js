@@ -16,8 +16,9 @@ const HomeHeader = (userProfile) => {
             <View
             style={{ backgroundColor: COLORS.primary, height: 30, paddingHorizontal: 0}}>
                 <Text style={style.headerTitle}>
-                    Welcome, {user ? (user.gender == 'elder' ? 'Elder' : 'Sister') : 'Missionary' }! 
+                    Welcome, {user ? (user.displayName === 'elder' ? 'Elder' : (user.displayName === 'sister' ? 'Sister' : 'Missionary')) : 'Missionary'}! 
                 </Text>
+
             </View>
             <View style={{ width: 45, height: 45 }}>
                 <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'AccountStack' })}>
