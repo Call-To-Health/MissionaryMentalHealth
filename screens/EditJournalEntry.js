@@ -42,6 +42,7 @@ const EditJournalEntry = ({route}) => {
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
       <JournalEditHeader/>
       <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
+      <ScrollView keyboardShouldPersistTaps="never">
       <View style={styles.container}>
   
       <TextInput
@@ -141,6 +142,7 @@ const EditJournalEntry = ({route}) => {
                   </TouchableOpacity>
           </View>
         </View> 
+        </ScrollView>
     </SafeAreaView>
   )
 }
