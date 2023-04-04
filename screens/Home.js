@@ -35,6 +35,7 @@ const Home = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
+        console.log(user.displayName);
         setUserProfile(getUserProfile(user.uid));
       } else {
         setUser(null);
