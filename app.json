@@ -33,8 +33,9 @@
     },
     "extra": {
       "eas": {
-        "projectId": "6c03569b-dee6-4636-a0ee-e6353b21c9d8"
+        "projectId": "3207414d-92d0-4298-a90b-3dd8d0cefe51"
       }
-    }
+    },
+    "owner": "missionary-wellness"
   }
 }

@@ -33,7 +33,6 @@ const JournalList= () => {
     const getJournals = async () => {
       const journalDocs = await fetchJournals();
       setJournals(journalDocs.map((doc) => ({ id: doc.id, ...doc })));
-      console.log("Here is the content of journalDocs in the JournalList component" + journalDocs);
     };
     getJournals();
 

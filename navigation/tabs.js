@@ -60,6 +60,7 @@ const Tabs = () => {
       }, []);
     return(
         <Tab.Navigator
+        initialRouteName="AccountStack"
         screenOptions = {{
             tabBarShowLabel:false,
             tabBarHideOnKeyboard: true,
