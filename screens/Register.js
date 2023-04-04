@@ -51,15 +51,24 @@ const Register = () => {
 
   const handleSignUp = () => {
     auth 
-    .createUserWithEmailAndPassword(email,password)
-    .then(userCredentials => {
-      const user = userCredentials.user;
-      console.log(user.email); 
-      navigation.navigate('Tabs', { screen: 'Home' })
-    })
-    .catch(error=> alert(error.message))
-  }
+      .createUserWithEmailAndPassword(email,password)
+      .then(userCredentials => {
+        const user = userCredentials.user;
+        console.log(user.email + " user account was created with " + user.gender + " gender.");
+  
+        // Save the selected gender option to the database
+        const gender = selectedOption;
+        user.updateProfile({
+          displayName: gender
+        });
 
+        // This is making bugs
+        // setUser(auth.currentUser);
+  
+        navigation.navigate("Home");
+      })
+      .catch(error=> alert(error.message))
+  }
 
 
   return (
@@ -111,7 +120,7 @@ const Register = () => {
             </View>
 
             <View style={{ paddingTop: 30 }}> 
-              {user && <ShowUserInfo/>}
+              {user}
 
               
             </View>
