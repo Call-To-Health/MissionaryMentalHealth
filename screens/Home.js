@@ -10,7 +10,6 @@ import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView, g
 const Home = () => {
   const [user, setUser] = useState(null);
   const [topViewed, setTopViewed] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
@@ -35,11 +34,8 @@ const Home = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        console.log(user.displayName);
-        setUserProfile(getUserProfile(user.uid));
       } else {
         setUser(null);
-        setUserProfile(null);
       }
     });
     return unsubscribe;
@@ -83,7 +79,7 @@ const Home = () => {
 
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-  <HomeHeader userProfile={userProfile}/>
+  <HomeHeader user={user}/>
   <FocusedStatusBar
      translucent={false}
      backgroundColor={COLORS.primary}/>

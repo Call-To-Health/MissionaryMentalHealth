@@ -4,10 +4,8 @@ import { COLORS, FONTS, SIZES, assets } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons } from '@expo/vector-icons';
 
-
-const HomeHeader = (userProfile) => {
+const HomeHeader = ({user}) => {
     const navigation = useNavigation();
-    const user = userProfile ? userProfile.userProfile : null;
     return (
         <View style={{height: 80, flexDirection: "row", justifyContent: "space-between", alignItems: "center", paddingHorizontal: SIZES.font}}>
             <Pressable onPress={() => navigation.navigate('Tabs', { screen: 'HomeStack' })}>

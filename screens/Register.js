@@ -98,6 +98,7 @@ const Register = () => {
               <TouchableOpacity onPress={() => handleOptionSelect('elder')} style={selectedOption === 'elder' ? styles.selectedButton : styles.unselectedButton}>
                 <Text style={selectedOption === 'elder' ? styles.selectedButtonText : styles.unselectedButtonText}>{selectedOption === 'elder' ? '●' : '○'} Elder</Text>
               </TouchableOpacity>
+            
               <TouchableOpacity onPress={() => handleOptionSelect('sister')} style={selectedOption === 'sister' ? styles.selectedButton : styles.unselectedButton}>
                 <Text style={selectedOption === 'sister' ? styles.selectedButtonText : styles.unselectedButtonText}>{selectedOption === 'sister' ? '●' : '○'} Sister</Text>
               </TouchableOpacity>
@@ -139,7 +140,7 @@ const styles = StyleSheet.create ({
   selectedButton: {
     backgroundColor: 'white',
     borderWidth: 2,
-    borderColor: 'black',
+    // borderColor: 'black',
     borderRadius: 15,
     paddingVertical: 10,
     paddingHorizontal: 15,
@@ -147,9 +148,9 @@ const styles = StyleSheet.create ({
     alignItems: 'center',
   },
   unselectedButton: {
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.secondary,
     borderWidth: 2,
-    borderColor: 'white',
+    // borderColor: 'white',
     borderRadius: 15,
     paddingVertical: 10,
     paddingHorizontal: 15,
@@ -191,7 +192,7 @@ const styles = StyleSheet.create ({
     backgroundColor: COLORS.secondary,
     color: COLORS.white,
     paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingVertical: 8,
     borderRadius: 10,
     marginTop: 5,
     marginBottom: 2,
