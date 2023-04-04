@@ -56,31 +56,31 @@ const EditJournalEntry = ({route}) => {
       <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
         <View style={styles.tagsContainer}>
           <TouchableOpacity
-            style={tags.includes('Depression') ? styles.tagButtonActive : styles.tagButton}
+            style={tags.includes('Depressed') ? styles.tagButtonActive : styles.tagButton}
             onPress={() => {
-              if (tags.includes('Depression')) {
-                setTags(tags.filter(tag => tag !== 'Depression'));
+              if (tags.includes('Depressed')) {
+                setTags(tags.filter(tag => tag !== 'Depressed'));
             } else {
-                setTags([...tags, 'Depression']);}}}>
-            <Text style={styles.tagText}>Depression</Text>
+                setTags([...tags, 'Depressed']);}}}>
+            <Text style={styles.tagText}>Depressed</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={tags.includes('Homesickness') ? styles.tagButtonActive : styles.tagButton}
+            style={tags.includes('Homesick') ? styles.tagButtonActive : styles.tagButton}
             onPress={() => {
-              if (tags.includes('Homesickness')) {
-                setTags(tags.filter(tag => tag !== 'Homesickness'));
+              if (tags.includes('Homesick')) {
+                setTags(tags.filter(tag => tag !== 'Homesick'));
             } else {
-                setTags([...tags, 'Homesickness']);}}}>
-            <Text style={styles.tagText}>Homesickness</Text>
+                setTags([...tags, 'Homesick']);}}}>
+            <Text style={styles.tagText}>Homesick</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={tags.includes('Anxiety') ? styles.tagButtonActive : styles.tagButton}
+            style={tags.includes('Anxious') ? styles.tagButtonActive : styles.tagButton}
             onPress={() => {
-              if (tags.includes('Anxiety')) {
+              if (tags.includes('Anxious')) {
                 setTags(tags.filter(tag => tag !== 'Anxiety'));
             } else {
-                setTags([...tags, 'Anxiety']);}}}>
-            <Text style={styles.tagText}>Anxiety</Text>
+                setTags([...tags, 'Anxious']);}}}>
+            <Text style={styles.tagText}>Anxious</Text>
           </TouchableOpacity>
           <TouchableOpacity
             style={tags.includes('Happy') ? styles.tagButtonActive : styles.tagButton}
@@ -92,31 +92,40 @@ const EditJournalEntry = ({route}) => {
             <Text style={styles.tagText}>Happy</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={tags.includes('Excitement') ? styles.tagButtonActive : styles.tagButton}
+            style={tags.includes('Excited') ? styles.tagButtonActive : styles.tagButton}
             onPress={() => {
-              if (tags.includes('Excitement')) {
-                setTags(tags.filter(tag => tag !== 'Excitement'));
+              if (tags.includes('Excited')) {
+                setTags(tags.filter(tag => tag !== 'Excited'));
             } else {
-                setTags([...tags, 'Excitement']);}}}>
+                setTags([...tags, 'Excited']);}}}>
             <Text style={styles.tagText}>Excited</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={tags.includes('Exhaustion') ? styles.tagButtonActive : styles.tagButton}
+            style={tags.includes('Sick') ? styles.tagButtonActive : styles.tagButton}
             onPress={() => {
-              if (tags.includes('Exhaustion')) {
-                setTags(tags.filter(tag => tag !== 'Exhaustion'));
+              if (tags.includes('Sick')) {
+                setTags(tags.filter(tag => tag !== 'Sick'));
             } else {
-                setTags([...tags, 'Exhaustion']);}}}>
-            <Text style={styles.tagText}>Exhaustion</Text>
+                setTags([...tags, 'Sick']);}}}>
+            <Text style={styles.tagText}>Sick</Text>
           </TouchableOpacity>
           <TouchableOpacity
-            style={tags.includes('Frustration') ? styles.tagButtonActive : styles.tagButton}
+            style={tags.includes('Exhausted') ? styles.tagButtonActive : styles.tagButton}
             onPress={() => {
-              if (tags.includes('Frustration')) {
-                setTags(tags.filter(tag => tag !== 'Frustration'));
+              if (tags.includes('Exhausted')) {
+                setTags(tags.filter(tag => tag !== 'Exhausted'));
             } else {
-                setTags([...tags, 'Frustration']);}}}>
-            <Text style={styles.tagText}>Frustration</Text>
+                setTags([...tags, 'Exhausted']);}}}>
+            <Text style={styles.tagText}>Exhausted</Text>
+          </TouchableOpacity>
+          <TouchableOpacity
+            style={tags.includes('Frustrated') ? styles.tagButtonActive : styles.tagButton}
+            onPress={() => {
+              if (tags.includes('Frustrated')) {
+                setTags(tags.filter(tag => tag !== 'Frustrated'));
+            } else {
+                setTags([...tags, 'Frustrated']);}}}>
+            <Text style={styles.tagText}>Frustrated</Text>
           </TouchableOpacity>
         </View>
         
