@@ -8,9 +8,9 @@ import Journal from "../screens/Journal";
 import Register from "../screens/Register";
 import Checkin from '../screens/Checkin';
 import UserAccount from '../screens/UserAccount';
-import UserAccountLoggedIn from "../screens/UserAccountLoggedIn";
 import { StyleSheet, Text, TouchableOpacity, View, Image } from "react-native";
 import JournalList from "../screens/JournalList";
+import UserAccountLoggedIn from "../screens/UserAccountLoggedIn";
 import React, { useState, useEffect } from 'react';
 import { auth } from '../firebase';
 import { createStackNavigator } from "@react-navigation/stack";
@@ -228,13 +228,13 @@ function JournalStack() {
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Home"
-          component={Home}
+          name="Register"
+          component={Register}
           options={{ headerShown: false }}
         />
         <Stack.Screen
-          name="Register"
-          component={Register}
+          name="UserAccountLoggedIn"
+          component={UserAccountLoggedIn}
           options={{ headerShown: false }}
         />
       </Stack.Navigator>
