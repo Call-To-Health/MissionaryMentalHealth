@@ -19,6 +19,7 @@ WebBrowser.maybeCompleteAuthSession()
 
 const Register = () => {
 
+  const [selectedOption, setSelectedOption] = useState('sister');
   const [accessToken, setAccessToken] = React.useState(null);
   const [user, setUser] = React.useState(null);
   const [request, response, promptAsync] = Google.useAuthRequest({
@@ -36,7 +37,9 @@ const Register = () => {
   const [password, setPassword] = useState('')
 
   const navigation = useNavigation()
-
+  const handleOptionSelect = (option) => {
+    setSelectedOption(option);
+  }
   useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged(user => {
       if (user) {
@@ -81,6 +84,19 @@ const Register = () => {
               </View>
             </View>
 
+            <View>
+            <Text style={styles.inputLabel}>I am a...</Text>
+            <View style={{ flexDirection: 'row'}}>
+              <TouchableOpacity onPress={() => handleOptionSelect('elder')} style={selectedOption === 'elder' ? styles.selectedButton : styles.unselectedButton}>
+                <Text style={selectedOption === 'elder' ? styles.selectedButtonText : styles.unselectedButtonText}>{selectedOption === 'elder' ? '●' : '○'} Elder</Text>
+              </TouchableOpacity>
+              <TouchableOpacity onPress={() => handleOptionSelect('sister')} style={selectedOption === 'sister' ? styles.selectedButton : styles.unselectedButton}>
+                <Text style={selectedOption === 'sister' ? styles.selectedButtonText : styles.unselectedButtonText}>{selectedOption === 'sister' ? '●' : '○'} Sister</Text>
+              </TouchableOpacity>
+            </View>
+
+            </View>
+
             <View style={styles.buttonContainer}>
               <TouchableOpacity onPress={handleSignUp} style={styles.button}>
                 <Text style={styles.buttonText}>Register</Text>
@@ -112,6 +128,33 @@ const styles = StyleSheet.create ({
     justifyContent: 'space-between',
     backgroundColor: COLORS.primary,
   },
+  selectedButton: {
+    backgroundColor: 'white',
+    borderWidth: 2,
+    borderColor: 'black',
+    borderRadius: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginVertical: 5,
+    alignItems: 'center',
+  },
+  unselectedButton: {
+    backgroundColor: 'transparent',
+    borderWidth: 2,
+    borderColor: 'white',
+    borderRadius: 15,
+    paddingVertical: 10,
+    paddingHorizontal: 15,
+    marginVertical: 5,
+    alignItems: 'center',
+  },
+  selectedButtonText: {
+    color: 'black',
+    fontSize: 20,
+  },
+  unselectedButtonText: {
+    color: 'white',
+    fontSize: 20,},
   loginHeader: {
     justifyContent: 'center', 
     alignItems: 'center', 

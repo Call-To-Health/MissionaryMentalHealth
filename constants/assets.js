@@ -22,7 +22,7 @@ import person01 from "../assets/images/person01.png";
 import person02 from "../assets/images/person02.png";
 import person03 from "../assets/images/person03.png";
 import person04 from "../assets/images/person04.png";
-import psychologytoday from "../assets/images/psychology_today.png";
+import psychologytoday from "../assets/images/psychology_today.jpg";
 
 import adjustToML from "../assets/images/adjustingtomissionarylife.jpeg";
 import Christ from "../assets/images/Christ.png";

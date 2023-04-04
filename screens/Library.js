@@ -80,7 +80,7 @@ const Library = () => {
           </View>
           
           {/* <ListCategories /> */}
-          <Text style={style.sectionTitle}>Recently Viewed</Text>
+          {/* <Text style={style.sectionTitle}>Recently Viewed</Text> */}
             {/* {user ? 
              topViewed?.map(doc => (
               <View key={doc.id} style={style.card}>
