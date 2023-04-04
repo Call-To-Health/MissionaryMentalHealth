@@ -100,7 +100,7 @@ const UserAccount = () => {
 
   return (
     <SafeAreaView style={{flex:1,backgroundColor: COLORS.primary}}>
-      <ScrollView keyboardShouldPersistTaps="always" contentInsetAdjustmentBehavior="automatic" contentInset={{ bottom: 100 }} scrollIndicatorInsets={{ bottom: 100 }}>
+      <ScrollView keyboardShouldPersistTaps="never" contentInsetAdjustmentBehavior="automatic" contentInset={{ bottom: 100 }} scrollIndicatorInsets={{ bottom: 100 }}>
         <SafeAreaView style={{alignItems:'center',flex:1,backgroundColor: COLORS.primary, paddingBottom: 110}}>
           <FocusedStatusBar translucent={false} backgroundColor={COLORS.primary}/>
           <LoginHeader />

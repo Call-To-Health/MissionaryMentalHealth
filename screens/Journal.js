@@ -82,7 +82,7 @@ const Journal = () => {
             underlineColorAndroid='transparent'
             autoCapitalize='none'/>
     <View>
-      <ScrollView horizontal={true} showsHorizontalScrollIndicator={false}>
+      <ScrollView keyboardShouldPersistTaps="never" horizontal={true} showsHorizontalScrollIndicator={false}>
         <View style={styles.tagsContainer}>
         <TouchableOpacity
             style={tags.includes('Depressed') ? styles.tagButtonActive : styles.tagButton}
