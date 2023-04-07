@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { View, Text, SafeAreaView, StyleSheet, TouchableOpacity, FlatList, ScrollView, Pressable } from 'react-native';
 import { FocusedStatusBar } from '../components';
 import HomeHeader from '../components/HomeHeader';
-import { useNavigation} from "@react-navigation/native";
+import { useNavigation, useFocusEffect} from "@react-navigation/native";
 import { COLORS, SIZES } from '../constants';
 import { fetchJournals } from '../firebase';
 import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView, getUserProfile } from '../firebase';
@@ -10,7 +10,6 @@ import { fetchRandomQuote, fetchRandomDocs, auth, getTopViewed, addRecentView, g
 const Home = () => {
   const [user, setUser] = useState(null);
   const [topViewed, setTopViewed] = useState(null);
-  const [userProfile, setUserProfile] = useState(null);
   const navigation = useNavigation();
   const [randomQuote, setRandomQuote] = useState([]);
   const [journals, setJournals] = useState([]);
@@ -35,30 +34,32 @@ const Home = () => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       if (user) {
         setUser(user);
-        setUserProfile(getUserProfile(user.uid));
       } else {
         setUser(null);
-        setUserProfile(null);
       }
     });
     return unsubscribe;
   }, []);
 
-  useEffect(() => {
-    const fetchAndSetJournals = async () => {
-      const fetchedJournals = await fetchJournals();
-      setJournals(fetchedJournals);
-    };
-    fetchAndSetJournals();
-  }, [user]);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchAndSetJournals = async () => {
+        const fetchedJournals = await fetchJournals();
+        setJournals(fetchedJournals);
+      };
+      fetchAndSetJournals();
+    }, [user])
+  );
 
-  useEffect(() => {
-    const getRandomDocs = async () => {
-      const randomDocs = await fetchRandomDocs();
-      setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
-    };
-    getRandomDocs();
-  }, []);
+  useFocusEffect(
+    React.useCallback(() => {
+      const getRandomDocs = async () => {
+        const randomDocs = await fetchRandomDocs();
+        setRandomDocs(randomDocs.map((doc) => ({ id: doc.id, ...doc.data() })));
+      };
+      getRandomDocs();
+    }, [])
+  );
 
   useEffect(() => {
     const getRandomQuote = async () => {
@@ -69,20 +70,21 @@ const Home = () => {
     getRandomQuote();
   }, []);
 
-  useEffect(() => {
-    const fetchTopViewed = async () => {
-      if (user) {
-        const topViewed = await getTopViewed(user.uid);
-        setTopViewed(topViewed);
-      }
-    };
-
-    fetchTopViewed();
-  }, [user]);
+  useFocusEffect(
+    React.useCallback(() => {
+      const fetchTopViewed = async () => {
+        if (user) {
+          const topViewed = await getTopViewed(user.uid);
+          setTopViewed(topViewed);
+        }
+      };
+      fetchTopViewed();
+    }, [user])
+  );
 
 return (
 <SafeAreaView style={{ flex: 1, backgroundColor: COLORS.primary }}>
-  <HomeHeader userProfile={userProfile}/>
+  <HomeHeader user={user}/>
   <FocusedStatusBar
      translucent={false}
      backgroundColor={COLORS.primary}/>

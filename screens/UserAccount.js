@@ -198,7 +198,7 @@ const styles = StyleSheet.create ({
     backgroundColor: COLORS.secondary,
     color: COLORS.white,
     paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingVertical: 8,
     borderRadius: 10,
     marginTop: 5,
     marginBottom: 2,

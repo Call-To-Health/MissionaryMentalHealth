@@ -93,13 +93,14 @@ const Register = () => {
             </View>
 
             <View>
-            <Text style={styles.inputLabel}>I am an...</Text>
+            <Text style={styles.inputLabel}>I am a/an...</Text>
             <View style={{ flexDirection: 'row'}}>
               <TouchableOpacity onPress={() => handleOptionSelect('elder')} style={selectedOption === 'elder' ? styles.selectedButton : styles.unselectedButton}>
-                <Text style={selectedOption === 'elder' ? styles.selectedButtonText : styles.unselectedButtonText}>{selectedOption === 'elder' ? '●' : '○'} Elder</Text>
+                <Text style={selectedOption === 'elder' ? styles.selectedButtonText : styles.unselectedButtonText}> Elder</Text>
               </TouchableOpacity>
+            
               <TouchableOpacity onPress={() => handleOptionSelect('sister')} style={selectedOption === 'sister' ? styles.selectedButton : styles.unselectedButton}>
-                <Text style={selectedOption === 'sister' ? styles.selectedButtonText : styles.unselectedButtonText}>{selectedOption === 'sister' ? '●' : '○'} Sister</Text>
+                <Text style={selectedOption === 'sister' ? styles.selectedButtonText : styles.unselectedButtonText}> Sister</Text>
               </TouchableOpacity>
             </View>
 
@@ -139,21 +140,23 @@ const styles = StyleSheet.create ({
   selectedButton: {
     backgroundColor: 'white',
     borderWidth: 2,
-    borderColor: 'black',
+    // borderColor: 'black',
     borderRadius: 15,
     paddingVertical: 10,
     paddingHorizontal: 15,
+    marginHorizontal: 10,
     marginVertical: 5,
     alignItems: 'center',
   },
   unselectedButton: {
-    backgroundColor: 'transparent',
+    backgroundColor: COLORS.secondary,
     borderWidth: 2,
-    borderColor: 'white',
+    borderColor: COLORS.secondary,
     borderRadius: 15,
     paddingVertical: 10,
     paddingHorizontal: 15,
     marginVertical: 5,
+    marginHorizontal: 10,
     alignItems: 'center',
   },
   selectedButtonText: {
@@ -191,7 +194,7 @@ const styles = StyleSheet.create ({
     backgroundColor: COLORS.secondary,
     color: COLORS.white,
     paddingHorizontal: 15,
-    paddingVertical: 15,
+    paddingVertical: 8,
     borderRadius: 10,
     marginTop: 5,
     marginBottom: 2,
