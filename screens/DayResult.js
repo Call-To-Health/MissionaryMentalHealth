@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native';
+import { View, Text, StyleSheet,SafeAreaView, TouchableOpacity } from 'react-native';
 import { FocusedStatusBar } from '../components';
 import Header from "../components/Header";
-import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS } from '../constants';
 import { useNavigation, useRoute } from '@react-navigation/native';
 import { fetchCheckinResults } from '../firebase';
