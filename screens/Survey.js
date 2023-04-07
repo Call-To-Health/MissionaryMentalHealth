@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity, ScrollView } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity, ScrollView,SafeAreaView } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import React, { useState } from 'react';
 import Header from '../components/Header';
-import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS } from '../constants';
 import { useNavigation } from "@react-navigation/native";
 import { updateCheckinResults } from "../firebase";

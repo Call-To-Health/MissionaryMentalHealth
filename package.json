@@ -1,6 +1,6 @@
 {
   "name": "calledto",
-  "version": "1.0.0",
+  "version": "1.0.2",
   "main": "node_modules/expo/AppEntry.js",
   "scripts": {
     "start": "expo start",
@@ -22,7 +22,6 @@
     "expo-auth-session": "~3.8.0",
     "expo-constants": "~14.0.2",
     "expo-font": "~11.0.1",
-    "expo-google-app-auth": "~8.3.0",
     "expo-random": "~13.0.0",
     "expo-updates": "~0.15.6",
     "expo-web-browser": "~12.0.0",
@@ -30,9 +29,8 @@
     "jetifier": "^2.0.0",
     "react": "18.1.0",
     "react-dom": "18.1.0",
-    "react-native": "0.70.5",
+    "react-native": "0.70.8",
     "react-native-calendars": "^1.1294.0",
-    "react-native-firebase": "^5.6.0",
     "react-native-form-component": "^2.6.8",
     "react-native-gesture-handler": "~2.8.0",
     "react-native-ico-material-design": "^3.3.1",
@@ -43,7 +41,6 @@
     "react-native-svg": "13.4.0",
     "react-native-web": "~0.18.7",
     "react-native-webview": "11.23.1",
-    "react-navigation": "^4.4.4",
     "rimraf": "^4.4.0"
   },
   "devDependencies": {

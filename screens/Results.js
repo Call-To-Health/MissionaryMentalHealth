@@ -2,9 +2,8 @@ import { View, Text, StyleSheet, TouchableOpacity, Image, useColorScheme } from 
 import {FocusedStatusBar} from "../components";
 import React from 'react';
 import Header from '../components/Header';
-import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS, assets } from '../constants';
-import { useNavigation } from "@react-navigation/native";
+import { useNavigation,SafeAreaView } from "@react-navigation/native";
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 
 const Results = ({ route }) => {

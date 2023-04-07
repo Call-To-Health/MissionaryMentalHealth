@@ -1,8 +1,7 @@
-import { View, Text, StyleSheet, TouchableOpacity } from 'react-native'
+import { View, Text, StyleSheet, TouchableOpacity,SafeAreaView } from 'react-native'
 import {FocusedStatusBar} from "../components";
 import React, {Component, useState, useEffect} from 'react';
 import CheckinHeader from '../components/CheckinHeader';
-import { SafeAreaView } from 'react-navigation';
 import { COLORS, SIZES, FONTS } from '../constants';
 import { Calendar } from 'react-native-calendars';
 // import MyCalendar from '../components/Calendar';
