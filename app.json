@@ -3,7 +3,7 @@
     "name": "Missionary Mental Health",
     "scheme": "com.missionarymentalhealth.login",
     "slug": "missionary-wellness",
-    "version": "1.0.3",
+    "version": "1.0.4",
     "orientation": "portrait",
     "icon": "./assets/icon.png",
     "userInterfaceStyle": "light",
@@ -23,8 +23,8 @@
       "bundleIdentifier": "com.firebaseapp.missionarymentalhealth"
     },
     "android": {
-      "version": "1.0.3",
-      "versionCode":3,
+      "version": "1.0.4",
+      "versionCode":4,
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
